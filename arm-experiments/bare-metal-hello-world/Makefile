@@ -1,4 +1,4 @@
-CROSS_COMPILE=arm-linux-gnueabi-
+CROSS_COMPILE=arm-none-eabi-
 CPU=arm926ej-s
 all:
 	$(CROSS_COMPILE)gcc -c -mcpu=$(CPU) -g test.c -o test.o
