@@ -15,6 +15,21 @@
 3. ./gdbserver --version
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 [技術] Build GDB for Linux ARM platform
 Written on 11:05 下午 by Yu Lai
 Note for building ARM GDB & GDB Server tools.
