@@ -1,0 +1,230 @@
+cli-cmds.o: cli/cli-cmds.c defs.h config.h build-gnulib/config.h \
+ build-gnulib/import/sys/types.h build-gnulib/import/unistd.h \
+ gnulib/import/pathmax.h ../include/ansidecl.h common/gdb_locale.h \
+ gdb_wchar.h build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h exceptions.h \
+ arch-utils.h ../include/dyn-string.h ../opcodes/../readline/readline.h \
+ ../opcodes/../readline/rlstdc.h ../opcodes/../readline/rltypedefs.h \
+ ../opcodes/../readline/keymaps.h ../opcodes/../readline/chardefs.h \
+ build-gnulib/import/string.h ../opcodes/../readline/tilde.h completer.h \
+ common/gdb_vecs.h common/vec.h common/gdb_assert.h target.h \
+ target/resume.h target/wait.h target/waitstatus.h common/gdb_signals.h \
+ symtab.h common/vec.h gdbtypes.h minsyms.h memattr.h btrace.h \
+ common/btrace-common.h command.h common/gdb_wait.h gdb_regex.h \
+ gdb_vfork.h linespec.h expression.h doublest.h ../include/floatformat.h \
+ std-operator.def ada-operator.def frame.h unwind_stop_reasons.def \
+ value.h frame.h expression.h language.h ../include/filenames.h \
+ ../include/hashtab.h objfiles.h gdb_obstack.h ../include/obstack.h \
+ symfile.h probe.h progspace.h target.h registry.h gdb_bfd.h source.h \
+ disasm.h tracepoint.h breakpoint.h value.h ax.h common/ax.def \
+ common/break-common.h memrange.h common/filestuff.h ui-out.h top.h \
+ cli/cli-decode.h command.h cli/cli-script.h cli/cli-setshow.h \
+ cli/cli-cmds.h cli/cli-utils.h python/python.h mi/mi-cmds.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+exceptions.h:
+
+arch-utils.h:
+
+../include/dyn-string.h:
+
+../opcodes/../readline/readline.h:
+
+../opcodes/../readline/rlstdc.h:
+
+../opcodes/../readline/rltypedefs.h:
+
+../opcodes/../readline/keymaps.h:
+
+../opcodes/../readline/chardefs.h:
+
+build-gnulib/import/string.h:
+
+../opcodes/../readline/tilde.h:
+
+completer.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+common/gdb_assert.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+symtab.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+command.h:
+
+common/gdb_wait.h:
+
+gdb_regex.h:
+
+gdb_vfork.h:
+
+linespec.h:
+
+expression.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+value.h:
+
+frame.h:
+
+expression.h:
+
+language.h:
+
+../include/filenames.h:
+
+../include/hashtab.h:
+
+objfiles.h:
+
+gdb_obstack.h:
+
+../include/obstack.h:
+
+symfile.h:
+
+probe.h:
+
+progspace.h:
+
+target.h:
+
+registry.h:
+
+gdb_bfd.h:
+
+source.h:
+
+disasm.h:
+
+tracepoint.h:
+
+breakpoint.h:
+
+value.h:
+
+ax.h:
+
+common/ax.def:
+
+common/break-common.h:
+
+memrange.h:
+
+common/filestuff.h:
+
+ui-out.h:
+
+top.h:
+
+cli/cli-decode.h:
+
+command.h:
+
+cli/cli-script.h:
+
+cli/cli-setshow.h:
+
+cli/cli-cmds.h:
+
+cli/cli-utils.h:
+
+python/python.h:
+
+mi/mi-cmds.h:

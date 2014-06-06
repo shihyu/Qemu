@@ -1,0 +1,79 @@
+notif.o: notif.c notif.h ../common/ptid.h server.h config.h \
+ build-gnulib-gdbserver/config.h ../../include/libiberty.h \
+ ../../include/ansidecl.h ../../include/ansidecl.h ../common/version.h \
+ ../gnulib/import/pathmax.h build-gnulib-gdbserver/import/unistd.h \
+ build-gnulib-gdbserver/import/string.h ../common/buffer.h \
+ ../common/xml-utils.h ../common/gdb_locale.h regcache.h \
+ ../../include/gdb/signals.h ../../include/gdb/signals.def \
+ ../common/gdb_signals.h target.h ../target/resume.h ../target/wait.h \
+ ../target/waitstatus.h ../common/common-utils.h config.h mem-break.h \
+ gdbthread.h inferiors.h event-loop.h remote-utils.h utils.h \
+ ../common/gdb_assert.h ../common/queue.h ../common/gdb_assert.h
+
+notif.h:
+
+../common/ptid.h:
+
+server.h:
+
+config.h:
+
+build-gnulib-gdbserver/config.h:
+
+../../include/libiberty.h:
+
+../../include/ansidecl.h:
+
+../../include/ansidecl.h:
+
+../common/version.h:
+
+../gnulib/import/pathmax.h:
+
+build-gnulib-gdbserver/import/unistd.h:
+
+build-gnulib-gdbserver/import/string.h:
+
+../common/buffer.h:
+
+../common/xml-utils.h:
+
+../common/gdb_locale.h:
+
+regcache.h:
+
+../../include/gdb/signals.h:
+
+../../include/gdb/signals.def:
+
+../common/gdb_signals.h:
+
+target.h:
+
+../target/resume.h:
+
+../target/wait.h:
+
+../target/waitstatus.h:
+
+../common/common-utils.h:
+
+config.h:
+
+mem-break.h:
+
+gdbthread.h:
+
+inferiors.h:
+
+event-loop.h:
+
+remote-utils.h:
+
+utils.h:
+
+../common/gdb_assert.h:
+
+../common/queue.h:
+
+../common/gdb_assert.h:

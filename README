@@ -1,1 +1,59 @@
 1. source qemu-2.0.0/build.env
+
+# build gdb 
+1. cd gdb-7.7
+2. ./configure --host=x86_64-linux-gnu --target=arm-linux 
+3. time make -j8
+4. cd gdb 
+5. ./gdb --vertsion 
+6. This GDB was configured as "--host=x86_64-linux-gnu --target=arm-linux"
+
+
+# build gdbserver
+1. ./configure  --host=arm-linux "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
+2. make -j8
+3. ./gdbserver --version
+
+
+[技術] Build GDB for Linux ARM platform
+Written on 11:05 下午 by Yu Lai
+Note for building ARM GDB & GDB Server tools.
+gdb part:
+$cd gdb-7.4.1
+$./configure --host=x86_64-linux-gnu --target=arm-linux \
+--with-expat=yes \
+CC=/usr/bin/cc \
+CXX=/usr/bin/c++ \
+AR=/usr/bin/ar \
+AS=/usr/bin/as \
+LD=/usr/bin/ld \
+NM=/usr/bin/nm \
+RANLIB=/usr/bin/ranlib \
+STRIP=/usr/bin/strip \
+OBJCOPY=/usr/bin/objcopy \
+OBJDUMP=/usr/bin/objdump \
+READELF=/usr/bin/readelf \
+CC_FOR_TARGET=${CROSS_TOOL}gcc \
+CXX_FOR_TARGET=${CROSS_TOOL}c++ \
+AR_FOR_TARGET=${CROSS_TOOL}ar \
+LD_FOR_TARGET=${CROSS_TOOL}ld \
+NM_FOR_TARGET=${CROSS_TOOL}nm \
+OBJDUMP_FOR_TARGET=${CROSS_TOOL}objdump \
+RANLIB_FOR_TARGET=${CROSS_TOOL}ranlib \
+READELF_FOR_TARGET=${CROSS_TOOL}readelf \
+STRIP_FOR_TARGET=${CROSS_TOOL}strip
+$make
+
+gdbserver part:
+$cd gdb/gdbserver
+$./configure --host=arm-linux \
+CC=${CROSS_TOOL}gcc \
+CXX=${CROSS_TOOL}c++ \
+AR=${CROSS_TOOL}ar \
+LD=${CROSS_TOOL}ld \
+NM=${CROSS_TOOL}nm \
+OBJDUMP=${CROSS_TOOL}objdump \
+RANLIB=${CROSS_TOOL}ranlib \
+READELF=${CROSS_TOOL}readelf \
+STRIP=${CROSS_TOOL}strip
+$make
