@@ -1,20 +1,5 @@
 1. source qemu-2.0.0/build.env
 
-# build gdb 
-1. cd gdb-7.7
-2. ./configure --host=x86_64-linux-gnu --target=arm-linux 
-3. time make -j8
-4. cd gdb 
-5. ./gdb --vertsion 
-6. This GDB was configured as "--host=x86_64-linux-gnu --target=arm-linux"
-
-
-# build gdbserver
-1. ./configure  --host=arm-linux "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
-2. make -j8
-3. ./gdbserver --version
-
-
 ---------------------------------------------------------------------------------------------------------------------------
 gdb 編譯
 
@@ -55,57 +40,40 @@ Qemu 編譯
 3. sudo make install
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------
+# 建立一個小而美的 initramfs
+
+只有 "Hello World" 一類的程式只能作切入點，還不能實際作點事情，從零到有建構 rootfs 也得花上一點功夫，還好，Ubuntu/Debian 已經提供靜態連結的 [BusyBox]，安裝方式很簡單：
+$ sudo apt-get install busybox-static
+隨後，系統會安裝 /bin/busybox 的執行檔，觀察一下：
+$ file /bin/busybox
+/bin/busybox: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), for GNU/Linux 2.6.8, statically linked, stripped
+咱們就以此為基礎，建立一個小而美的 initramfs + kernel image：
+
+
+$ mkdir initramfs-workspace
+$ cd initramfs-workspace
+$ mkdir -p busybox-initramfs/bin
+$ mkdir -p busybox-initramfs/proc
+$ cd busybox-initramfs/bin
+$ cp /bin/busybox .
+$ ./busybox --help | ruby -e 'STDIN.read.split(/functions:$/m)[1].split(/,/).each{|i|`ln -s busybox #{i.strip}` unless i=~/busybox/}'
+$ cd ..
+$ echo -e '#!/bin/busybox sh\nmount -t proc proc /proc\nexec busybox sh\n' > init ; chmod +x init
+$ find . | cpio -o -H newc | gzip > ../busybox.initramfs.cpio.gz
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+#啟動
+qemu-system-x86_64 -kernel bzImage -hda linux-0.2.img -append "root=/dev/sda"  -smp 1 -m 2048 -gdb tcp::1234 -S
+qemu-system-x86_64 -kernel bzImage -initrd ../initramfs-workspace/busybox.initramfs.cpio.gz -hda /dev/zero -smp 1 -m 2048 -gdb tcp::1234 -S
 
 
 
+# 另開終端機
+cgdb vmlinux
+b start_kernel
+target remote localhost:1234
+c
 
+ 
 
-
-
-
-
-
-
-
-[技術] Build GDB for Linux ARM platform
-Written on 11:05 下午 by Yu Lai
-Note for building ARM GDB & GDB Server tools.
-gdb part:
-$cd gdb-7.4.1
-$./configure --host=x86_64-linux-gnu --target=arm-linux \
---with-expat=yes \
-CC=/usr/bin/cc \
-CXX=/usr/bin/c++ \
-AR=/usr/bin/ar \
-AS=/usr/bin/as \
-LD=/usr/bin/ld \
-NM=/usr/bin/nm \
-RANLIB=/usr/bin/ranlib \
-STRIP=/usr/bin/strip \
-OBJCOPY=/usr/bin/objcopy \
-OBJDUMP=/usr/bin/objdump \
-READELF=/usr/bin/readelf \
-CC_FOR_TARGET=${CROSS_TOOL}gcc \
-CXX_FOR_TARGET=${CROSS_TOOL}c++ \
-AR_FOR_TARGET=${CROSS_TOOL}ar \
-LD_FOR_TARGET=${CROSS_TOOL}ld \
-NM_FOR_TARGET=${CROSS_TOOL}nm \
-OBJDUMP_FOR_TARGET=${CROSS_TOOL}objdump \
-RANLIB_FOR_TARGET=${CROSS_TOOL}ranlib \
-READELF_FOR_TARGET=${CROSS_TOOL}readelf \
-STRIP_FOR_TARGET=${CROSS_TOOL}strip
-$make
-
-gdbserver part:
-$cd gdb/gdbserver
-$./configure --host=arm-linux \
-CC=${CROSS_TOOL}gcc \
-CXX=${CROSS_TOOL}c++ \
-AR=${CROSS_TOOL}ar \
-LD=${CROSS_TOOL}ld \
-NM=${CROSS_TOOL}nm \
-OBJDUMP=${CROSS_TOOL}objdump \
-RANLIB=${CROSS_TOOL}ranlib \
-READELF=${CROSS_TOOL}readelf \
-STRIP=${CROSS_TOOL}strip
-$make
