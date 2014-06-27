@@ -19,7 +19,7 @@
 srcdir = .
 
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 
 infodir = ${datarootdir}/info
 datarootdir = ${prefix}/share
@@ -35,8 +35,8 @@ SHELL = /bin/bash
 LN_S = ln -s
 
 INSTALL = /usr/bin/install -c
-INSTALL_PROGRAM = ${INSTALL}
-INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_PROGRAM = /usr/bin/install -c
+INSTALL_DATA = /usr/bin/install -c -m 644
 
 SYSTEM_GDBINIT = 
 
@@ -49,9 +49,9 @@ gdbdir = $(srcdir)/..
 TEXIDIR=${gdbdir}/../texinfo
 
 # where to find makeinfo, preferably one designed for texinfo-2
-MAKEINFO = 
+MAKEINFO = makeinfo --split-size=5000000
 MAKEINFOFLAGS = 
-MAKEINFO_EXTRA_FLAGS = 
+MAKEINFO_EXTRA_FLAGS =  -DHAVE_MAKEINFO_CLICK
 MAKEINFO_CMD = $(MAKEINFO) $(MAKEINFOFLAGS) $(MAKEINFO_EXTRA_FLAGS)
 
 MAKEHTML = $(MAKEINFO_CMD) --html
@@ -170,8 +170,21 @@ MAN5S = gdbinit.5
 MANS = $(MAN1S) $(MAN5S)
 
 # Host-dependent makefile fragment comes in here.
+# Host: GNU/Linux x86-64
+NATDEPFILES= inf-ptrace.o fork-child.o \
+	i386-nat.o amd64-nat.o amd64-linux-nat.o \
+	linux-nat.o linux-osdata.o \
+	proc-service.o linux-thread-db.o linux-fork.o \
+	linux-procfs.o linux-ptrace.o linux-btrace.o \
+	linux-waitpid.o
+NAT_FILE= config/nm-linux.h
+NAT_CDEPS = $(srcdir)/proc-service.list
+
+# The dynamically loaded libthread_db needs access to symbols in the
+# gdb executable.
+LOADLIBES = -ldl $(RDYNAMIC)
 # End of host-dependent makefile fragment
-HAVE_NATIVE_GCORE_TARGET = 
+HAVE_NATIVE_GCORE_TARGET = 1
 
 ###
 

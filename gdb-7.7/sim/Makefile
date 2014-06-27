@@ -20,12 +20,12 @@
 
 srcdir = .
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
 host_alias = x86_64-unknown-linux-gnu
-target_alias = arm-linux
-program_transform_name = s&^&arm-linux-&
+target_alias = x86_64-unknown-linux-gnu
+program_transform_name = s,y,y,
 bindir = ${exec_prefix}/bin
 libdir = ${exec_prefix}/lib
 tooldir = $(libdir)/$(target_alias)
@@ -60,7 +60,7 @@ CFLAGS_FOR_BUILD = -g -O2
 MAKEINFO = makeinfo
 RANLIB = ranlib
 
-SUBDIRS =  arm testsuite common
+SUBDIRS = 
 
 INCDIR = $(srcdir)/../include
 CSEARCH = -I. -I$(srcdir) -I$(INCDIR)

@@ -1,0 +1,273 @@
+ppc-linux-tdep.o: ppc-linux-tdep.c defs.h config.h build-gnulib/config.h \
+ build-gnulib/import/sys/types.h build-gnulib/import/unistd.h \
+ gnulib/import/pathmax.h ../include/ansidecl.h common/gdb_locale.h \
+ gdb_wchar.h build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h frame.h \
+ unwind_stop_reasons.def inferior.h breakpoint.h value.h doublest.h \
+ ../include/floatformat.h symtab.h common/vec.h \
+ build-gnulib/import/string.h common/gdb_assert.h common/gdb_vecs.h \
+ common/vec.h gdbtypes.h minsyms.h expression.h std-operator.def \
+ ada-operator.def ax.h common/ax.def command.h common/break-common.h \
+ target.h target/resume.h target/wait.h target/waitstatus.h \
+ common/gdb_signals.h memattr.h btrace.h common/btrace-common.h defs.h \
+ progspace.h registry.h gdbcore.h exec.h memrange.h gdbcmd.h symfile.h \
+ probe.h objfiles.h gdb_obstack.h ../include/obstack.h gdb_bfd.h \
+ regcache.h osabi.h regset.h solib-svr4.h solib-spu.h solib.h solist.h \
+ ppc-tdep.h ppc64-tdep.h ppc-linux-tdep.h glibc-tdep.h trad-frame.h \
+ frame-unwind.h tramp-frame.h observer.h auxv.h ../include/elf/common.h \
+ arch-utils.h spu-tdep.h xml-syscall.h linux-tdep.h stap-probe.h ax-gdb.h \
+ cli/cli-utils.h parser-defs.h user-regs.h ../bfd/elf-bfd.h \
+ ../include/elf/external.h ../include/elf/internal.h ../include/bfdlink.h \
+ features/rs6000/powerpc-32l.c osabi.h target-descriptions.h \
+ features/rs6000/powerpc-altivec32l.c features/rs6000/powerpc-cell32l.c \
+ features/rs6000/powerpc-vsx32l.c features/rs6000/powerpc-isa205-32l.c \
+ features/rs6000/powerpc-isa205-altivec32l.c \
+ features/rs6000/powerpc-isa205-vsx32l.c features/rs6000/powerpc-64l.c \
+ features/rs6000/powerpc-altivec64l.c features/rs6000/powerpc-cell64l.c \
+ features/rs6000/powerpc-vsx64l.c features/rs6000/powerpc-isa205-64l.c \
+ features/rs6000/powerpc-isa205-altivec64l.c \
+ features/rs6000/powerpc-isa205-vsx64l.c features/rs6000/powerpc-e500l.c
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+inferior.h:
+
+breakpoint.h:
+
+value.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+symtab.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+expression.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+ax.h:
+
+common/ax.def:
+
+command.h:
+
+common/break-common.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+progspace.h:
+
+registry.h:
+
+gdbcore.h:
+
+exec.h:
+
+memrange.h:
+
+gdbcmd.h:
+
+symfile.h:
+
+probe.h:
+
+objfiles.h:
+
+gdb_obstack.h:
+
+../include/obstack.h:
+
+gdb_bfd.h:
+
+regcache.h:
+
+osabi.h:
+
+regset.h:
+
+solib-svr4.h:
+
+solib-spu.h:
+
+solib.h:
+
+solist.h:
+
+ppc-tdep.h:
+
+ppc64-tdep.h:
+
+ppc-linux-tdep.h:
+
+glibc-tdep.h:
+
+trad-frame.h:
+
+frame-unwind.h:
+
+tramp-frame.h:
+
+observer.h:
+
+auxv.h:
+
+../include/elf/common.h:
+
+arch-utils.h:
+
+spu-tdep.h:
+
+xml-syscall.h:
+
+linux-tdep.h:
+
+stap-probe.h:
+
+ax-gdb.h:
+
+cli/cli-utils.h:
+
+parser-defs.h:
+
+user-regs.h:
+
+../bfd/elf-bfd.h:
+
+../include/elf/external.h:
+
+../include/elf/internal.h:
+
+../include/bfdlink.h:
+
+features/rs6000/powerpc-32l.c:
+
+osabi.h:
+
+target-descriptions.h:
+
+features/rs6000/powerpc-altivec32l.c:
+
+features/rs6000/powerpc-cell32l.c:
+
+features/rs6000/powerpc-vsx32l.c:
+
+features/rs6000/powerpc-isa205-32l.c:
+
+features/rs6000/powerpc-isa205-altivec32l.c:
+
+features/rs6000/powerpc-isa205-vsx32l.c:
+
+features/rs6000/powerpc-64l.c:
+
+features/rs6000/powerpc-altivec64l.c:
+
+features/rs6000/powerpc-cell64l.c:
+
+features/rs6000/powerpc-vsx64l.c:
+
+features/rs6000/powerpc-isa205-64l.c:
+
+features/rs6000/powerpc-isa205-altivec64l.c:
+
+features/rs6000/powerpc-isa205-vsx64l.c:
+
+features/rs6000/powerpc-e500l.c:

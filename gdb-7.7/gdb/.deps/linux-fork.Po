@@ -1,0 +1,180 @@
+linux-fork.o: linux-fork.c defs.h config.h build-gnulib/config.h \
+ build-gnulib/import/sys/types.h build-gnulib/import/unistd.h \
+ gnulib/import/pathmax.h ../include/ansidecl.h common/gdb_locale.h \
+ gdb_wchar.h build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h arch-utils.h \
+ inferior.h breakpoint.h frame.h unwind_stop_reasons.def value.h \
+ doublest.h ../include/floatformat.h symtab.h common/vec.h \
+ build-gnulib/import/string.h common/gdb_assert.h common/gdb_vecs.h \
+ common/vec.h gdbtypes.h minsyms.h expression.h std-operator.def \
+ ada-operator.def ax.h common/ax.def command.h common/break-common.h \
+ target.h target/resume.h target/wait.h target/waitstatus.h \
+ common/gdb_signals.h memattr.h btrace.h common/btrace-common.h defs.h \
+ progspace.h registry.h regcache.h gdbcmd.h infcall.h objfiles.h \
+ gdb_obstack.h ../include/obstack.h symfile.h probe.h gdb_bfd.h \
+ common/gdb_assert.h linux-fork.h linux-nat.h gdbthread.h source.h \
+ common/gdb_wait.h build-gnulib/import/dirent.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+arch-utils.h:
+
+inferior.h:
+
+breakpoint.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+value.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+symtab.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+expression.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+ax.h:
+
+common/ax.def:
+
+command.h:
+
+common/break-common.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+progspace.h:
+
+registry.h:
+
+regcache.h:
+
+gdbcmd.h:
+
+infcall.h:
+
+objfiles.h:
+
+gdb_obstack.h:
+
+../include/obstack.h:
+
+symfile.h:
+
+probe.h:
+
+gdb_bfd.h:
+
+common/gdb_assert.h:
+
+linux-fork.h:
+
+linux-nat.h:
+
+gdbthread.h:
+
+source.h:
+
+common/gdb_wait.h:
+
+build-gnulib/import/dirent.h:

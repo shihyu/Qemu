@@ -1,1 +1,3 @@
-# dummy
+pdp11-opc.lo: pdp11-opc.c ../include/opcode/pdp11.h
+
+../include/opcode/pdp11.h:

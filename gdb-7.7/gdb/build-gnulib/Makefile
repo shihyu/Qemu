@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
-host_alias = x86_64-linux-gnu
-target_alias = arm-linux
-program_transform_name = s&^&arm-linux-&
+host_alias = x86_64-unknown-linux-gnu
+target_alias = x86_64-unknown-linux-gnu
+program_transform_name = s,y,y,
 bindir = ${exec_prefix}/bin
 libdir = ${exec_prefix}/lib
 tooldir = $(libdir)/$(target_alias)
@@ -48,8 +48,8 @@ SHELL = /bin/bash
 EXEEXT = 
 
 INSTALL = /usr/bin/install -c
-INSTALL_PROGRAM = ${INSTALL}
-INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_PROGRAM = /usr/bin/install -c
+INSTALL_DATA = /usr/bin/install -c -m 644
 
 DESTDIR =
 
@@ -67,7 +67,7 @@ REQUIRED_SUBDIRS = $(SUBDIRS)
 # -traditional flag.  Otherwise the ioctl calls in inflow.c
 # will be incorrectly compiled.  The "fixincludes" script in the gcc
 # distribution will fix your include files up.
-CC=x86_64-linux-gnu-gcc
+CC=gcc
 
 # Directory containing source files.
 srcdir = .././gnulib
@@ -81,7 +81,7 @@ CFLAGS = -g -O2
 
 # LDFLAGS is specifically reserved for setting from the command line
 # when running make.
-LDFLAGS = 
+LDFLAGS = -static-libstdc++ -static-libgcc 
 
 FLAGS_TO_PASS = \
 	"prefix=$(prefix)" \

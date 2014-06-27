@@ -15,7 +15,44 @@
 3. ./gdbserver --version
 
 
+---------------------------------------------------------------------------------------------------------------------------
+gdb 編譯
 
+./configure --enable-targets=all --enable-64-bit-bfd --prefix=/usr/local/gdb7.7
+
+gdb 編譯新版修改  // 因為 gdb 會出現  'g' packet reply is too long:
+
+修改gdb/remote.c文件，屏蔽process_g_packet函数中的下列两行：
+
+if (buf_len > 2 * rsa->sizeof_g_packet)
+
+error (_(“Remote ‘g’ packet reply is too long: %s”), rs->buf);
+
+在其后添加：
+
+if (buf_len > 2 * rsa->sizeof_g_packet) {
+      rsa->sizeof_g_packet = buf_len ;
+      for (i = 0; i < gdbarch_num_regs (gdbarch); i++)
+      {
+         if (rsa->regs[i].pnum == -1)
+         continue;
+
+         if (rsa->regs[i].offset >= rsa->sizeof_g_packet)
+         rsa->regs[i].in_g_packet = 0;
+         else
+         rsa->regs[i].in_g_packet = 1;
+      }
+   }
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Qemu 編譯
+1. ./configure --prefix=/opt/qemu_bin --target-list="arm-softmmu arm-linux-user x86_64-linux-user x86_64-softmmu" --enable-debug
+   ./configure --prefix=/opt/qemu_bin --enable-debug
+
+2. make -j8
+
+3. sudo make install
 
 
 

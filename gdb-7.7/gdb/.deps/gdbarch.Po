@@ -5,7 +5,7 @@ gdbarch.o: gdbarch.c defs.h config.h build-gnulib/config.h \
  ../include/gdb/signals.def ui-file.h common/host-defs.h \
  ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
  ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
- common/ptid.h ../include/fopen-bin.h common/common-utils.h config.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
  gdbarch.h utils.h cleanups.h exceptions.h ui-out.h arch-utils.h gdbcmd.h \
  command.h common/gdb_vecs.h common/vec.h build-gnulib/import/string.h \
  common/gdb_assert.h inferior.h breakpoint.h frame.h \
@@ -59,6 +59,8 @@ common/host-defs.h:
 build-gnulib/import/sys/stat.h:
 
 common/ptid.h:
+
+nm.h:
 
 ../include/fopen-bin.h:
 

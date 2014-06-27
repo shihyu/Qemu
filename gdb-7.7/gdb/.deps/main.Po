@@ -5,7 +5,7 @@ main.o: main.c defs.h config.h build-gnulib/config.h \
  ../include/gdb/signals.def ui-file.h common/host-defs.h \
  ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
  ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
- common/ptid.h ../include/fopen-bin.h common/common-utils.h config.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
  gdbarch.h utils.h cleanups.h exceptions.h ui-out.h top.h target.h \
  target/resume.h target/wait.h target/waitstatus.h common/gdb_signals.h \
  symtab.h common/vec.h build-gnulib/import/string.h common/gdb_assert.h \
@@ -60,6 +60,8 @@ common/host-defs.h:
 build-gnulib/import/sys/stat.h:
 
 common/ptid.h:
+
+nm.h:
 
 ../include/fopen-bin.h:
 

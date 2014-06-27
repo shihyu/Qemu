@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/usr/local/x86_64-unknown-linux-gnu/arm-linux/lib'
+libdir='/usr/local/gdb-7.7/lib'

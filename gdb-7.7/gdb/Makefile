@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
-host_alias = x86_64-linux-gnu
-target_alias = arm-linux
-program_transform_name = s&^&arm-linux-&
+host_alias = x86_64-unknown-linux-gnu
+target_alias = x86_64-unknown-linux-gnu
+program_transform_name = s,y,y,
 bindir = ${exec_prefix}/bin
 libdir = ${exec_prefix}/lib
 tooldir = $(libdir)/$(target_alias)
@@ -44,7 +44,7 @@ htmldir = ${docdir}
 pdfdir = ${docdir}
 includedir = ${prefix}/include
 
-install_sh = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/install-sh
+install_sh = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/install-sh
 
 # This can be referenced by `LIBINTL' as computed by
 # ZW_GNU_GETTEXT_SISTER_DIR.
@@ -53,22 +53,22 @@ top_builddir = .
 SHELL = /bin/bash
 EXEEXT = 
 
-AWK = mawk
+AWK = gawk
 LN_S = ln -s
 
 INSTALL = /usr/bin/install -c
-INSTALL_PROGRAM = ${INSTALL}
-INSTALL_SCRIPT = ${INSTALL}
+INSTALL_PROGRAM = /usr/bin/install -c
+INSTALL_SCRIPT = /usr/bin/install -c
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_DATA = /usr/bin/install -c -m 644
 
 DESTDIR =
 
 AR = ar
 AR_FLAGS = qv
 RANLIB = ranlib
-DLLTOOL = 
-WINDRES = 
+DLLTOOL = dlltool
+WINDRES = windres
 MIG = 
 STRIP = 
 
@@ -84,7 +84,7 @@ CATALOGS =
 # -traditional flag.  Otherwise the ioctl calls in inflow.c
 # will be incorrectly compiled.  The "fixincludes" script in the gcc
 # distribution will fix your include files up.
-CC=x86_64-linux-gnu-gcc
+CC=gcc
 
 # Dependency tracking information.
 DEPMODE = depmode=gcc3
@@ -112,9 +112,9 @@ FLEX = flex
 YLWRAP = $(srcdir)/../ylwrap
 
 # where to find makeinfo, preferably one designed for texinfo-2
-MAKEINFO = 
+MAKEINFO = makeinfo --split-size=5000000
 MAKEINFOFLAGS = 
-MAKEINFO_EXTRA_FLAGS = 
+MAKEINFO_EXTRA_FLAGS =  -DHAVE_MAKEINFO_CLICK
 MAKEINFO_CMD = $(MAKEINFO) $(MAKEINFOFLAGS) $(MAKEINFO_EXTRA_FLAGS)
 
 MAKEHTML = $(MAKEINFO_CMD) --html
@@ -173,7 +173,7 @@ GDB_WARN_CFLAGS_NO_FORMAT = `echo " $(GDB_WARN_CFLAGS) " \
 GDB_WARN_CFLAGS_NO_DEFS = `echo " $(GDB_WARN_CFLAGS) " \
 		   | sed "s/ -Wold-style-definition / -Wno-old-style-definition /g"`
 
-RDYNAMIC = -rdynamic
+RDYNAMIC = -Wl,--dynamic-list=$(srcdir)/proc-service.list
 
 # Where is the INTL library?  Typically in ../intl.
 INTL = 
@@ -423,16 +423,16 @@ SUBDIR_GDBTK_DEPS = $(LIBGUI) $(TCL_DEPS) $(TK_DEPS)
 SUBDIR_GDBTK_LDFLAGS=
 SUBDIR_GDBTK_CFLAGS= -DGDBTK
 
-CONFIG_OBS=  $(SUBDIR_CLI_OBS) $(SUBDIR_MI_OBS) python.o py-value.o py-prettyprint.o py-auto-load.o elfread.o stap-probe.o posix-hdep.o
-CONFIG_SRCS=  $(SUBDIR_CLI_SRCS) $(SUBDIR_MI_SRCS) python/python.c python/py-value.c 	python/py-prettyprint.c python/py-auto-load.c
-CONFIG_DEPS=  $(SUBDIR_CLI_DEPS) $(SUBDIR_MI_DEPS)
+CONFIG_OBS=  $(SUBDIR_CLI_OBS) $(SUBDIR_MI_OBS) $(SUBDIR_TUI_OBS) $(SUBDIR_PYTHON_OBS) elfread.o stap-probe.o machoread.o somread.o posix-hdep.o
+CONFIG_SRCS=  $(SUBDIR_CLI_SRCS) $(SUBDIR_MI_SRCS) $(SUBDIR_TUI_SRCS) $(SUBDIR_PYTHON_SRCS)
+CONFIG_DEPS=  $(SUBDIR_CLI_DEPS) $(SUBDIR_MI_DEPS) $(SUBDIR_TUI_DEPS) $(SUBDIR_PYTHON_DEPS)
 CONFIG_LDFLAGS = 
-ENABLE_CFLAGS=  $(SUBDIR_CLI_CFLAGS) $(SUBDIR_MI_CFLAGS)
+ENABLE_CFLAGS=  $(SUBDIR_CLI_CFLAGS) $(SUBDIR_MI_CFLAGS) $(SUBDIR_TUI_CFLAGS) $(SUBDIR_PYTHON_CFLAGS)
 CONFIG_ALL=  all-po
 CONFIG_CLEAN=  clean-po
-CONFIG_INSTALL =  install-po
+CONFIG_INSTALL =  install-po install-python
 CONFIG_UNINSTALL =  uninstall-po
-HAVE_NATIVE_GCORE_TARGET = 
+HAVE_NATIVE_GCORE_TARGET = 1
 
 # -I. for config files.
 # -I$(srcdir) for gdb internal headers.
@@ -460,7 +460,7 @@ CFLAGS = -g -O2
 # are sometimes a little generic, we think that the risk of collision
 # with other header files is high.  If that happens, we try to mitigate
 # a bit the consequences by putting the Python includes last in the list.
-INTERNAL_CPPFLAGS =   
+INTERNAL_CPPFLAGS =   -I/usr/include/python2.7 -I/usr/include/python2.7
 
 # Need to pass this to testsuite for "make check".  Probably should be
 # consistent with top-level Makefile.in and gdb/testsuite/Makefile.in
@@ -478,7 +478,7 @@ INTERNAL_CFLAGS = $(INTERNAL_WARN_CFLAGS) $(GDB_WERROR_CFLAGS)
 
 # LDFLAGS is specifically reserved for setting from the command line
 # when running make.
-LDFLAGS = 
+LDFLAGS = -static-libstdc++ -static-libgcc 
 
 # Profiling options need to go here to work.
 # I think it's perfectly reasonable for a user to set -pg in CFLAGS
@@ -493,7 +493,7 @@ INTERNAL_LDFLAGS = $(CFLAGS) $(GLOBAL_CFLAGS) $(MH_LDFLAGS) $(LDFLAGS) $(CONFIG_
 # XM_CLIBS, defined in *config files, have host-dependent libs.
 # LIBIBERTY appears twice on purpose.
 CLIBS = $(SIM) $(READLINE) $(OPCODES) $(BFD) $(INTL) $(LIBIBERTY) $(LIBDECNUMBER) \
-	$(XM_CLIBS) $(NAT_CLIBS) $(GDBTKLIBS) -ldl -ltermcap -lz -lm     \
+	$(XM_CLIBS) $(NAT_CLIBS) $(GDBTKLIBS) -ldl -lncurses -lz -lm    -lpthread -ldl -lutil -lm -lpython2.7 -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions \
 	$(LIBEXPAT) $(LIBLZMA) $(LIBBABELTRACE) \
 	$(LIBIBERTY) $(WIN32LIBS) $(LIBGNU)
 CDEPS = $(XM_CDEPS) $(NAT_CDEPS) $(SIM) $(BFD) $(READLINE_DEPS) \
@@ -537,7 +537,7 @@ REMOTE_OBS = remote.o dcache.o tracepoint.o ax-general.o ax-gdb.o remote-fileio.
 SIM_OBS = 
 
 # Target-dependent object files.
-TARGET_OBS =  arm-tdep.o arm-linux-tdep.o glibc-tdep.o solib-svr4.o symfile-mem.o linux-tdep.o
+TARGET_OBS = $(ALL_TARGET_OBS) $(ALL_64_TARGET_OBS)
 
 # All target-dependent objects files that require 64-bit CORE_ADDR
 # (used with --enable-targets=all --enable-64-bit-bfd).
@@ -620,6 +620,19 @@ ALL_TARGET_OBS = \
 	ravenscar-thread.o
 
 # Host-dependent makefile fragment comes in here.
+# Host: GNU/Linux x86-64
+NATDEPFILES= inf-ptrace.o fork-child.o \
+	i386-nat.o amd64-nat.o amd64-linux-nat.o \
+	linux-nat.o linux-osdata.o \
+	proc-service.o linux-thread-db.o linux-fork.o \
+	linux-procfs.o linux-ptrace.o linux-btrace.o \
+	linux-waitpid.o
+NAT_FILE= config/nm-linux.h
+NAT_CDEPS = $(srcdir)/proc-service.list
+
+# The dynamically loaded libthread_db needs access to symbols in the
+# gdb executable.
+LOADLIBES = -ldl $(RDYNAMIC)
 # End of host-dependent makefile fragment
 
 FLAGS_TO_PASS = \
@@ -660,7 +673,7 @@ FLAGS_TO_PASS = \
 # Flags that we pass when building the testsuite.
 
 # empty for native, $(target_alias)/ for cross
-target_subdir = arm-linux/
+target_subdir = 
 
 CC_FOR_TARGET = ` \
   if [ -f $${rootme}/../gcc/xgcc ] ; then \
@@ -966,7 +979,7 @@ COMMON_OBS = $(DEPFILES) $(CONFIG_OBS) $(YYOBJ) \
 
 TSOBS = inflow.o
 
-SUBDIRS = doc  testsuite data-directory $(GNULIB_BUILDDIR)
+SUBDIRS = doc  testsuite gdbserver data-directory $(GNULIB_BUILDDIR)
 CLEANDIRS = $(SUBDIRS)
 
 # List of subdirectories in the build tree that must exist.
@@ -1265,7 +1278,7 @@ gdb1$(EXEEXT): gdb$(EXEEXT)
 # TAGS depends on all the files that go into it so you can rebuild TAGS
 # with `make TAGS' and not have to say `rm TAGS' first.
 
-GDB_NM_FILE = 
+GDB_NM_FILE = config/nm-linux.h
 TAGS: $(TAGFILES_NO_SRCDIR) $(TAGFILES_WITH_SRCDIR)
 	@echo Making TAGS
 	etags `(test -n "$(GDB_NM_FILE)" && echo "$(srcdir)/$(GDB_NM_FILE)")` \
@@ -1344,21 +1357,21 @@ subdir_do: force
 		else true ; fi ; \
 	done
 
-Makefile: Makefile.in config.status 
+Makefile: Makefile.in config.status  ./config/i386/linux64.mh
 	# Regenerate the Makefile and the tm.h / nm.h links.
 	CONFIG_FILES="Makefile" \
 	  CONFIG_COMMANDS= \
 	  CONFIG_HEADERS= \
 	  $(SHELL) config.status
 
-$(GNULIB_BUILDDIR)/Makefile: gnulib/Makefile.in config.status 
+$(GNULIB_BUILDDIR)/Makefile: gnulib/Makefile.in config.status  ./config/i386/linux64.mh
 	@cd $(GNULIB_BUILDDIR); CONFIG_FILES="Makefile" \
 	  CONFIG_COMMANDS="depfiles" \
 	  CONFIG_HEADERS= \
 	  CONFIG_LINKS= \
 	  $(SHELL) config.status
 
-data-directory/Makefile: data-directory/Makefile.in config.status 
+data-directory/Makefile: data-directory/Makefile.in config.status  ./config/i386/linux64.mh
 	CONFIG_FILES="data-directory/Makefile" \
 	  CONFIG_COMMANDS="depfiles" \
 	  CONFIG_HEADERS= \
@@ -2158,7 +2171,7 @@ tui-winsource.o: $(srcdir)/tui/tui-winsource.c
 # or try to compile the object file into the sub-directory.
 
 # Flags needed to compile Python code
-PYTHON_CFLAGS=
+PYTHON_CFLAGS= -fno-strict-aliasing -DNDEBUG -fwrapv
 
 python.o: $(srcdir)/python/python.c
 	$(COMPILE) $(PYTHON_CFLAGS) $(srcdir)/python/python.c

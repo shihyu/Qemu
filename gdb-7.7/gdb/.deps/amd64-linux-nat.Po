@@ -1,0 +1,189 @@
+amd64-linux-nat.o: amd64-linux-nat.c defs.h config.h \
+ build-gnulib/config.h build-gnulib/import/sys/types.h \
+ build-gnulib/import/unistd.h gnulib/import/pathmax.h \
+ ../include/ansidecl.h common/gdb_locale.h gdb_wchar.h \
+ build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h inferior.h \
+ breakpoint.h frame.h unwind_stop_reasons.def value.h doublest.h \
+ ../include/floatformat.h symtab.h common/vec.h \
+ build-gnulib/import/string.h common/gdb_assert.h common/gdb_vecs.h \
+ common/vec.h gdbtypes.h minsyms.h expression.h std-operator.def \
+ ada-operator.def ax.h common/ax.def command.h common/break-common.h \
+ target.h target/resume.h target/wait.h target/waitstatus.h \
+ common/gdb_signals.h memattr.h btrace.h common/btrace-common.h defs.h \
+ progspace.h registry.h gdbcore.h exec.h memrange.h regcache.h regset.h \
+ linux-nat.h amd64-linux-tdep.h common/linux-btrace.h \
+ common/btrace-common.h common/ptid.h common/gdb_assert.h \
+ ../include/elf/common.h gdb_proc_service.h gregset.h amd64-tdep.h \
+ i386-tdep.h i386-linux-tdep.h amd64-nat.h i386-nat.h \
+ common/i386-xstate.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+inferior.h:
+
+breakpoint.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+value.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+symtab.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+expression.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+ax.h:
+
+common/ax.def:
+
+command.h:
+
+common/break-common.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+progspace.h:
+
+registry.h:
+
+gdbcore.h:
+
+exec.h:
+
+memrange.h:
+
+regcache.h:
+
+regset.h:
+
+linux-nat.h:
+
+amd64-linux-tdep.h:
+
+common/linux-btrace.h:
+
+common/btrace-common.h:
+
+common/ptid.h:
+
+common/gdb_assert.h:
+
+../include/elf/common.h:
+
+gdb_proc_service.h:
+
+gregset.h:
+
+amd64-tdep.h:
+
+i386-tdep.h:
+
+i386-linux-tdep.h:
+
+amd64-nat.h:
+
+i386-nat.h:
+
+common/i386-xstate.h:

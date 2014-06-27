@@ -1,1 +1,3 @@
-# dummy
+cris-opc.lo: cris-opc.c ../include/opcode/cris.h
+
+../include/opcode/cris.h:

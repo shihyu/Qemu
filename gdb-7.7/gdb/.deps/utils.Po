@@ -5,7 +5,7 @@ utils.o: utils.c defs.h config.h build-gnulib/config.h \
  ../include/gdb/signals.def ui-file.h common/host-defs.h \
  ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
  ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
- common/ptid.h ../include/fopen-bin.h common/common-utils.h config.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
  gdbarch.h utils.h cleanups.h exceptions.h ui-out.h \
  ../include/dyn-string.h common/gdb_assert.h build-gnulib/import/string.h \
  common/gdb_wait.h event-top.h gdbthread.h breakpoint.h frame.h \
@@ -15,8 +15,8 @@ utils.o: utils.c defs.h config.h build-gnulib/config.h \
  common/ax.def command.h common/break-common.h inferior.h target.h \
  target/resume.h target/wait.h target/waitstatus.h common/gdb_signals.h \
  memattr.h btrace.h common/btrace-common.h defs.h progspace.h registry.h \
- ../include/fnmatch.h gdb_bfd.h ../include/timeval-utils.h gdbcmd.h \
- serial.h gdb-demangle.h language.h charset.h annotate.h \
+ ../include/fnmatch.h gdb_bfd.h tui/tui.h ../include/timeval-utils.h \
+ gdbcmd.h serial.h gdb-demangle.h language.h charset.h annotate.h \
  ../include/filenames.h ../include/hashtab.h symfile.h probe.h \
  gdb_obstack.h ../include/obstack.h gdbcore.h exec.h memrange.h top.h \
  main.h solist.h gdb_curses.h ../opcodes/../readline/readline.h \
@@ -65,6 +65,8 @@ common/host-defs.h:
 build-gnulib/import/sys/stat.h:
 
 common/ptid.h:
+
+nm.h:
 
 ../include/fopen-bin.h:
 
@@ -161,6 +163,8 @@ registry.h:
 ../include/fnmatch.h:
 
 gdb_bfd.h:
+
+tui/tui.h:
 
 ../include/timeval-utils.h:
 

@@ -1,7 +1,7 @@
 strnlen1.o: ../.././gnulib/import/strnlen1.c ../config.h \
  ../.././gnulib/import/strnlen1.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h string.h \
- /usr/include/string.h /usr/include/features.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.7/include/stddef.h string.h \
+ /usr/include/string.h /usr/include/features.h /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/predefs.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -12,20 +12,23 @@ strnlen1.o: ../.././gnulib/import/strnlen1.c ../config.h \
  /usr/include/x86_64-linux-gnu/bits/endian.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/stdlib.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/string3.h
 
 ../config.h:
 
 ../.././gnulib/import/strnlen1.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.7/include/stddef.h:
 
 string.h:
 
 /usr/include/string.h:
 
 /usr/include/features.h:
+
+/usr/include/stdc-predef.h:
 
 /usr/include/x86_64-linux-gnu/bits/predefs.h:
 
@@ -52,6 +55,8 @@ string.h:
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
 
 /usr/include/stdlib.h:
 

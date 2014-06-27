@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
-host_alias = arm-linux
-target_alias = 
-program_transform_name = s,x,x,
+host_alias = x86_64-unknown-linux-gnu
+target_alias = x86_64-unknown-linux-gnu
+program_transform_name = s,y,y,
 bindir = ${exec_prefix}/bin
 libdir = ${exec_prefix}/lib
 tooldir = $(libdir)/$(target_alias)
@@ -48,8 +48,8 @@ SHELL = /bin/bash
 EXEEXT = 
 
 INSTALL = /usr/bin/install -c
-INSTALL_PROGRAM = ${INSTALL}
-INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_PROGRAM = /usr/bin/install -c
+INSTALL_DATA = /usr/bin/install -c -m 644
 
 DESTDIR =
 
@@ -77,11 +77,11 @@ CC_LD=$(CC)
 
 # CFLAGS is specifically reserved for setting from the command line
 # when running make.  I.E.  "make CFLAGS=-Wmissing-prototypes".
-CFLAGS = -m32
+CFLAGS = -g -O2
 
 # LDFLAGS is specifically reserved for setting from the command line
 # when running make.
-LDFLAGS = -m32
+LDFLAGS = -static-libstdc++ -static-libgcc 
 
 FLAGS_TO_PASS = \
 	"prefix=$(prefix)" \

@@ -25,7 +25,7 @@ VPATH = $(SYSCALLS_SRCDIR):$(PYTHON_SRCDIR):$(SYSTEM_GDBINIT_SRCDIR)
 top_srcdir = ..
 top_builddir = ..
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -36,7 +36,7 @@ SHELL = /bin/bash
 LN_S = ln -s
 
 INSTALL = /usr/bin/install -c
-INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_DATA = /usr/bin/install -c -m 644
 INSTALL_DIR = $(SHELL) $(srcdir)/../../mkinstalldirs
 
 GDB_DATADIR = ${datarootdir}/gdb

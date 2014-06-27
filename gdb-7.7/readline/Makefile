@@ -29,7 +29,7 @@ PACKAGE_VERSION = 6.2
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /home/jason-yao/下載/Qemu/gdb-7.7/readline
+BUILD_DIR = /home/shihyu/data/Qemu/gdb-7.7/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = /usr/bin/install -c
@@ -48,7 +48,7 @@ PURIFY =
 
 SHELL = /bin/sh
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

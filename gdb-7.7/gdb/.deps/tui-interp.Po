@@ -1,0 +1,117 @@
+tui-interp.o: tui/tui-interp.c defs.h config.h build-gnulib/config.h \
+ build-gnulib/import/sys/types.h build-gnulib/import/unistd.h \
+ gnulib/import/pathmax.h ../include/ansidecl.h common/gdb_locale.h \
+ gdb_wchar.h build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h interps.h top.h \
+ event-top.h event-loop.h ui-out.h cli-out.h common/vec.h \
+ build-gnulib/import/string.h common/gdb_assert.h tui/tui-data.h \
+ tui/tui.h gdb_curses.h ../opcodes/../readline/readline.h \
+ ../opcodes/../readline/rlstdc.h ../opcodes/../readline/rltypedefs.h \
+ ../opcodes/../readline/keymaps.h ../opcodes/../readline/chardefs.h \
+ ../opcodes/../readline/tilde.h tui/tui-win.h tui/tui-io.h exceptions.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+interps.h:
+
+top.h:
+
+event-top.h:
+
+event-loop.h:
+
+ui-out.h:
+
+cli-out.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+tui/tui-data.h:
+
+tui/tui.h:
+
+gdb_curses.h:
+
+../opcodes/../readline/readline.h:
+
+../opcodes/../readline/rlstdc.h:
+
+../opcodes/../readline/rltypedefs.h:
+
+../opcodes/../readline/keymaps.h:
+
+../opcodes/../readline/chardefs.h:
+
+../opcodes/../readline/tilde.h:
+
+tui/tui-win.h:
+
+tui/tui-io.h:
+
+exceptions.h:

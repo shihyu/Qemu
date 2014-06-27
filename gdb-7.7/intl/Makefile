@@ -26,9 +26,9 @@ SHELL = /bin/bash
 srcdir = .
 
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
-transform = s&^&arm-linux-&
+transform = s,y,y,
 libdir = ${exec_prefix}/lib
 includedir = ${prefix}/include
 datarootdir = ${prefix}/share

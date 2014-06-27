@@ -24,7 +24,7 @@
 libiberty_topdir = ./..
 srcdir = .
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 
 exec_prefix = ${prefix}
 bindir = ${exec_prefix}/bin
@@ -58,7 +58,7 @@ CC = gcc
 CFLAGS = -g -O2
 CPPFLAGS = 
 RANLIB = ranlib
-MAKEINFO = /home/jason-yao/下載/Qemu/gdb-7.7/missing makeinfo --split-size=5000000
+MAKEINFO = makeinfo --split-size=5000000
 PERL = perl
 
 PICFLAG = 
@@ -100,7 +100,7 @@ FLAGS_TO_PASS = \
 # Subdirectories to recurse into. We need to override this during cleaning
 SUBDIRS = testsuite
 
-# FIXME: add  once we're sure it works for everyone.
+# FIXME: add info once we're sure it works for everyone.
 all: stamp-picdir $(TARGETLIB) required-list all-subdir
 	@: $(MAKE) ; $(MULTIDO) $(FLAGS_TO_PASS) multi-do DO=all
 

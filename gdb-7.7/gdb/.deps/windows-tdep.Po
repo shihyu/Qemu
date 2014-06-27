@@ -1,0 +1,175 @@
+windows-tdep.o: windows-tdep.c defs.h config.h build-gnulib/config.h \
+ build-gnulib/import/sys/types.h build-gnulib/import/unistd.h \
+ gnulib/import/pathmax.h ../include/ansidecl.h common/gdb_locale.h \
+ gdb_wchar.h build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h windows-tdep.h \
+ gdb_obstack.h ../include/obstack.h build-gnulib/import/string.h \
+ xml-support.h common/vec.h common/gdb_assert.h common/xml-utils.h \
+ target.h target/resume.h target/wait.h target/waitstatus.h \
+ common/gdb_signals.h symtab.h common/gdb_vecs.h common/vec.h gdbtypes.h \
+ minsyms.h memattr.h btrace.h common/btrace-common.h defs.h command.h \
+ value.h doublest.h ../include/floatformat.h frame.h \
+ unwind_stop_reasons.def expression.h std-operator.def ada-operator.def \
+ inferior.h breakpoint.h ax.h common/ax.def common/break-common.h \
+ progspace.h registry.h gdbcmd.h gdbthread.h objfiles.h symfile.h probe.h \
+ gdb_bfd.h coff-pe-read.h complaints.h solib.h solib-target.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+windows-tdep.h:
+
+gdb_obstack.h:
+
+../include/obstack.h:
+
+build-gnulib/import/string.h:
+
+xml-support.h:
+
+common/vec.h:
+
+common/gdb_assert.h:
+
+common/xml-utils.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+symtab.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+command.h:
+
+value.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+expression.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+inferior.h:
+
+breakpoint.h:
+
+ax.h:
+
+common/ax.def:
+
+common/break-common.h:
+
+progspace.h:
+
+registry.h:
+
+gdbcmd.h:
+
+gdbthread.h:
+
+objfiles.h:
+
+symfile.h:
+
+probe.h:
+
+gdb_bfd.h:
+
+coff-pe-read.h:
+
+complaints.h:
+
+solib.h:
+
+solib-target.h:

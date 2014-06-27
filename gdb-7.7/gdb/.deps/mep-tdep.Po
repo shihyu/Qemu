@@ -1,0 +1,228 @@
+mep-tdep.o: mep-tdep.c defs.h config.h build-gnulib/config.h \
+ build-gnulib/import/sys/types.h build-gnulib/import/unistd.h \
+ gnulib/import/pathmax.h ../include/ansidecl.h common/gdb_locale.h \
+ gdb_wchar.h build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h frame.h \
+ unwind_stop_reasons.def frame-unwind.h frame-base.h symtab.h \
+ common/vec.h build-gnulib/import/string.h common/gdb_assert.h \
+ common/gdb_vecs.h common/vec.h gdbtypes.h minsyms.h gdbcmd.h command.h \
+ gdbcore.h exec.h target.h target/resume.h target/wait.h \
+ target/waitstatus.h common/gdb_signals.h memattr.h btrace.h \
+ common/btrace-common.h defs.h progspace.h registry.h memrange.h value.h \
+ doublest.h ../include/floatformat.h expression.h std-operator.def \
+ ada-operator.def inferior.h breakpoint.h ax.h common/ax.def \
+ common/break-common.h ../include/dis-asm.h symfile.h probe.h objfiles.h \
+ gdb_obstack.h ../include/obstack.h gdb_bfd.h language.h arch-utils.h \
+ regcache.h remote.h remote-notif.h common/queue.h sim-regno.h disasm.h \
+ trad-frame.h reggroups.h ../bfd/elf-bfd.h ../include/elf/common.h \
+ ../include/elf/external.h ../include/elf/internal.h ../include/bfdlink.h \
+ ../include/elf/mep.h ../include/elf/reloc-macros.h prologue-value.h \
+ ../include/cgen/bitset.h infcall.h common/gdb_assert.h \
+ ../opcodes/../opcodes/mep-desc.h ../include/opcode/cgen.h \
+ ../bfd/bfd_stdint.h ../opcodes/../opcodes/mep-opc.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+frame-unwind.h:
+
+frame-base.h:
+
+symtab.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+gdbcmd.h:
+
+command.h:
+
+gdbcore.h:
+
+exec.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+progspace.h:
+
+registry.h:
+
+memrange.h:
+
+value.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+expression.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+inferior.h:
+
+breakpoint.h:
+
+ax.h:
+
+common/ax.def:
+
+common/break-common.h:
+
+../include/dis-asm.h:
+
+symfile.h:
+
+probe.h:
+
+objfiles.h:
+
+gdb_obstack.h:
+
+../include/obstack.h:
+
+gdb_bfd.h:
+
+language.h:
+
+arch-utils.h:
+
+regcache.h:
+
+remote.h:
+
+remote-notif.h:
+
+common/queue.h:
+
+sim-regno.h:
+
+disasm.h:
+
+trad-frame.h:
+
+reggroups.h:
+
+../bfd/elf-bfd.h:
+
+../include/elf/common.h:
+
+../include/elf/external.h:
+
+../include/elf/internal.h:
+
+../include/bfdlink.h:
+
+../include/elf/mep.h:
+
+../include/elf/reloc-macros.h:
+
+prologue-value.h:
+
+../include/cgen/bitset.h:
+
+infcall.h:
+
+common/gdb_assert.h:
+
+../opcodes/../opcodes/mep-desc.h:
+
+../include/opcode/cgen.h:
+
+../bfd/bfd_stdint.h:
+
+../opcodes/../opcodes/mep-opc.h:

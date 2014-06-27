@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 6.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /home/jason-yao/下載/Qemu/gdb-7.7/readline
+BUILD_DIR = /home/shihyu/data/Qemu/gdb-7.7/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

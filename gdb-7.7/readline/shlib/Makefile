@@ -32,7 +32,7 @@ datarootdir = ${prefix}/share
 srcdir = .
 VPATH = ..
 topdir = ..
-BUILD_DIR = /home/jason-yao/下載/Qemu/gdb-7.7/readline
+BUILD_DIR = /home/shihyu/data/Qemu/gdb-7.7/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = /usr/bin/install -c
@@ -52,7 +52,7 @@ SHELL = /bin/sh
 host_os = linux-gnu
 host_vendor = unknown
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 includedir = ${prefix}/include
 bindir = ${exec_prefix}/bin

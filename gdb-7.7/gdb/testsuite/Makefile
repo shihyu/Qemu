@@ -18,15 +18,15 @@
 
 
 srcdir = .
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
-abs_builddir = /home/jason-yao/下載/Qemu/gdb-7.7/gdb/testsuite
+abs_builddir = /home/shihyu/data/Qemu/gdb-7.7/gdb/testsuite
 
-target_alias = arm-linux
-program_transform_name = s,x,x,
+target_alias = x86_64-unknown-linux-gnu
+program_transform_name = s,y,y,
 build_canonical = x86_64-unknown-linux-gnu
-host_canonical = x86_64-pc-linux-gnu
-target_canonical = arm-unknown-linux-gnu
+host_canonical = x86_64-unknown-linux-gnu
+target_canonical = x86_64-unknown-linux-gnu
 
 SHELL = /bin/bash
 EXEEXT = 

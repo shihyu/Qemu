@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
-host_alias = arm-linux
-target_alias = arm-linux
-program_transform_name = s,x,x,
+host_alias = x86_64-unknown-linux-gnu
+target_alias = x86_64-unknown-linux-gnu
+program_transform_name = s,y,y,
 bindir = ${exec_prefix}/bin
 libdir = ${exec_prefix}/lib
 tooldir = $(libdir)/$(target_alias)
@@ -45,8 +45,8 @@ SHELL = /bin/bash
 EXEEXT = 
 
 INSTALL = /usr/bin/install -c
-INSTALL_PROGRAM = ${INSTALL}
-INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_PROGRAM = /usr/bin/install -c
+INSTALL_DATA = /usr/bin/install -c -m 644
 RANLIB = ranlib
 
 CC = gcc
@@ -66,8 +66,8 @@ POSTCOMPILE = @true
 # Directory containing source files.  Don't clean up the spacing,
 # this exact string is matched for by the "configure" script.
 srcdir = .
-abs_top_srcdir=/home/jason-yao/下載/Qemu/gdb-7.7/gdb/gdbserver
-abs_srcdir=/home/jason-yao/下載/Qemu/gdb-7.7/gdb/gdbserver
+abs_top_srcdir=/home/shihyu/data/Qemu/gdb-7.7/gdb/gdbserver
+abs_srcdir=/home/shihyu/data/Qemu/gdb-7.7/gdb/gdbserver
 
 
 # It is also possible that you will need to add -I/usr/include/sys to the
@@ -122,7 +122,7 @@ WARN_CFLAGS_NO_FORMAT = `echo " $(WARN_CFLAGS) " \
 
 # CFLAGS is specifically reserved for setting from the command line
 # when running make.  I.E.  "make CFLAGS=-Wmissing-prototypes".
-CFLAGS = -m32
+CFLAGS = -g -O2
 
 # INTERNAL_CFLAGS is the aggregate of all other *CFLAGS macros.
 INTERNAL_CFLAGS_BASE =  ${CFLAGS} ${GLOBAL_CFLAGS} \
@@ -132,7 +132,7 @@ INTERNAL_CFLAGS =  ${INTERNAL_WARN_CFLAGS} $(WERROR_CFLAGS) -DGDBSERVER
 
 # LDFLAGS is specifically reserved for setting from the command line
 # when running make.
-LDFLAGS = -m32
+LDFLAGS = -static-libstdc++ -static-libgcc 
 INTERNAL_LDFLAGS = $(LDFLAGS) -Wl,--dynamic-list=$(srcdir)/proc-service.list
 
 # All source files that go into linking GDB remote server.
@@ -165,7 +165,7 @@ SFILES=	$(srcdir)/gdbreplay.c $(srcdir)/inferiors.c $(srcdir)/dll.c \
 	$(srcdir)/common/filestuff.c $(srcdir)/target/waitstatus.c \
     $(srcdir)/common/mips-linux-watch.c
 
-DEPFILES = reg-arm.o arm-with-iwmmxt.o arm-with-vfpv2.o arm-with-vfpv3.o arm-with-neon.o linux-low.o linux-osdata.o linux-procfs.o linux-ptrace.o linux-waitpid.o linux-arm-low.o hostio-errno.o thread-db.o proc-service.o
+DEPFILES = amd64-linux.o amd64-avx-linux.o amd64-mpx-linux.o x32-linux.o x32-avx-linux.o i386-linux.o i386-avx-linux.o i386-mpx-linux.o i386-mmx-linux.o linux-low.o linux-osdata.o linux-procfs.o linux-ptrace.o linux-waitpid.o linux-x86-low.o i386-low.o i387-fp.o linux-btrace.o hostio-errno.o thread-db.o proc-service.o
 
 LIBOBJS = 
 
@@ -184,11 +184,11 @@ CDEPS = $(srcdir)/proc-service.list
 
 # XML files to compile in to gdbserver, if any.
 XML_DIR = $(srcdir)/../features
-XML_FILES =  $(XML_DIR)/arm-with-iwmmxt.xml $(XML_DIR)/arm-with-vfpv2.xml $(XML_DIR)/arm-with-vfpv3.xml $(XML_DIR)/arm-with-neon.xml $(XML_DIR)/arm-core.xml $(XML_DIR)/xscale-iwmmxt.xml $(XML_DIR)/arm-vfpv2.xml $(XML_DIR)/arm-vfpv3.xml
+XML_FILES =  $(XML_DIR)/i386/i386-linux.xml $(XML_DIR)/i386/i386-avx-linux.xml $(XML_DIR)/i386/i386-mmx-linux.xml $(XML_DIR)/i386/32bit-linux.xml $(XML_DIR)/i386/i386-mpx-linux.xml $(XML_DIR)/i386/32bit-core.xml $(XML_DIR)/i386/32bit-sse.xml $(XML_DIR)/i386/32bit-avx.xml $(XML_DIR)/i386/32bit-mpx.xml $(XML_DIR)/i386/amd64-linux.xml $(XML_DIR)/i386/amd64-avx-linux.xml $(XML_DIR)/i386/64bit-linux.xml $(XML_DIR)/i386/amd64-mpx-linux.xml $(XML_DIR)/i386/x32-linux.xml $(XML_DIR)/i386/x32-avx-linux.xml $(XML_DIR)/i386/64bit-core.xml $(XML_DIR)/i386/64bit-sse.xml $(XML_DIR)/i386/64bit-avx.xml $(XML_DIR)/i386/x32-core.xml $(XML_DIR)/i386/64bit-mpx.xml
 XML_BUILTIN = xml-builtin.o
 
-IPA_DEPFILES = 
-extra_libraries = 
+IPA_DEPFILES = amd64-linux-ipa.o linux-amd64-ipa.o
+extra_libraries =  libinproctrace.so
 
 SUBDIRS = $(GNULIB_BUILDDIR)
 CLEANDIRS = $(SUBDIRS)

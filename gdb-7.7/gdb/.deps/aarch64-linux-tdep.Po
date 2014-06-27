@@ -1,0 +1,174 @@
+aarch64-linux-tdep.o: aarch64-linux-tdep.c defs.h config.h \
+ build-gnulib/config.h build-gnulib/import/sys/types.h \
+ build-gnulib/import/unistd.h gnulib/import/pathmax.h \
+ ../include/ansidecl.h common/gdb_locale.h gdb_wchar.h \
+ build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h glibc-tdep.h \
+ linux-tdep.h aarch64-tdep.h aarch64-linux-tdep.h osabi.h solib-svr4.h \
+ symtab.h common/vec.h build-gnulib/import/string.h common/gdb_assert.h \
+ common/gdb_vecs.h common/vec.h gdbtypes.h minsyms.h tramp-frame.h \
+ frame.h unwind_stop_reasons.def trad-frame.h inferior.h breakpoint.h \
+ value.h doublest.h ../include/floatformat.h expression.h \
+ std-operator.def ada-operator.def ax.h common/ax.def command.h \
+ common/break-common.h target.h target/resume.h target/wait.h \
+ target/waitstatus.h common/gdb_signals.h memattr.h btrace.h \
+ common/btrace-common.h defs.h progspace.h registry.h regcache.h regset.h \
+ cli/cli-utils.h stap-probe.h parser-defs.h user-regs.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+glibc-tdep.h:
+
+linux-tdep.h:
+
+aarch64-tdep.h:
+
+aarch64-linux-tdep.h:
+
+osabi.h:
+
+solib-svr4.h:
+
+symtab.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+tramp-frame.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+trad-frame.h:
+
+inferior.h:
+
+breakpoint.h:
+
+value.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+expression.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+ax.h:
+
+common/ax.def:
+
+command.h:
+
+common/break-common.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+progspace.h:
+
+registry.h:
+
+regcache.h:
+
+regset.h:
+
+cli/cli-utils.h:
+
+stap-probe.h:
+
+parser-defs.h:
+
+user-regs.h:

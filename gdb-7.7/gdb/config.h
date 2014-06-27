@@ -11,7 +11,7 @@
 #define AUTO_LOAD_SAFE_PATH "$debugdir:$datadir/auto-load"
 
 /* Directory of programs. */
-#define BINDIR "/usr/local/bin"
+#define BINDIR "/usr/local/gdb-7.7/bin"
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
@@ -22,17 +22,17 @@
 /* #undef C_ALLOCA */
 
 /* look for global separate debug info in this path [LIBDIR/debug] */
-#define DEBUGDIR "/usr/local/lib/debug"
+#define DEBUGDIR "/usr/local/gdb-7.7/lib/debug"
 
 /* Define if the separate-debug-dir directory should be relocated when GDB is
    moved. */
 #define DEBUGDIR_RELOCATABLE 1
 
 /* Define to BFD's default architecture. */
-#define DEFAULT_BFD_ARCH bfd_arm_arch
+#define DEFAULT_BFD_ARCH bfd_i386_arch
 
 /* Define to BFD's default target vector. */
-#define DEFAULT_BFD_VEC bfd_elf32_littlearm_vec
+#define DEFAULT_BFD_VEC bfd_elf64_x86_64_vec
 
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
@@ -42,7 +42,7 @@
 #define GDBINIT ".gdbinit"
 
 /* look for global separate data files in this path [DATADIR/gdb] */
-#define GDB_DATADIR "/usr/local/share/gdb"
+#define GDB_DATADIR "/usr/local/gdb-7.7/share/gdb"
 
 /* Define if the gdb-datadir directory should be relocated when GDB is moved.
    */
@@ -61,7 +61,7 @@
 #define GDB_HOST_LONG_DOUBLE_FORMAT 0
 
 /* nativefile */
-/* #undef GDB_NM_FILE */
+#define GDB_NM_FILE "config/nm-linux.h"
 
 /* Define to the default OS ABI for this configuration. */
 #define GDB_OSABI_DEFAULT GDB_OSABI_LINUX
@@ -206,7 +206,7 @@
 /* #undef HAVE_LIBPYTHON2_6 */
 
 /* Define if Python 2.7 is being used. */
-/* #undef HAVE_LIBPYTHON2_7 */
+#define HAVE_LIBPYTHON2_7 1
 
 /* Define to 1 if you have the <libunwind-ia64.h> header file. */
 /* #undef HAVE_LIBUNWIND_IA64_H */
@@ -326,7 +326,7 @@
 #define HAVE_PWRITE 1
 
 /* Define if Python interpreter is being linked in. */
-/* #undef HAVE_PYTHON */
+#define HAVE_PYTHON 1
 
 /* Define to 1 if you have the `readlink' function. */
 #define HAVE_READLINK 1
@@ -335,7 +335,7 @@
 #define HAVE_REALPATH 1
 
 /* Define to 1 if you have the `resize_term' function. */
-/* #undef HAVE_RESIZE_TERM */
+#define HAVE_RESIZE_TERM 1
 
 /* Define to 1 if you have the `sbrk' function. */
 #define HAVE_SBRK 1
@@ -515,7 +515,7 @@
 #define HAVE_WAIT_H 1
 
 /* Define to 1 if you have the `wborder' function. */
-/* #undef HAVE_WBORDER */
+#define HAVE_WBORDER 1
 
 /* Define to 1 if `fork' works. */
 #define HAVE_WORKING_FORK 1
@@ -524,7 +524,7 @@
 #define HAVE_WORKING_VFORK 1
 
 /* Define to 1 if you have the `wresize' function. */
-/* #undef HAVE_WRESIZE */
+#define HAVE_WRESIZE 1
 
 /* Define to 1 if you have the `XML_StopParser' function. */
 #define HAVE_XML_STOPPARSER 1
@@ -548,7 +548,7 @@
 #define ICONV_CONST 
 
 /* directory to load the JIT readers from */
-#define JIT_READER_DIR "/usr/local/lib/gdb"
+#define JIT_READER_DIR "/usr/local/gdb-7.7/lib/gdb"
 
 /* Define if the jit-reader-dir directory should be relocated when GDB is
    moved. */
@@ -610,7 +610,7 @@
 #define PTRACE_TYPE_RET long
 
 /* Define if the python directory should be relocated when GDB is moved. */
-/* #undef PYTHON_PATH_RELOCATABLE */
+#define PYTHON_PATH_RELOCATABLE 0
 
 /* Relocated directory for source files. */
 /* #undef RELOC_SRCDIR */
@@ -704,7 +704,7 @@
 
 /* Define if --with-python provides a path, either directly or via
    python-config.py --exec-prefix. */
-/* #undef WITH_PYTHON_PATH */
+#define WITH_PYTHON_PATH "/usr"
 
 /* Define if the simulator is being linked in. */
 /* #undef WITH_SIM */

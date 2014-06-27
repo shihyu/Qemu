@@ -16,4 +16,4 @@ ac_cv_env_build_alias_value=x86_64-unknown-linux-gnu
 ac_cv_env_host_alias_set=set
 ac_cv_env_host_alias_value=x86_64-unknown-linux-gnu
 ac_cv_env_target_alias_set=set
-ac_cv_env_target_alias_value=arm-linux
+ac_cv_env_target_alias_value=x86_64-unknown-linux-gnu

@@ -54,8 +54,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = x86_64-unknown-linux-gnu
-target_triplet = arm-unknown-linux-gnu
-am__append_1 = -rpath $(rpath_bfdlibdir)
+target_triplet = x86_64-unknown-linux-gnu
+#am__append_1 = -rpath $(rpath_bfdlibdir)
 subdir = .
 DIST_COMMON = ChangeLog $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
@@ -120,8 +120,8 @@ libopcodes_la_OBJECTS = $(am_libopcodes_la_OBJECTS)
 libopcodes_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libopcodes_la_LDFLAGS) $(LDFLAGS) -o $@
-am_libopcodes_la_rpath =
-#am_libopcodes_la_rpath = -rpath $(bfdlibdir)
+#am_libopcodes_la_rpath =
+am_libopcodes_la_rpath = -rpath $(bfdlibdir)
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/../depcomp
 am__depfiles_maybe = depfiles
@@ -152,14 +152,14 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 ETAGS = etags
 CTAGS = ctags
 DIST_SUBDIRS = $(SUBDIRS)
-ACLOCAL = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run aclocal-1.11
-AMTAR = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run tar
+ACLOCAL = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run aclocal-1.11
+AMTAR = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run tar
 AR = ar
-AUTOCONF = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run automake-1.11
-AWK = mawk
-BFD_MACHINES =  arm-dis.lo
+AUTOCONF = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run automake-1.11
+AWK = gawk
+BFD_MACHINES = $(ALL_MACHINES)
 BUILD_LIBS = ../libiberty/libiberty.a 
 BUILD_LIB_DEPS = ../libiberty/libiberty.a 
 CATALOGS =  da.gmo de.gmo es.gmo fi.gmo fr.gmo ga.gmo id.gmo it.gmo nl.gmo pt_BR.gmo ro.gmo sv.gmo tr.gmo uk.gmo vi.gmo zh_CN.gmo da.gmo de.gmo es.gmo fi.gmo fr.gmo ga.gmo id.gmo it.gmo nl.gmo pt_BR.gmo ro.gmo sv.gmo tr.gmo uk.gmo vi.gmo zh_CN.gmo
@@ -206,7 +206,7 @@ LIPO =
 LN_S = ln -s
 LTLIBOBJS = 
 MAINT = #
-MAKEINFO = /home/jason-yao/下載/Qemu/gdb-7.7/missing makeinfo --split-size=5000000
+MAKEINFO = makeinfo --split-size=5000000
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = $(top_builddir)/./../mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
@@ -240,10 +240,10 @@ USE_NLS = yes
 VERSION = 2.24.51
 WARN_CFLAGS = -W -Wall -Wstrict-prototypes -Wmissing-prototypes -Wshadow -Werror
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/jason-yao/下載/Qemu/gdb-7.7/opcodes
-abs_srcdir = /home/jason-yao/下載/Qemu/gdb-7.7/opcodes
-abs_top_builddir = /home/jason-yao/下載/Qemu/gdb-7.7/opcodes
-abs_top_srcdir = /home/jason-yao/下載/Qemu/gdb-7.7/opcodes
+abs_builddir = /home/shihyu/data/Qemu/gdb-7.7/opcodes
+abs_srcdir = /home/shihyu/data/Qemu/gdb-7.7/opcodes
+abs_top_builddir = /home/shihyu/data/Qemu/gdb-7.7/opcodes
+abs_top_srcdir = /home/shihyu/data/Qemu/gdb-7.7/opcodes
 ac_ct_CC = 
 ac_ct_DUMPBIN = 
 am__include = include
@@ -251,12 +251,12 @@ am__leading_dot = .
 am__quote = 
 am__tar = ${AMTAR} chof - "$$tardir"
 am__untar = ${AMTAR} xf -
-archdefs =  -DARCH_arm
-bfdincludedir = 
-#bfdincludedir = $(exec_prefix)/$(host_noncanonical)/$(target_noncanonical)/include
+archdefs = -DARCH_all
+#bfdincludedir = 
+bfdincludedir = $(includedir)
 # Empty these so that the respective installation directories will not be created.
-bfdlibdir = 
-#bfdlibdir = $(exec_prefix)/$(host_noncanonical)/$(target_noncanonical)/lib
+#bfdlibdir = 
+bfdlibdir = $(libdir)
 bindir = ${exec_prefix}/bin
 build = x86_64-unknown-linux-gnu
 build_alias = x86_64-unknown-linux-gnu
@@ -279,7 +279,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/install-sh
+install_sh = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -288,17 +288,17 @@ mandir = ${datarootdir}/man
 mkdir_p = /bin/mkdir -p
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
-program_transform_name = s&^&arm-linux-&
+prefix = /usr/local/gdb-7.7
+program_transform_name = s,y,y,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
-target = arm-unknown-linux-gnu
-target_alias = arm-linux
-target_cpu = arm
-target_noncanonical = arm-linux
+target = x86_64-unknown-linux-gnu
+target_alias = x86_64-unknown-linux-gnu
+target_cpu = x86_64
+target_noncanonical = x86_64-unknown-linux-gnu
 target_os = linux-gnu
 target_vendor = unknown
 top_build_prefix = 
@@ -320,10 +320,10 @@ LINK_FOR_BUILD = $(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) \
 
 libopcodes_la_LDFLAGS = $(am__append_1) -release `cat \
 	../bfd/libtool-soversion` 
-#bfdlib_LTLIBRARIES = libopcodes.la
-#bfdinclude_DATA = $(INCDIR)/dis-asm.h
-rpath_bfdlibdir = $(exec_prefix)/$(host_noncanonical)/$(target_noncanonical)/lib
-noinst_LTLIBRARIES = libopcodes.la
+bfdlib_LTLIBRARIES = libopcodes.la
+bfdinclude_DATA = $(INCDIR)/dis-asm.h
+#rpath_bfdlibdir = $(libdir)
+#noinst_LTLIBRARIES = libopcodes.la
 
 # This is where bfd.h lives.
 BFD_H = ../bfd/bfd.h
@@ -568,7 +568,7 @@ CFILES = \
 	z8kgen.c
 
 ALL_MACHINES = $(TARGET_LIBOPCODES_CFILES:.c=.lo)
-OFILES =  arm-dis.lo
+OFILES = $(ALL_MACHINES)
 
 # We should reconfigure whenever bfd/configure.in changes, because
 # that's where the version number in Makefile comes from.
@@ -1262,11 +1262,11 @@ uninstall-am: uninstall-bfdincludeDATA uninstall-bfdlibLTLIBRARIES
 
 
 disassemble.lo: disassemble.c
-	$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@  -DARCH_arm $(srcdir)/disassemble.c
+	$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ -DARCH_all $(srcdir)/disassemble.c
 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 #	source='disassemble.c' object='$@' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(LTCOMPILE) -c -o $@  -DARCH_arm $(srcdir)/disassemble.c
+#	$(LTCOMPILE) -c -o $@ -DARCH_all $(srcdir)/disassemble.c
 
 stamp-lib: libopcodes.la
 	libtooldir=`$(LIBTOOL) --config | sed -n -e 's/^objdir=//p'`; \
@@ -1471,11 +1471,11 @@ $(srcdir)/z8k-opc.h: # z8kgen$(EXEEXT_FOR_BUILD)
 z8k-dis.lo: $(srcdir)/z8k-opc.h
 
 sh-dis.lo: sh-dis.c
-	$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@  -DARCH_arm $(srcdir)/sh-dis.c
+	$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ -DARCH_all $(srcdir)/sh-dis.c
 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 #	source='sh-dis.c' object='$@' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(LTCOMPILE) -c -o $@  -DARCH_arm $(srcdir)/sh-dis.c
+#	$(LTCOMPILE) -c -o $@ -DARCH_all $(srcdir)/sh-dis.c
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

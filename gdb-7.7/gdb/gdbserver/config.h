@@ -80,7 +80,7 @@
 /* #undef HAVE_LIBMCHECK */
 
 /* Define if the target supports branch tracing. */
-/* #undef HAVE_LINUX_BTRACE */
+#define HAVE_LINUX_BTRACE 1
 
 /* Define to 1 if you have the <linux/elf.h> header file. */
 #define HAVE_LINUX_ELF_H 1
@@ -311,7 +311,7 @@
 #define USE_XML 1
 
 /* Number of bits in a file offset, on hosts where this is settable. */
-#define _FILE_OFFSET_BITS 64
+/* #undef _FILE_OFFSET_BITS */
 
 /* Define for large files, on AIX-style hosts. */
 /* #undef _LARGE_FILES */

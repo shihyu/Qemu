@@ -4,7 +4,7 @@
 
 DESTDIR		=
 
-prefix 		= /usr/local
+prefix 		= /usr/local/gdb-7.7
 exec_prefix 	= ${prefix}
 
 srcdir  = .

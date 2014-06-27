@@ -54,8 +54,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = x86_64-unknown-linux-gnu
-target_triplet = arm-unknown-linux-gnu
-am__append_1 = -rpath $(rpath_bfdlibdir)
+target_triplet = x86_64-unknown-linux-gnu
+#am__append_1 = -rpath $(rpath_bfdlibdir)
 #am__append_2 = $(INCDIR)/plugin-api.h
 subdir = .
 DIST_COMMON = README ChangeLog $(srcdir)/Makefile.in \
@@ -131,8 +131,8 @@ libbfd_la_OBJECTS = $(am_libbfd_la_OBJECTS)
 libbfd_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libbfd_la_LDFLAGS) $(LDFLAGS) -o $@
-am_libbfd_la_rpath =
-#am_libbfd_la_rpath = -rpath $(bfdlibdir)
+#am_libbfd_la_rpath =
+am_libbfd_la_rpath = -rpath $(bfdlibdir)
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/../depcomp
 am__depfiles_maybe = depfiles
@@ -165,13 +165,13 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 ETAGS = etags
 CTAGS = ctags
 DIST_SUBDIRS = $(SUBDIRS)
-ACLOCAL = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run aclocal-1.11
-AMTAR = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run tar
+ACLOCAL = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run aclocal-1.11
+AMTAR = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run tar
 AR = ar
-AUTOCONF = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/missing --run automake-1.11
-AWK = mawk
+AUTOCONF = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/missing --run automake-1.11
+AWK = gawk
 BFD_HOSTPTR_T = unsigned long
 BFD_HOST_64BIT_LONG = 1
 BFD_HOST_64BIT_LONG_LONG = 0
@@ -225,7 +225,7 @@ LIPO =
 LN_S = ln -s
 LTLIBOBJS = 
 MAINT = #
-MAKEINFO = /home/jason-yao/下載/Qemu/gdb-7.7/missing makeinfo --split-size=5000000
+MAKEINFO = makeinfo --split-size=5000000
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = $(top_builddir)/./../mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
@@ -261,10 +261,10 @@ USE_NLS = yes
 VERSION = 2.24.51
 WARN_CFLAGS = -W -Wall -Wstrict-prototypes -Wmissing-prototypes -Wshadow -Werror
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/jason-yao/下載/Qemu/gdb-7.7/bfd
-abs_srcdir = /home/jason-yao/下載/Qemu/gdb-7.7/bfd
-abs_top_builddir = /home/jason-yao/下載/Qemu/gdb-7.7/bfd
-abs_top_srcdir = /home/jason-yao/下載/Qemu/gdb-7.7/bfd
+abs_builddir = /home/shihyu/data/Qemu/gdb-7.7/bfd
+abs_srcdir = /home/shihyu/data/Qemu/gdb-7.7/bfd
+abs_top_builddir = /home/shihyu/data/Qemu/gdb-7.7/bfd
+abs_top_srcdir = /home/shihyu/data/Qemu/gdb-7.7/bfd
 ac_ct_CC = 
 ac_ct_DUMPBIN = 
 all_backends = $(BFD64_BACKENDS) $(BFD32_BACKENDS)
@@ -274,16 +274,16 @@ am__quote =
 am__tar = ${AMTAR} chof - "$$tardir"
 am__untar = ${AMTAR} xf -
 bfd64_libs = $(BFD64_LIBS)
-bfd_backends =  elf32-arm.lo elf32.lo elf-nacl.lo elf-vxworks.lo elf.lo elflink.lo elf-attrs.lo elf-strtab.lo elf-eh-frame.lo dwarf1.lo elf32-gen.lo
-bfd_default_target_size = 32
+bfd_backends =  elf64-x86-64.lo elf-ifunc.lo elf-nacl.lo elf64.lo elf.lo elflink.lo elf-attrs.lo elf-strtab.lo elf-eh-frame.lo dwarf1.lo elf32-i386.lo elf-vxworks.lo elf32.lo i386linux.lo aout32.lo pei-i386.lo peigen.lo cofflink.lo pei-x86_64.lo pex64igen.lo elf64-gen.lo elf32-gen.lo $(ALL_BACKENDS)
+bfd_default_target_size = 64
 bfd_file_ptr = BFD_HOST_64_BIT
-bfd_machines =  cpu-arm.lo
+bfd_machines =  cpu-i386.lo cpu-l1om.lo cpu-k1om.lo $(ALL_MACHINES)
 bfd_ufile_ptr = BFD_HOST_U_64_BIT
-bfdincludedir = 
-#bfdincludedir = $(exec_prefix)/$(host_noncanonical)/$(target_noncanonical)/include
+#bfdincludedir = 
+bfdincludedir = $(includedir)
 # Empty these so that the respective installation directories will not be created.
-bfdlibdir = 
-#bfdlibdir = $(exec_prefix)/$(host_noncanonical)/$(target_noncanonical)/lib
+#bfdlibdir = 
+bfdlibdir = $(libdir)
 bindir = ${exec_prefix}/bin
 build = x86_64-unknown-linux-gnu
 build_alias = x86_64-unknown-linux-gnu
@@ -296,7 +296,7 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-havevecs = -DHAVE_bfd_elf32_littlearm_vec -DHAVE_bfd_elf32_bigarm_vec -DHAVE_bfd_elf32_little_generic_vec -DHAVE_bfd_elf32_big_generic_vec
+havevecs = -DHAVE_all_vecs
 host = x86_64-unknown-linux-gnu
 host_alias = x86_64-unknown-linux-gnu
 host_cpu = x86_64
@@ -306,7 +306,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/jason-yao/下載/Qemu/gdb-7.7/install-sh
+install_sh = ${SHELL} /home/shihyu/data/Qemu/gdb-7.7/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -316,21 +316,21 @@ mandir = ${datarootdir}/man
 mkdir_p = /bin/mkdir -p
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
-program_transform_name = s&^&arm-linux-&
+prefix = /usr/local/gdb-7.7
+program_transform_name = s,y,y,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 supports_plugins = 0
 sysconfdir = ${prefix}/etc
-target = arm-unknown-linux-gnu
-target_alias = arm-linux
-target_cpu = arm
-target_noncanonical = arm-linux
+target = x86_64-unknown-linux-gnu
+target_alias = x86_64-unknown-linux-gnu
+target_cpu = x86_64
+target_noncanonical = x86_64-unknown-linux-gnu
 target_os = linux-gnu
 target_vendor = unknown
-tdefaults =  -DDEFAULT_VECTOR=bfd_elf32_littlearm_vec -DSELECT_VECS='&bfd_elf32_littlearm_vec,&bfd_elf32_bigarm_vec,&bfd_elf32_little_generic_vec,&bfd_elf32_big_generic_vec' -DSELECT_ARCHITECTURES='&bfd_arm_arch'
+tdefaults =  -DDEFAULT_VECTOR=bfd_elf64_x86_64_vec -DASSOCIATED_VECS='&bfd_elf64_x86_64_vec,&bfd_elf32_i386_vec,&bfd_elf32_x86_64_vec,&i386linux_vec,&i386pei_vec,&x86_64pei_vec,&bfd_elf64_l1om_vec,&bfd_elf64_k1om_vec,&bfd_elf64_little_generic_vec,&bfd_elf64_big_generic_vec,&bfd_elf32_little_generic_vec,&bfd_elf32_big_generic_vec'
 top_build_prefix = 
 top_builddir = .
 top_srcdir = .
@@ -346,13 +346,13 @@ SUBDIRS = doc po
 bfddocdir = doc
 libbfd_la_LDFLAGS = $(am__append_1) -release `cat libtool-soversion` \
 	 $(am__empty)
-#bfdlib_LTLIBRARIES = libbfd.la
-bfdinclude_HEADERS = $(am__append_2)
-#bfdinclude_HEADERS = $(BFD_H) \
-#	$(INCDIR)/ansidecl.h $(INCDIR)/symcat.h \
-#	$(INCDIR)/bfdlink.h $(am__append_2)
-rpath_bfdlibdir = $(exec_prefix)/$(host_noncanonical)/$(target_noncanonical)/lib
-noinst_LTLIBRARIES = libbfd.la
+bfdlib_LTLIBRARIES = libbfd.la
+#bfdinclude_HEADERS = $(am__append_2)
+bfdinclude_HEADERS = $(BFD_H) \
+	$(INCDIR)/ansidecl.h $(INCDIR)/symcat.h \
+	$(INCDIR)/bfdlink.h $(am__append_2)
+#rpath_bfdlibdir = $(libdir)
+#noinst_LTLIBRARIES = libbfd.la
 AM_CFLAGS = $(WARN_CFLAGS)
 AM_CPPFLAGS = -DBINDIR='"$(bindir)"'
 #LIBDL = -ldl
@@ -1057,10 +1057,10 @@ CONFIG_STATUS_DEPENDENCIES = \
 # These are defined by configure.in:
 WORDSIZE = 64
 ALL_BACKENDS = $(BFD64_BACKENDS) $(BFD32_BACKENDS)
-BFD_BACKENDS =  elf32-arm.lo elf32.lo elf-nacl.lo elf-vxworks.lo elf.lo elflink.lo elf-attrs.lo elf-strtab.lo elf-eh-frame.lo dwarf1.lo elf32-gen.lo
-BFD_MACHINES =  cpu-arm.lo
-TDEFAULTS =  -DDEFAULT_VECTOR=bfd_elf32_littlearm_vec -DSELECT_VECS='&bfd_elf32_littlearm_vec,&bfd_elf32_bigarm_vec,&bfd_elf32_little_generic_vec,&bfd_elf32_big_generic_vec' -DSELECT_ARCHITECTURES='&bfd_arm_arch'
-HAVEVECS = -DHAVE_bfd_elf32_littlearm_vec -DHAVE_bfd_elf32_bigarm_vec -DHAVE_bfd_elf32_little_generic_vec -DHAVE_bfd_elf32_big_generic_vec
+BFD_BACKENDS =  elf64-x86-64.lo elf-ifunc.lo elf-nacl.lo elf64.lo elf.lo elflink.lo elf-attrs.lo elf-strtab.lo elf-eh-frame.lo dwarf1.lo elf32-i386.lo elf-vxworks.lo elf32.lo i386linux.lo aout32.lo pei-i386.lo peigen.lo cofflink.lo pei-x86_64.lo pex64igen.lo elf64-gen.lo elf32-gen.lo $(ALL_BACKENDS)
+BFD_MACHINES =  cpu-i386.lo cpu-l1om.lo cpu-k1om.lo $(ALL_MACHINES)
+TDEFAULTS =  -DDEFAULT_VECTOR=bfd_elf64_x86_64_vec -DASSOCIATED_VECS='&bfd_elf64_x86_64_vec,&bfd_elf32_i386_vec,&bfd_elf32_x86_64_vec,&i386linux_vec,&i386pei_vec,&x86_64pei_vec,&bfd_elf64_l1om_vec,&bfd_elf64_k1om_vec,&bfd_elf64_little_generic_vec,&bfd_elf64_big_generic_vec,&bfd_elf32_little_generic_vec,&bfd_elf32_big_generic_vec'
+HAVEVECS = -DHAVE_all_vecs
 INCLUDES =     $(CSEARCH) $(CSWITCHES) \
 	$(HAVEVECS) 
 

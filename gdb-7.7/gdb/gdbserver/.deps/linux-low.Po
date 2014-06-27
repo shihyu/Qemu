@@ -14,7 +14,8 @@ linux-low.o: linux-low.c server.h config.h \
  ../nat/linux-waitpid.h ../common/gdb_wait.h ../common/linux-procfs.h \
  build-gnulib-gdbserver/import/dirent.h \
  build-gnulib-gdbserver/import/sys/stat.h ../common/filestuff.h \
- tracepoint.h hostio.h
+ tracepoint.h hostio.h ../common/linux-btrace.h ../common/btrace-common.h \
+ server.h ../common/vec.h ../common/gdb_assert.h
 
 server.h:
 
@@ -109,3 +110,13 @@ build-gnulib-gdbserver/import/sys/stat.h:
 tracepoint.h:
 
 hostio.h:
+
+../common/linux-btrace.h:
+
+../common/btrace-common.h:
+
+server.h:
+
+../common/vec.h:
+
+../common/gdb_assert.h:

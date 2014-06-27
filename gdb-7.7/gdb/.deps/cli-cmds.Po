@@ -5,7 +5,7 @@ cli-cmds.o: cli/cli-cmds.c defs.h config.h build-gnulib/config.h \
  ../include/gdb/signals.def ui-file.h common/host-defs.h \
  ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
  ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
- common/ptid.h ../include/fopen-bin.h common/common-utils.h config.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
  gdbarch.h utils.h cleanups.h exceptions.h ui-out.h exceptions.h \
  arch-utils.h ../include/dyn-string.h ../opcodes/../readline/readline.h \
  ../opcodes/../readline/rlstdc.h ../opcodes/../readline/rltypedefs.h \
@@ -23,7 +23,7 @@ cli-cmds.o: cli/cli-cmds.c defs.h config.h build-gnulib/config.h \
  disasm.h tracepoint.h breakpoint.h value.h ax.h common/ax.def \
  common/break-common.h memrange.h common/filestuff.h ui-out.h top.h \
  cli/cli-decode.h command.h cli/cli-script.h cli/cli-setshow.h \
- cli/cli-cmds.h cli/cli-utils.h python/python.h mi/mi-cmds.h
+ cli/cli-cmds.h cli/cli-utils.h python/python.h mi/mi-cmds.h tui/tui.h
 
 defs.h:
 
@@ -66,6 +66,8 @@ common/host-defs.h:
 build-gnulib/import/sys/stat.h:
 
 common/ptid.h:
+
+nm.h:
 
 ../include/fopen-bin.h:
 
@@ -228,3 +230,5 @@ cli/cli-utils.h:
 python/python.h:
 
 mi/mi-cmds.h:
+
+tui/tui.h:

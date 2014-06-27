@@ -1,0 +1,178 @@
+amd64-linux-tdep.o: amd64-linux-tdep.c defs.h config.h \
+ build-gnulib/config.h build-gnulib/import/sys/types.h \
+ build-gnulib/import/unistd.h gnulib/import/pathmax.h \
+ ../include/ansidecl.h common/gdb_locale.h gdb_wchar.h \
+ build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h arch-utils.h frame.h \
+ unwind_stop_reasons.def gdbcore.h exec.h target.h target/resume.h \
+ target/wait.h target/waitstatus.h common/gdb_signals.h symtab.h \
+ common/vec.h build-gnulib/import/string.h common/gdb_assert.h \
+ common/gdb_vecs.h common/vec.h gdbtypes.h minsyms.h memattr.h btrace.h \
+ common/btrace-common.h defs.h command.h progspace.h registry.h \
+ memrange.h regcache.h osabi.h reggroups.h regset.h amd64-linux-tdep.h \
+ i386-linux-tdep.h linux-tdep.h common/i386-xstate.h amd64-tdep.h \
+ i386-tdep.h solib-svr4.h xml-syscall.h glibc-tdep.h \
+ features/i386/amd64-linux.c osabi.h target-descriptions.h \
+ features/i386/amd64-avx-linux.c features/i386/amd64-mpx-linux.c \
+ features/i386/x32-linux.c features/i386/x32-avx-linux.c record-full.h \
+ linux-record.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+arch-utils.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+gdbcore.h:
+
+exec.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+symtab.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+command.h:
+
+progspace.h:
+
+registry.h:
+
+memrange.h:
+
+regcache.h:
+
+osabi.h:
+
+reggroups.h:
+
+regset.h:
+
+amd64-linux-tdep.h:
+
+i386-linux-tdep.h:
+
+linux-tdep.h:
+
+common/i386-xstate.h:
+
+amd64-tdep.h:
+
+i386-tdep.h:
+
+solib-svr4.h:
+
+xml-syscall.h:
+
+glibc-tdep.h:
+
+features/i386/amd64-linux.c:
+
+osabi.h:
+
+target-descriptions.h:
+
+features/i386/amd64-avx-linux.c:
+
+features/i386/amd64-mpx-linux.c:
+
+features/i386/x32-linux.c:
+
+features/i386/x32-avx-linux.c:
+
+record-full.h:
+
+linux-record.h:

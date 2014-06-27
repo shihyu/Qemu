@@ -1,0 +1,242 @@
+s390-linux-tdep.o: s390-linux-tdep.c defs.h config.h \
+ build-gnulib/config.h build-gnulib/import/sys/types.h \
+ build-gnulib/import/unistd.h gnulib/import/pathmax.h \
+ ../include/ansidecl.h common/gdb_locale.h gdb_wchar.h \
+ build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h arch-utils.h frame.h \
+ unwind_stop_reasons.def inferior.h breakpoint.h value.h doublest.h \
+ ../include/floatformat.h symtab.h common/vec.h \
+ build-gnulib/import/string.h common/gdb_assert.h common/gdb_vecs.h \
+ common/vec.h gdbtypes.h minsyms.h expression.h std-operator.def \
+ ada-operator.def ax.h common/ax.def command.h common/break-common.h \
+ target.h target/resume.h target/wait.h target/waitstatus.h \
+ common/gdb_signals.h memattr.h btrace.h common/btrace-common.h defs.h \
+ progspace.h registry.h gdbcore.h exec.h memrange.h gdbcmd.h objfiles.h \
+ gdb_obstack.h ../include/obstack.h symfile.h probe.h gdb_bfd.h \
+ regcache.h trad-frame.h frame-base.h frame-unwind.h dwarf2-frame.h \
+ reggroups.h regset.h common/gdb_assert.h ../include/dis-asm.h \
+ solib-svr4.h prologue-value.h linux-tdep.h s390-linux-tdep.h auxv.h \
+ stap-probe.h ax-gdb.h user-regs.h cli/cli-utils.h \
+ ../include/elf/common.h features/s390-linux32.c osabi.h \
+ target-descriptions.h features/s390-linux32v1.c \
+ features/s390-linux32v2.c features/s390-linux64.c \
+ features/s390-linux64v1.c features/s390-linux64v2.c \
+ features/s390-te-linux64.c features/s390x-linux64.c \
+ features/s390x-linux64v1.c features/s390x-linux64v2.c \
+ features/s390x-te-linux64.c
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+arch-utils.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+inferior.h:
+
+breakpoint.h:
+
+value.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+symtab.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+expression.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+ax.h:
+
+common/ax.def:
+
+command.h:
+
+common/break-common.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+progspace.h:
+
+registry.h:
+
+gdbcore.h:
+
+exec.h:
+
+memrange.h:
+
+gdbcmd.h:
+
+objfiles.h:
+
+gdb_obstack.h:
+
+../include/obstack.h:
+
+symfile.h:
+
+probe.h:
+
+gdb_bfd.h:
+
+regcache.h:
+
+trad-frame.h:
+
+frame-base.h:
+
+frame-unwind.h:
+
+dwarf2-frame.h:
+
+reggroups.h:
+
+regset.h:
+
+common/gdb_assert.h:
+
+../include/dis-asm.h:
+
+solib-svr4.h:
+
+prologue-value.h:
+
+linux-tdep.h:
+
+s390-linux-tdep.h:
+
+auxv.h:
+
+stap-probe.h:
+
+ax-gdb.h:
+
+user-regs.h:
+
+cli/cli-utils.h:
+
+../include/elf/common.h:
+
+features/s390-linux32.c:
+
+osabi.h:
+
+target-descriptions.h:
+
+features/s390-linux32v1.c:
+
+features/s390-linux32v2.c:
+
+features/s390-linux64.c:
+
+features/s390-linux64v1.c:
+
+features/s390-linux64v2.c:
+
+features/s390-te-linux64.c:
+
+features/s390x-linux64.c:
+
+features/s390x-linux64v1.c:
+
+features/s390x-linux64v2.c:
+
+features/s390x-te-linux64.c:

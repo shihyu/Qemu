@@ -1,1 +1,6 @@
-# dummy
+spu-opc.lo: spu-opc.c ../include/opcode/spu.h \
+ ../include/opcode/spu-insns.h
+
+../include/opcode/spu.h:
+
+../include/opcode/spu-insns.h:

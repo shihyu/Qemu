@@ -5,7 +5,7 @@ solib-svr4.o: solib-svr4.c defs.h config.h build-gnulib/config.h \
  ../include/gdb/signals.def ui-file.h common/host-defs.h \
  ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
  ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
- common/ptid.h ../include/fopen-bin.h common/common-utils.h config.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
  gdbarch.h utils.h cleanups.h exceptions.h ui-out.h \
  ../include/elf/external.h ../include/elf/common.h ../include/elf/mips.h \
  ../include/elf/reloc-macros.h symtab.h common/vec.h \
@@ -63,6 +63,8 @@ common/host-defs.h:
 build-gnulib/import/sys/stat.h:
 
 common/ptid.h:
+
+nm.h:
 
 ../include/fopen-bin.h:
 

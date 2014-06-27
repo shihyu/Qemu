@@ -47,14 +47,14 @@ objext = o
 
 datarootdir = ${prefix}/share
 datadir = ${datarootdir}
-exec_prefix = /usr/local
+exec_prefix = /usr/local/gdb-7.7
 libdir = ${exec_prefix}/lib
 localedir = $(datadir)/locale
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 
-ADDITIONAL_OBJS = 
+ADDITIONAL_OBJS =  $(bid_OBJS)
 
-enable_decimal_float= dpd
+enable_decimal_float= bid
 
 INCLUDES = -I$(srcdir) -I.
 

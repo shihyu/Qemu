@@ -1,0 +1,122 @@
+tui-layout.o: tui/tui-layout.c defs.h config.h build-gnulib/config.h \
+ build-gnulib/import/sys/types.h build-gnulib/import/unistd.h \
+ gnulib/import/pathmax.h ../include/ansidecl.h common/gdb_locale.h \
+ gdb_wchar.h build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h arch-utils.h \
+ command.h common/gdb_vecs.h common/vec.h build-gnulib/import/string.h \
+ common/gdb_assert.h symtab.h common/vec.h gdbtypes.h minsyms.h frame.h \
+ unwind_stop_reasons.def source.h tui/tui.h tui/tui-data.h gdb_curses.h \
+ tui/tui-windata.h tui/tui-wingeneral.h tui/tui-stack.h tui/tui-regs.h \
+ tui/tui-win.h tui/tui-winsource.h tui/tui-disasm.h tui/tui-layout.h
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+arch-utils.h:
+
+command.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+symtab.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+source.h:
+
+tui/tui.h:
+
+tui/tui-data.h:
+
+gdb_curses.h:
+
+tui/tui-windata.h:
+
+tui/tui-wingeneral.h:
+
+tui/tui-stack.h:
+
+tui/tui-regs.h:
+
+tui/tui-win.h:
+
+tui/tui-winsource.h:
+
+tui/tui-disasm.h:
+
+tui/tui-layout.h:

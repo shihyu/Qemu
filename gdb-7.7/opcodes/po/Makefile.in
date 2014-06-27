@@ -18,7 +18,7 @@ top_srcdir = ..
 
 top_builddir = ..
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 datadir = $(prefix)/share
 localedir = $(datadir)/locale

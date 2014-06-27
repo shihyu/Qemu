@@ -1,0 +1,290 @@
+rs6000-tdep.o: rs6000-tdep.c defs.h config.h build-gnulib/config.h \
+ build-gnulib/import/sys/types.h build-gnulib/import/unistd.h \
+ gnulib/import/pathmax.h ../include/ansidecl.h common/gdb_locale.h \
+ gdb_wchar.h build-gnulib/import/wctype.h ../include/gdb/signals.h \
+ ../include/gdb/signals.def ui-file.h common/host-defs.h \
+ ../include/libiberty.h ../include/ansidecl.h ../include/hashtab.h \
+ ../bfd/bfd.h ../include/symcat.h build-gnulib/import/sys/stat.h \
+ common/ptid.h nm.h ../include/fopen-bin.h common/common-utils.h config.h \
+ gdbarch.h utils.h cleanups.h exceptions.h ui-out.h frame.h \
+ unwind_stop_reasons.def inferior.h breakpoint.h value.h doublest.h \
+ ../include/floatformat.h symtab.h common/vec.h \
+ build-gnulib/import/string.h common/gdb_assert.h common/gdb_vecs.h \
+ common/vec.h gdbtypes.h minsyms.h expression.h std-operator.def \
+ ada-operator.def ax.h common/ax.def command.h common/break-common.h \
+ target.h target/resume.h target/wait.h target/waitstatus.h \
+ common/gdb_signals.h memattr.h btrace.h common/btrace-common.h defs.h \
+ progspace.h registry.h gdbcore.h exec.h memrange.h gdbcmd.h objfiles.h \
+ gdb_obstack.h ../include/obstack.h symfile.h probe.h gdb_bfd.h \
+ arch-utils.h regcache.h regset.h parser-defs.h osabi.h infcall.h \
+ sim-regno.h ../include/gdb/sim-ppc.h reggroups.h dwarf2-frame.h \
+ target-descriptions.h user-regs.h ../bfd/libbfd.h \
+ ../include/coff/internal.h ../bfd/libcoff.h ../include/bfdlink.h \
+ ../include/coff/xcoff.h ../bfd/libxcoff.h ../bfd/elf-bfd.h \
+ ../include/elf/common.h ../include/elf/external.h \
+ ../include/elf/internal.h ../include/elf/ppc.h \
+ ../include/elf/reloc-macros.h solib-svr4.h ppc-tdep.h \
+ ppc-ravenscar-thread.h common/gdb_assert.h ../include/dis-asm.h \
+ trad-frame.h frame-unwind.h frame-base.h features/rs6000/powerpc-32.c \
+ osabi.h target-descriptions.h features/rs6000/powerpc-altivec32.c \
+ features/rs6000/powerpc-vsx32.c features/rs6000/powerpc-403.c \
+ features/rs6000/powerpc-403gc.c features/rs6000/powerpc-405.c \
+ features/rs6000/powerpc-505.c features/rs6000/powerpc-601.c \
+ features/rs6000/powerpc-602.c features/rs6000/powerpc-603.c \
+ features/rs6000/powerpc-604.c features/rs6000/powerpc-64.c \
+ features/rs6000/powerpc-altivec64.c features/rs6000/powerpc-vsx64.c \
+ features/rs6000/powerpc-7400.c features/rs6000/powerpc-750.c \
+ features/rs6000/powerpc-860.c features/rs6000/powerpc-e500.c \
+ features/rs6000/rs6000.c
+
+defs.h:
+
+config.h:
+
+build-gnulib/config.h:
+
+build-gnulib/import/sys/types.h:
+
+build-gnulib/import/unistd.h:
+
+gnulib/import/pathmax.h:
+
+../include/ansidecl.h:
+
+common/gdb_locale.h:
+
+gdb_wchar.h:
+
+build-gnulib/import/wctype.h:
+
+../include/gdb/signals.h:
+
+../include/gdb/signals.def:
+
+ui-file.h:
+
+common/host-defs.h:
+
+../include/libiberty.h:
+
+../include/ansidecl.h:
+
+../include/hashtab.h:
+
+../bfd/bfd.h:
+
+../include/symcat.h:
+
+build-gnulib/import/sys/stat.h:
+
+common/ptid.h:
+
+nm.h:
+
+../include/fopen-bin.h:
+
+common/common-utils.h:
+
+config.h:
+
+gdbarch.h:
+
+utils.h:
+
+cleanups.h:
+
+exceptions.h:
+
+ui-out.h:
+
+frame.h:
+
+unwind_stop_reasons.def:
+
+inferior.h:
+
+breakpoint.h:
+
+value.h:
+
+doublest.h:
+
+../include/floatformat.h:
+
+symtab.h:
+
+common/vec.h:
+
+build-gnulib/import/string.h:
+
+common/gdb_assert.h:
+
+common/gdb_vecs.h:
+
+common/vec.h:
+
+gdbtypes.h:
+
+minsyms.h:
+
+expression.h:
+
+std-operator.def:
+
+ada-operator.def:
+
+ax.h:
+
+common/ax.def:
+
+command.h:
+
+common/break-common.h:
+
+target.h:
+
+target/resume.h:
+
+target/wait.h:
+
+target/waitstatus.h:
+
+common/gdb_signals.h:
+
+memattr.h:
+
+btrace.h:
+
+common/btrace-common.h:
+
+defs.h:
+
+progspace.h:
+
+registry.h:
+
+gdbcore.h:
+
+exec.h:
+
+memrange.h:
+
+gdbcmd.h:
+
+objfiles.h:
+
+gdb_obstack.h:
+
+../include/obstack.h:
+
+symfile.h:
+
+probe.h:
+
+gdb_bfd.h:
+
+arch-utils.h:
+
+regcache.h:
+
+regset.h:
+
+parser-defs.h:
+
+osabi.h:
+
+infcall.h:
+
+sim-regno.h:
+
+../include/gdb/sim-ppc.h:
+
+reggroups.h:
+
+dwarf2-frame.h:
+
+target-descriptions.h:
+
+user-regs.h:
+
+../bfd/libbfd.h:
+
+../include/coff/internal.h:
+
+../bfd/libcoff.h:
+
+../include/bfdlink.h:
+
+../include/coff/xcoff.h:
+
+../bfd/libxcoff.h:
+
+../bfd/elf-bfd.h:
+
+../include/elf/common.h:
+
+../include/elf/external.h:
+
+../include/elf/internal.h:
+
+../include/elf/ppc.h:
+
+../include/elf/reloc-macros.h:
+
+solib-svr4.h:
+
+ppc-tdep.h:
+
+ppc-ravenscar-thread.h:
+
+common/gdb_assert.h:
+
+../include/dis-asm.h:
+
+trad-frame.h:
+
+frame-unwind.h:
+
+frame-base.h:
+
+features/rs6000/powerpc-32.c:
+
+osabi.h:
+
+target-descriptions.h:
+
+features/rs6000/powerpc-altivec32.c:
+
+features/rs6000/powerpc-vsx32.c:
+
+features/rs6000/powerpc-403.c:
+
+features/rs6000/powerpc-403gc.c:
+
+features/rs6000/powerpc-405.c:
+
+features/rs6000/powerpc-505.c:
+
+features/rs6000/powerpc-601.c:
+
+features/rs6000/powerpc-602.c:
+
+features/rs6000/powerpc-603.c:
+
+features/rs6000/powerpc-604.c:
+
+features/rs6000/powerpc-64.c:
+
+features/rs6000/powerpc-altivec64.c:
+
+features/rs6000/powerpc-vsx64.c:
+
+features/rs6000/powerpc-7400.c:
+
+features/rs6000/powerpc-750.c:
+
+features/rs6000/powerpc-860.c:
+
+features/rs6000/powerpc-e500.c:
+
+features/rs6000/rs6000.c:

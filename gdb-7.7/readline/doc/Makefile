@@ -20,7 +20,7 @@ topdir = ..
 srcdir = .
 
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 
 datarootdir = ${prefix}/share
 
@@ -46,7 +46,7 @@ RM = rm -f
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = /usr/bin/install -c -m 644
 
-BUILD_DIR = /home/jason-yao/下載/Qemu/gdb-7.7/readline
+BUILD_DIR = /home/shihyu/data/Qemu/gdb-7.7/readline
 TEXINPUTDIR = $(srcdir)
 
 MAKEINFO    = LANGUAGE= makeinfo

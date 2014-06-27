@@ -37,14 +37,14 @@ host_alias=x86_64-unknown-linux-gnu
 host_vendor=unknown
 host_os=linux-gnu
 host=x86_64-unknown-linux-gnu
-target_alias=arm-linux
+target_alias=x86_64-unknown-linux-gnu
 target_vendor=unknown
 target_os=linux-gnu
-target=arm-unknown-linux-gnu
+target=x86_64-unknown-linux-gnu
 
-program_transform_name = s&^&arm-linux-&
+program_transform_name = s,y,y,
 
-prefix = /usr/local
+prefix = /usr/local/gdb-7.7
 exec_prefix = ${prefix}
 
 srcdir = .
@@ -90,10 +90,10 @@ MAINTAINER_MODE_TRUE = #
 # -------------------------------------------------
 
 # The gcc driver likes to know the arguments it was configured with.
-TOPLEVEL_CONFIGURE_ARGUMENTS=./configure --target=arm-linux
+TOPLEVEL_CONFIGURE_ARGUMENTS=./configure --enable-targets=all --enable-64-bit-bfd --prefix=/usr/local/gdb-7.7
 
-tooldir = ${exec_prefix}/arm-linux
-build_tooldir = ${exec_prefix}/arm-linux
+tooldir = ${exec_prefix}/x86_64-unknown-linux-gnu
+build_tooldir = ${exec_prefix}/x86_64-unknown-linux-gnu
 
 # This is the name of the environment variable used for the path to
 # the libraries.
@@ -108,7 +108,7 @@ GCC_SHLIB_SUBDIR =
 BUILD_SUBDIR = build-x86_64-unknown-linux-gnu
 # This is set by the configure script to the arguments to use when configuring
 # directories built for the build system.
-BUILD_CONFIGARGS =  --cache-file=../config.cache  --program-transform-name='s&^&arm-linux-&' --disable-option-checking --with-build-subdir="$(BUILD_SUBDIR)"
+BUILD_CONFIGARGS =  --cache-file=../config.cache '--enable-targets=all' '--enable-64-bit-bfd' '--prefix=/usr/local/gdb-7.7' --program-transform-name='s,y,y,' --disable-option-checking --with-build-subdir="$(BUILD_SUBDIR)"
 
 # Linker flags to use on the host, for stage1 or when not
 # bootstrapping.
@@ -171,7 +171,7 @@ SUBDIRS =  intl libiberty opcodes bfd readline libdecnumber sim gdb etc
 TARGET_CONFIGDIRS = 
 # This is set by the configure script to the arguments to use when configuring
 # directories built for the host system.
-HOST_CONFIGARGS =  --cache-file=./config.cache  --with-system-zlib  --program-transform-name='s&^&arm-linux-&' --disable-option-checking
+HOST_CONFIGARGS =  --cache-file=./config.cache  --with-system-zlib '--enable-targets=all' '--enable-64-bit-bfd' '--prefix=/usr/local/gdb-7.7' --program-transform-name='s,y,y,' --disable-option-checking
 # Host programs are put under this directory, which is . except if building
 # with srcdir=..
 HOST_SUBDIR = .
@@ -238,10 +238,10 @@ POSTSTAGE1_HOST_EXPORTS = \
 	HOST_LIBS="$(POSTSTAGE1_LIBS)"; export HOST_LIBS;
 
 # Target libraries are put under this directory:
-TARGET_SUBDIR = arm-linux
+TARGET_SUBDIR = x86_64-unknown-linux-gnu
 # This is set by the configure script to the arguments to use when configuring
 # directories built for the target.
-TARGET_CONFIGARGS = --cache-file=./config.cache --enable-multilib --with-cross-host=x86_64-unknown-linux-gnu   --program-transform-name='s&^&arm-linux-&' --disable-option-checking --with-target-subdir="$(TARGET_SUBDIR)"
+TARGET_CONFIGARGS = --cache-file=./config.cache --enable-multilib   '--enable-targets=all' '--enable-64-bit-bfd' '--prefix=/usr/local/gdb-7.7' --program-transform-name='s,y,y,' --disable-option-checking --with-target-subdir="$(TARGET_SUBDIR)"
 # This is the list of variables to export in the environment when
 # configuring subdirectories for the target system.
 BASE_TARGET_EXPORTS = \
@@ -340,14 +340,14 @@ BOOT_CFLAGS= -g -O2
 BOOT_LDFLAGS=
 BOOT_ADAFLAGS= -gnatpg
 
-AWK = mawk
+AWK = gawk
 SED = /bin/sed
 BISON = bison
 YACC = bison -y
 FLEX = flex
 LEX = flex
 M4 = m4
-MAKEINFO = /home/jason-yao/下載/Qemu/gdb-7.7/missing makeinfo
+MAKEINFO = makeinfo
 EXPECT = expect
 RUNTEST = runtest
 
@@ -466,31 +466,31 @@ do-compare3 = $(do-compare)
 # Programs producing files for the TARGET machine
 # -----------------------------------------------
 
-AR_FOR_TARGET=arm-linux-ar
-AS_FOR_TARGET=arm-linux-as
-CC_FOR_TARGET=$(STAGE_CC_WRAPPER) arm-linux-cc
+AR_FOR_TARGET=$(AR)
+AS_FOR_TARGET=$(AS)
+CC_FOR_TARGET=$(STAGE_CC_WRAPPER) $(CC)
 
 # If GCC_FOR_TARGET is not overriden on the command line, then this
 # variable is passed down to the gcc Makefile, where it is used to
 # build libgcc2.a.  We define it here so that it can itself be
 # overridden on the command line.
-GCC_FOR_TARGET=$(STAGE_CC_WRAPPER) arm-linux-gcc
-CXX_FOR_TARGET=$(STAGE_CC_WRAPPER) arm-linux-c++
-RAW_CXX_FOR_TARGET=$(STAGE_CC_WRAPPER) arm-linux-c++
-GCJ_FOR_TARGET=$(STAGE_CC_WRAPPER) arm-linux-gcj
-GFORTRAN_FOR_TARGET=$(STAGE_CC_WRAPPER) arm-linux-gfortran
-GOC_FOR_TARGET=$(STAGE_CC_WRAPPER) arm-linux-gccgo
-DLLTOOL_FOR_TARGET=arm-linux-dlltool
-LD_FOR_TARGET=arm-linux-ld
+GCC_FOR_TARGET=$(STAGE_CC_WRAPPER) $()
+CXX_FOR_TARGET=$(STAGE_CC_WRAPPER) $(CXX)
+RAW_CXX_FOR_TARGET=$(STAGE_CC_WRAPPER) $(CXX)
+GCJ_FOR_TARGET=$(STAGE_CC_WRAPPER) $(GCJ)
+GFORTRAN_FOR_TARGET=$(STAGE_CC_WRAPPER) $(GFORTRAN)
+GOC_FOR_TARGET=$(STAGE_CC_WRAPPER) $(GOC)
+DLLTOOL_FOR_TARGET=$(DLLTOOL)
+LD_FOR_TARGET=$(LD)
 
-LIPO_FOR_TARGET=arm-linux-lipo
-NM_FOR_TARGET=arm-linux-nm
-OBJDUMP_FOR_TARGET=arm-linux-objdump
-RANLIB_FOR_TARGET=arm-linux-ranlib
-READELF_FOR_TARGET=arm-linux-readelf
-STRIP_FOR_TARGET=arm-linux-strip
-WINDRES_FOR_TARGET=arm-linux-windres
-WINDMC_FOR_TARGET=arm-linux-windmc
+LIPO_FOR_TARGET=$(LIPO)
+NM_FOR_TARGET=$(NM)
+OBJDUMP_FOR_TARGET=$(OBJDUMP)
+RANLIB_FOR_TARGET=$(RANLIB)
+READELF_FOR_TARGET=$(READELF)
+STRIP_FOR_TARGET=$(STRIP)
+WINDRES_FOR_TARGET=$(WINDRES)
+WINDMC_FOR_TARGET=$(WINDMC)
 
 COMPILER_AS_FOR_TARGET=$(AS_FOR_TARGET)
 COMPILER_LD_FOR_TARGET=$(LD_FOR_TARGET)

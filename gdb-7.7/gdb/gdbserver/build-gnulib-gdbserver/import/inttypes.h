@@ -493,7 +493,7 @@ _GL_WARN_EXTERN_C int _gl_warn_on_use
 # endif
 #endif
 #ifdef INT64_MAX
-# if (0 ? defined _LP64 : 0)
+# if (0 ? defined _LP64 : 1)
 #  define _PRI64_PREFIX "l"
 # elif defined _MSC_VER || defined __MINGW32__
 #  define _PRI64_PREFIX "I64"
@@ -510,7 +510,7 @@ _GL_WARN_EXTERN_C int _gl_warn_on_use
 # endif
 #endif
 #ifdef UINT64_MAX
-# if (0 ? defined _LP64 : 0)
+# if (0 ? defined _LP64 : 1)
 #  define _PRIu64_PREFIX "l"
 # elif defined _MSC_VER || defined __MINGW32__
 #  define _PRIu64_PREFIX "I64"
@@ -861,37 +861,37 @@ _GL_WARN_EXTERN_C int _gl_warn_on_use
 #if !defined PRIdPTR || 0
 # undef PRIdPTR
 # ifdef INTPTR_MAX
-#  define PRIdPTR "" "d"
+#  define PRIdPTR "l" "d"
 # endif
 #endif
 #if !defined PRIiPTR || 0
 # undef PRIiPTR
 # ifdef INTPTR_MAX
-#  define PRIiPTR "" "i"
+#  define PRIiPTR "l" "i"
 # endif
 #endif
 #if !defined PRIoPTR || 0
 # undef PRIoPTR
 # ifdef UINTPTR_MAX
-#  define PRIoPTR "" "o"
+#  define PRIoPTR "l" "o"
 # endif
 #endif
 #if !defined PRIuPTR || 0
 # undef PRIuPTR
 # ifdef UINTPTR_MAX
-#  define PRIuPTR "" "u"
+#  define PRIuPTR "l" "u"
 # endif
 #endif
 #if !defined PRIxPTR || 0
 # undef PRIxPTR
 # ifdef UINTPTR_MAX
-#  define PRIxPTR "" "x"
+#  define PRIxPTR "l" "x"
 # endif
 #endif
 #if !defined PRIXPTR || 0
 # undef PRIXPTR
 # ifdef UINTPTR_MAX
-#  define PRIXPTR "" "X"
+#  define PRIXPTR "l" "X"
 # endif
 #endif
 
@@ -986,7 +986,7 @@ _GL_WARN_EXTERN_C int _gl_warn_on_use
 # endif
 #endif
 #ifdef INT64_MAX
-# if (0 ? defined _LP64 : 0)
+# if (0 ? defined _LP64 : 1)
 #  define _SCN64_PREFIX "l"
 # elif defined _MSC_VER || defined __MINGW32__
 #  define _SCN64_PREFIX "I64"
@@ -1003,7 +1003,7 @@ _GL_WARN_EXTERN_C int _gl_warn_on_use
 # endif
 #endif
 #ifdef UINT64_MAX
-# if (0 ? defined _LP64 : 0)
+# if (0 ? defined _LP64 : 1)
 #  define _SCNu64_PREFIX "l"
 # elif defined _MSC_VER || defined __MINGW32__
 #  define _SCNu64_PREFIX "I64"
@@ -1328,31 +1328,31 @@ _GL_WARN_EXTERN_C int _gl_warn_on_use
 #if !defined SCNdPTR || 0
 # undef SCNdPTR
 # ifdef INTPTR_MAX
-#  define SCNdPTR "" "d"
+#  define SCNdPTR "l" "d"
 # endif
 #endif
 #if !defined SCNiPTR || 0
 # undef SCNiPTR
 # ifdef INTPTR_MAX
-#  define SCNiPTR "" "i"
+#  define SCNiPTR "l" "i"
 # endif
 #endif
 #if !defined SCNoPTR || 0
 # undef SCNoPTR
 # ifdef UINTPTR_MAX
-#  define SCNoPTR "" "o"
+#  define SCNoPTR "l" "o"
 # endif
 #endif
 #if !defined SCNuPTR || 0
 # undef SCNuPTR
 # ifdef UINTPTR_MAX
-#  define SCNuPTR "" "u"
+#  define SCNuPTR "l" "u"
 # endif
 #endif
 #if !defined SCNxPTR || 0
 # undef SCNxPTR
 # ifdef UINTPTR_MAX
-#  define SCNxPTR "" "x"
+#  define SCNxPTR "l" "x"
 # endif
 #endif
 
