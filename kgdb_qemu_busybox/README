@@ -1,1 +1,8 @@
+#啟動
 qemu-system-x86_64  -kernel bzImage -append "root=/dev/sda" -boot c -hda busybox.img -smp 1 -m 2048 -gdb tcp::1234 -S
+
+#另開終端機
+cgdb vmlinux
+b start_kernel
+target remote localhost:1234
+c
