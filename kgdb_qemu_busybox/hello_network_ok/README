@@ -21,3 +21,64 @@ tftp host—ip  // ex tftp localhost
 get or put
 
 ------------------------------------------------------------------------
+
+生成內核
+內核中需要打開的選項是CONFIG_EXPERIMENTAL, CONFIG_DEBUG_INFO, CONFIG_KGDB和CONFIG_KGDB_SERIAL_CONSOLE, 同時需要關閉CONFIG_DEBUG_RODATA選項. 然後make bzImage編譯生成內核. 具體選項的意義可以去翻內核文檔, 這裡就不囉嗦了.
+生成根文件系統
+打開Busybox的CONFIG_STATIC和CONFIG_INSTALL_NO_USR選項, 執行make和make install編譯並生成, 然後參照下面的步驟創建initrd根文件系統:
+mkdir temp && cd temp
+
+#創建系統目錄
+mkdir -p dev etc/init.d mnt proc root sys tmp
+chmod a+rwxt tmp
+
+cp -rf ../busybox/_install/* ./
+
+#掛載系統目錄
+cat << EOF > etc/fstab
+proc  /proc  proc  defaults  0  0
+sysfs  /sys  sysfs defaults  0  0
+tmpfs  /tmp  tmpfs defaults  0  0
+EOF
+
+cat << EOF > etc/inittab
+::sysinit:/etc/init.d/rcS
+::respawn:-/bin/sh
+tty2::askfirst:-/bin/sh
+::ctrlaltdel:/bin/umount -a -r
+EOF
+
+cat << EOF > etc/init.d/rcS
+#!bin/sh
+/bin/mount -a
+#用mdev生成設備文件
+/sbin/mdev -s
+EOF
+
+chmod 755 etc/init.d/rcS
+
+find ./ | cpio -o -H newc | gzip > ../rootfs.img
+
+啟動QEMU
+qemu-system-x86_64 -kernel kernel.img -append \
+"root=/dev/ram rdinit=/sbin/init" -initrd rootfs.img
+
+或
+qemu-system-x86_64 -kernel kernel.img -append \
+"root=/dev/ram rdinit=/sbin/init kgdboc=ttyS0,115200 kgdbwait" \
+-initrd rootfs.img -serial tcp::1234,server
+
+第二個命令開啟了KGDB, 將Guest系統的串口映射到了Host系統的1234端口, 並在啟動過程中等待gdb的連接.
+啟動gdb
+內核開啟KGDB的情況下, 執行gdb vmlinux, 其中vmlinux是未壓縮的內核. 然後target remote localhost:1234連接kgdb.
+接下來就和普通的gdb沒什麼大的區別了, 比如在sched_clock函數處設置斷點break sched_clock, continue繼續運行, 到達斷點後打印jiffies_64變量print jiffies_64等等.
+另外, 運行過程中可以在測試系統裡執行echo g > /proc/sysrq-trigger讓gdb重新得到控制權.
+For 懶人
+順手在github上建了個項目, 可以自動搭建整個內核開發調試環境, 詳見README.
+http://github.com/adam8157/kernel-studio
+git clone git://github.com/adam8157/kernel-studio.git
+
+
+
+// 記得加上 -static
+gcc -static test.c -o test
