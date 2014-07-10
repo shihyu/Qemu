@@ -1,0 +1,23 @@
+# 安裝 tftp
+1.sudo apt-get install tftp-hpa tftpd-hpa
+
+2. /etc/default/tftpd-hpa
+# /etc/default/tftpd-hpa
+TFTP_USERNAME="tftp"
+TFTP_DIRECTORY="/tftpboot"
+TFTP_ADDRESS="0.0.0.0:69"
+TFTP_OPTIONS="-l -c -s"
+
+3、建tftpboot
+sudo mkdir /tftpboot
+sudo chmod 777 /tftpboot
+
+
+4.restart service
+sudoservice tftpd-hpa restart
+
+5. test
+tftp host—ip  // ex tftp localhost
+get or put
+
+------------------------------------------------------------------------
