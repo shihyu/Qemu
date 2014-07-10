@@ -14,7 +14,7 @@ sudo chmod 777 /tftpboot
 
 
 4.restart service
-sudoservice tftpd-hpa restart
+sudo service tftpd-hpa restart
 
 5. test
 tftp host—ip  // ex tftp localhost
