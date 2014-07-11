@@ -1,0 +1,3 @@
+b globalmem_write
+b globalmem_read
+c

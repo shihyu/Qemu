@@ -1,0 +1,12 @@
+add-symbol-file ./globalmem.ko 0xffffffffa0000000 \
+   -s .bss 0xffffffffa0000900 \
+   -s .data 0xffffffffa0000698 \
+   -s .gnu.linkonce.this_module 0xffffffffa00006a0 \
+   -s .note.gnu.build-id 0xffffffffa0000488 \
+   -s .rodata 0xffffffffa0000560 \
+   -s .rodata.str1.1 0xffffffffa00004ac \
+   -s .rodata.str1.8 0xffffffffa0000508 \
+   -s .strtab 0xffffffffa00025e8 \
+   -s .symtab 0xffffffffa0002000 \
+   -s __mcount_loc 0xffffffffa0000658 \
+   -s __param 0xffffffffa0000528
