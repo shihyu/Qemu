@@ -34,6 +34,8 @@ hello 1248 0 - Live 0xbf003000
 9. (gdb) add-symbol-file ../first_arm_hello_driver_example/hello.ko 0xbf000000 -s .bss 0xbf0004e0 -s .data 0xbf0003d5 
 or
 (gdb) add-symbol-file ../first_arm_hello_driver_example/hello.ko 0xbf003058
+or 
+(gdb) add-symbol-file ../first_arm_hello_driver_example/hello.ko hello_exit // 這樣直接給函數可以印出位址目前才在測試
 
 
 10. b hello_exit
