@@ -1,13 +1,13 @@
-下載code
+# 下載code
 4.2.2 
 // kernel 
 git clone http://android.googlesource.com/kernel/goldfish.git
 
 
-編譯
+# 編譯
 1. copy 模擬器的 /proc/config.gz 
 
-
+# 執行
 1. emulator -verbose -show-kernel -netfast -kernel goldfish/arch/arm/boot/zImage  -partition-size 1024 -qemu -monitor telnet::6666,server
 
 2. telnet localhost 6666
@@ -15,3 +15,16 @@ git clone http://android.googlesource.com/kernel/goldfish.git
 3. (qemu) gdbserver
 
 4. arm-eabi-gdb ./vmlinux
+
+
+# using gdb for driver module 
+1. 編譯出 hello.ko
+2. adb push hello.ko /data/app 
+3. adb shell
+4. cd /data/app
+5. insmod hello.ko
+6. cd sys/module/hello/sections/
+7. cat .text .bss .data
+8. (gdb) add-symbol-file ../first_arm_hello_driver_example/hello.ko 0xbf000000 -s .bss 0xbf0004e0 -s .data 0xbf0003d5
+9. b hello_exit
+10. emulator 中下 rmmod hello 即中斷在 hello_exit 函數 
