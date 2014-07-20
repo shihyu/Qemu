@@ -24,7 +24,17 @@ git clone http://android.googlesource.com/kernel/goldfish.git
 4. cd /data/app
 5. insmod hello.ko
 6. cd sys/module/hello/sections/
-7. cat .text .bss .data
-8. (gdb) add-symbol-file ../first_arm_hello_driver_example/hello.ko 0xbf000000 -s .bss 0xbf0004e0 -s .data 0xbf0003d5
-9. b hello_exit
-10. emulator 中下 rmmod hello 即中斷在 hello_exit 函數 
+7. cat .text .bss .data or cat /proc/modules                                     
+hello 1248 0 - Live 0xbf003000
+
+8. arm-eabi-objdump --section-headers hello.ko  | ag 'text'
+1 .text         0000003c  00000000  00000000  00000058  2**2
+
+0xbf003000 + 00000058 = 0xbf003058
+9. (gdb) add-symbol-file ../first_arm_hello_driver_example/hello.ko 0xbf000000 -s .bss 0xbf0004e0 -s .data 0xbf0003d5 
+or
+(gdb) add-symbol-file ../first_arm_hello_driver_example/hello.ko 0xbf003058
+
+
+10. b hello_exit
+11. emulator 中下 rmmod hello 即中斷在 hello_exit 函數 
