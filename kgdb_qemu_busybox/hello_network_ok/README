@@ -50,6 +50,10 @@ qemu-system-x86_64 -kernel bzImage -append "root=/dev/ram rdinit=/sbin/init" -in
 
 qemu-system-x86_64 -kernel bzImage -append "root=/dev/ram rdinit=/sbin/init" -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no  -gdb tcp::1234 -S
 
+3. 產生 rootfs , 可在temp 下新增修改檔案 
+
+find ./ | cpio -o -H newc | gzip > ../rootfs.img
+
 
 // 記得加上 -static
 gcc -static test.c -o test
