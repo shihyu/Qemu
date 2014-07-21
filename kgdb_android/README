@@ -5,7 +5,8 @@ git clone http://android.googlesource.com/kernel/goldfish.git
 
 
 # 編譯
-1. copy 模擬器的 /proc/config.gz 
+1. copy 模擬器的 /proc/config.gz  or 
+   make goldfish_armv7_defconfig // 在 4.4.2 and goldfish 3.4 kernel 用這方適才可以正常啟動 
 
 2. make ARCH=arm CROSS_COMPILE=arm-eabi- menuconfig
 
