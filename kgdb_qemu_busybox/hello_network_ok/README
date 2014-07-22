@@ -25,7 +25,7 @@ get or put
 1. 
 sudo ./nettap.sh  // 必須加上 sudo 
 # nettap.sh 
-tunctl ­u jason­yao ­t tap0  
+tunctl -u shihyu -t tap0  
 ifconfig tap0 192.168.100.1 up  
 echo 1 > /proc/sys/net/ipv4/ip_forward 
 iptables ­t nat ­A POSTROUTING ­o eth0 ­j MASQUERADE 
