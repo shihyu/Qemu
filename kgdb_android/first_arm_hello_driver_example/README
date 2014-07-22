@@ -1,0 +1,9 @@
+是情況修改下面路徑跟名稱
+CROSS_COMPILE 
+KRNELDIR
+
+make -C $(KRNELDIR) M=$(PWD) modules ARCH=arm , 必須加上ARCH=arm
+
+不然就是make ARCH=arm
+
+

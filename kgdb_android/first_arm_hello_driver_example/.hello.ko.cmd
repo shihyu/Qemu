@@ -1,0 +1,1 @@
+cmd_/media/shihyu/toshiba/android_42_pure/first_arm_hello_driver_example/hello.ko := arm-eabi-ld -r   --build-id -o /media/shihyu/toshiba/android_42_pure/first_arm_hello_driver_example/hello.ko /media/shihyu/toshiba/android_42_pure/first_arm_hello_driver_example/hello.o /media/shihyu/toshiba/android_42_pure/first_arm_hello_driver_example/hello.mod.o
