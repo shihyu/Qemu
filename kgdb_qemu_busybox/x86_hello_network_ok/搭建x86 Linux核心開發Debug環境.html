@@ -28,7 +28,7 @@
 <pre class="prettyprint prettyprinted"><code><span class="pln">CONFIG_EXPERIMENTAL</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 使得編譯的內核包含一些調試信息，使得調試更容易。</span><span class="pln">
 CONFIG_DEBUG_INFO</span><span class="pun">=</span><span class="pln">y
-CONFIG_KGD</span><span class="pun">=</span><span class="pln">y
+CONFIG_KGDB</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 使用串口進行通信</span><span class="pln">
 CONFIG_KGDB_SERIAL_CONSOLE</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 使能該選項可以kgdb 不依賴 notifier_call_chain() 機制來獲取斷點異常, 這樣就可以對 notifier_call_chain() 機制實現相關的函數進行單步調試。</span><span class="pln">
@@ -47,7 +47,7 @@ CONFIG_DEBUG_RODATA</span><span class="pun">=</span><span class="pln">n</span></
 <ul>
 <li>make menuconfig</li>
 <li>time make -j8 2&gt;&amp;1 | tee build.log</li>
-</ul>
+</ul><div class="se-section-delimiter"></div>
 
 <h3 id="產生根文件系統">產生根文件系統</h3>
 

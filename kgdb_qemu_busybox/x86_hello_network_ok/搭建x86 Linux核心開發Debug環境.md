@@ -11,7 +11,7 @@
 CONFIG_EXPERIMENTAL=y
 # 使得編譯的內核包含一些調試信息，使得調試更容易。
 CONFIG_DEBUG_INFO=y
-CONFIG_KGD=y
+CONFIG_KGDB=y
 # 使用串口進行通信
 CONFIG_KGDB_SERIAL_CONSOLE=y
 # 使能該選項可以kgdb 不依賴 notifier_call_chain() 機制來獲取斷點異常, 這樣就可以對 notifier_call_chain() 機制實現相關的函數進行單步調試。
