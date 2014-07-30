@@ -14,7 +14,10 @@
 https</span><span class="pun">:</span><span class="com">//github.com/Christopher83/linaro_toolchains_2014</span><span class="pln">
 
 https</span><span class="pun">:</span><span class="com">//launchpad.net/linaro-toolchain-binaries/</span><span class="pln">
-https</span><span class="pun">:</span><span class="com">//launchpad.net/linaro-toolchain-binaries/trunk/2013.10/+download/gcc-linaro-arm-linux-gnueabihf-4.8-2013.10_linux.tar.bz2</span></code></pre>
+https</span><span class="pun">:</span><span class="com">//launchpad.net/linaro-toolchain-binaries/trunk/2013.10/+download/gcc-linaro-arm-linux-gnueabihf-4.8-2013.10_linux.tar.bz2</span><span class="pln">
+
+
+arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">8.3</span><span class="pun">-</span><span class="lit">2013.12</span><span class="pln"> </span><span class="com">// 目前使用這成功</span></code></pre>
 
 <ul>
 <li>source build.env</li>
@@ -71,11 +74,17 @@ test </span><span class="pun">這個二進位文件需要三個共享庫:</span>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">cd _install</span><span class="pun">/</span><span class="pln">
 mkdir </span><span class="pun">-</span><span class="pln">p proc sys dev etc etc</span><span class="pun">/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d lib
-cp arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">9.1</span><span class="pun">-</span><span class="lit">2014.07</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">libc</span><span class="pun">/</span><span class="pln">lib</span><span class="com">/* lib</span></code></pre>
+
+cd arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">8.3</span><span class="pun">-</span><span class="lit">2013.12</span><span class="pln">
+find </span><span class="pun">.</span><span class="pln"> </span><span class="pun">-</span><span class="pln">name  </span><span class="str">'libc.so.6'</span><span class="pln">
+cp </span><span class="pun">-</span><span class="pln">a </span><span class="pun">/</span><span class="pln">media</span><span class="pun">/</span><span class="pln">ssd</span><span class="pun">/</span><span class="pln">arm_work</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">8.3</span><span class="pun">-</span><span class="lit">2013.12</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">sysroot</span><span class="pun">/</span><span class="pln">lib</span><span class="com">/* .
+
+
+cp /media/ssd/arm_work/gcc-linaro-arm-linux-gnueabihf-4.8-2013.10_linux/arm-linux-gnueabihf/libc/lib/arm-linux-gnueabihf/* lib</span></code></pre>
 
 <ul>
 <li>掛載系統目錄</li>
-</ul>
+</ul><div class="se-section-delimiter"></div>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">fstab 
 proc  </span><span class="pun">/</span><span class="pln">proc  proc  defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
@@ -221,6 +230,6 @@ iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><sp
 
 <h3 id="啟動-gdb">啟動 GDB</h3>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln">gdb vmlinux
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">gdb </span><span class="pun">./</span><span class="pln">vmlinux
 target remote localhost</span><span class="pun">:</span><span class="lit">1234</span></code></pre></div></body>
 </html>
