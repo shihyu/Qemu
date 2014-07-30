@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>New Markdown document</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="搭建-arm-linux核心開發debug-環境">搭建 ARM Linux核心開發Debug 環境</h1>
+
+<h3 id="crosscompile-linaro">CROSS_COMPILE - linaro</h3>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">9.1</span><span class="pun">-</span><span class="lit">2014.07</span><span class="pln">
+https</span><span class="pun">:</span><span class="com">//github.com/Christopher83/linaro_toolchains_2014</span><span class="pln">
+
+https</span><span class="pun">:</span><span class="com">//launchpad.net/linaro-toolchain-binaries/</span><span class="pln">
+https</span><span class="pun">:</span><span class="com">//launchpad.net/linaro-toolchain-binaries/trunk/2013.10/+download/gcc-linaro-arm-linux-gnueabihf-4.8-2013.10_linux.tar.bz2</span></code></pre>
+
+<ul>
+<li>source build.env</li>
+<li>成功可看到下面訊息</li>
+</ul><div class="se-section-delimiter"></div>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln">gcc </span><span class="pun">-</span><span class="pln">v
+
+</span><span class="typ">Using</span><span class="pln"> built</span><span class="pun">-</span><span class="kwd">in</span><span class="pln"> specs</span><span class="pun">.</span><span class="pln">
+COLLECT_GCC</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln">gcc
+COLLECT_LTO_WRAPPER</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">ssd</span><span class="pun">/</span><span class="pln">arm_work</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">9.1</span><span class="pun">-</span><span class="lit">2014.07</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/../</span><span class="pln">libexec</span><span class="pun">/</span><span class="pln">gcc</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="lit">4.9</span><span class="pun">.</span><span class="lit">1</span><span class="pun">/</span><span class="pln">lto</span><span class="pun">-</span><span class="pln">wrapper
+</span><span class="typ">Target</span><span class="pun">:</span><span class="pln"> arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi
+</span><span class="typ">Configured</span><span class="pln"> </span><span class="kwd">with</span><span class="pun">:</span><span class="pln"> </span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">linaro</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">src</span><span class="pun">/</span><span class="pln">gcc</span><span class="pun">-</span><span class="pln">linaro</span><span class="pun">-</span><span class="lit">4.9</span><span class="pun">-</span><span class="lit">2014.07</span><span class="pun">/</span><span class="pln">configure </span><span class="pun">--</span><span class="pln">build</span><span class="pun">=</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">build_unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu </span><span class="pun">--</span><span class="pln">host</span><span class="pun">=</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">build_unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu </span><span class="pun">--</span><span class="pln">target</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi </span><span class="pun">--</span><span class="pln">prefix</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">linaro</span><span class="pun">/</span><span class="pln">builds</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">sysroot</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">linaro</span><span class="pun">/</span><span class="pln">builds</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">libc </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">languages</span><span class="pun">=</span><span class="pln">c</span><span class="pun">,</span><span class="pln">c</span><span class="pun">++,</span><span class="pln">fortran </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">multilib </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">arch</span><span class="pun">=</span><span class="pln">armv7</span><span class="pun">-</span><span class="pln">a </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">tune</span><span class="pun">=</span><span class="pln">cortex</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">fpu</span><span class="pun">=</span><span class="pln">vfpv3</span><span class="pun">-</span><span class="pln">d16 </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="kwd">float</span><span class="pun">=</span><span class="pln">softfp </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">pkgversion</span><span class="pun">=</span><span class="str">'crosstool-NG linaro-1.13.1+bzr2673 - Linaro GCC 2014.07'</span><span class="pln"> </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">bugurl</span><span class="pun">=</span><span class="pln">https</span><span class="pun">:</span><span class="com">//bugs.launchpad.net/gcc-linaro --enable-__cxa_atexit --enable-libmudflap --enable-libgomp --enable-libssp --with-gmp=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-mpfr=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-mpc=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-isl=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-cloog=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-libelf=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --enable-threads=posix --disable-libstdcxx-pch --enable-linker-build-id --enable-plugin --enable-gold --with-local-prefix=/media/hdd_linux/linaro/builds/arm-linux-gnueabi/arm-linux-gnueabi/libc --enable-c99 --enable-long-long --with-mode=thumb --with-float=softfp</span><span class="pln">
+</span><span class="typ">Thread</span><span class="pln"> model</span><span class="pun">:</span><span class="pln"> posix
+gcc version </span><span class="lit">4.9</span><span class="pun">.</span><span class="lit">1</span><span class="pln"> </span><span class="lit">20140710</span><span class="pln"> </span><span class="pun">(</span><span class="pln">prerelease</span><span class="pun">)</span><span class="pln"> </span><span class="pun">(</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">NG linaro</span><span class="pun">-</span><span class="lit">1.13.1+bzr2673</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="typ">Linaro</span><span class="pln"> GCC </span><span class="lit">2014.07</span><span class="pun">)</span></code></pre>
+
+<h3 id="產生根文件系統">產生根文件系統</h3>
+
+<ul>
+<li>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi- defconfig</li>
+<li>打開 Busybox 選項</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_STATIC</span><span class="pun">=</span><span class="pln">y
+CONFIG_INSTALL_NO_USR</span><span class="pun">=</span><span class="pln">y
+CONFIG_FEATURE_PREFER_APPLETS</span><span class="pun">=</span><span class="pln">y
+CONFIG_FEATURE_SH_STANDALONE</span><span class="pun">=</span><span class="pln">y</span></code></pre>
+
+<ul>
+<li><p>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi- </p></li>
+<li><p>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi-  install // 產生  _install 資料夾</p></li>
+<li><p>建立ARM version的root filesystem image</p></li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><span class="pln">
+
+</span><span class="kwd">int</span><span class="pln"> main</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> argc</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln">argv</span><span class="pun">[])</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+    printf</span><span class="pun">(</span><span class="str">"Hello world\n"</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></code></pre><div class="se-section-delimiter"></div>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln">readelf </span><span class="pun">-</span><span class="pln">a test </span><span class="pun">|</span><span class="pln"> ag </span><span class="str">'lib'</span><span class="pln">
+      </span><span class="pun">[正在要求程式解譯器：/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">ld</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">3</span><span class="pun">]</span><span class="pln">
+ </span><span class="lit">0x00000001</span><span class="pln"> </span><span class="pun">(</span><span class="pln">NEEDED</span><span class="pun">)</span><span class="pln">                     </span><span class="pun">共享函式庫：[</span><span class="pln">libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pun">]</span><span class="pln">
+</span><span class="lit">00010554</span><span class="pln">  </span><span class="lit">00000216</span><span class="pln"> R_ARM_JUMP_SLOT   </span><span class="lit">00000000</span><span class="pln">   __libc_start_main
+     </span><span class="lit">2</span><span class="pun">:</span><span class="pln"> </span><span class="lit">00000000</span><span class="pln">     </span><span class="lit">0</span><span class="pln"> FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2</span><span class="pun">.</span><span class="lit">4</span><span class="pln"> </span><span class="pun">(</span><span class="lit">2</span><span class="pun">)</span><span class="pln">
+    </span><span class="lit">94</span><span class="pun">:</span><span class="pln"> </span><span class="lit">00008429</span><span class="pln">     </span><span class="lit">2</span><span class="pln"> FUNC    GLOBAL DEFAULT   </span><span class="lit">13</span><span class="pln"> __libc_csu_fini
+   </span><span class="lit">104</span><span class="pun">:</span><span class="pln"> </span><span class="lit">00000000</span><span class="pln">     </span><span class="lit">0</span><span class="pln"> FUNC    GLOBAL DEFAULT  UND __libc_start_main@@GLIBC_
+   </span><span class="lit">108</span><span class="pun">:</span><span class="pln"> </span><span class="lit">000083e9</span><span class="pln">    </span><span class="lit">64</span><span class="pln"> FUNC    GLOBAL DEFAULT   </span><span class="lit">13</span><span class="pln"> __libc_csu_init
+  </span><span class="lit">000000</span><span class="pun">:</span><span class="pln"> </span><span class="pun">版本:</span><span class="pln"> </span><span class="lit">1</span><span class="pln">  </span><span class="pun">檔案：</span><span class="pln">libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln">  </span><span class="pun">計數：</span><span class="lit">1</span><span class="pln">
+
+test </span><span class="pun">這個二進位文件需要三個共享庫:</span><span class="pln"> </span><span class="pun">“</span><span class="pln">ld</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">3</span><span class="pun">″,“</span><span class="pln">libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pun">″</span></code></pre><div class="se-section-delimiter"></div>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cd _install</span><span class="pun">/</span><span class="pln">
+mkdir </span><span class="pun">-</span><span class="pln">p proc sys dev etc etc</span><span class="pun">/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d lib
+cp arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">9.1</span><span class="pun">-</span><span class="lit">2014.07</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">libc</span><span class="pun">/</span><span class="pln">lib</span><span class="com">/* lib</span></code></pre>
+
+<ul>
+<li>掛載系統目錄</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">fstab 
+proc  </span><span class="pun">/</span><span class="pln">proc  proc  defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
+sysfs  </span><span class="pun">/</span><span class="pln">sys  sysfs defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
+tmpfs  </span><span class="pun">/</span><span class="pln">tmp  tmpfs defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
+EOF</span></code></pre>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">inittab 
+</span><span class="pun">::</span><span class="pln">sysinit</span><span class="pun">:</span><span class="str">/etc/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d</span><span class="pun">/</span><span class="pln">rcS
+</span><span class="pun">::</span><span class="pln">respawn</span><span class="pun">:-/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">sh
+tty2</span><span class="pun">::</span><span class="pln">askfirst</span><span class="pun">:-/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">sh
+</span><span class="pun">::</span><span class="pln">ctrlaltdel</span><span class="pun">:</span><span class="str">/bin/</span><span class="pln">umount </span><span class="pun">-</span><span class="pln">a </span><span class="pun">-</span><span class="pln">r
+EOF </span></code></pre>
+
+<ul>
+<li>etc/init.d/rcS</li>
+</ul><div class="se-section-delimiter"></div>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="com">#! /bin/sh</span><span class="pln">
+
+MAC</span><span class="pun">=</span><span class="lit">08</span><span class="pun">:</span><span class="lit">90</span><span class="pun">:</span><span class="lit">90</span><span class="pun">:</span><span class="lit">59</span><span class="pun">:</span><span class="lit">62</span><span class="pun">:</span><span class="lit">21</span><span class="pln">
+IP</span><span class="pun">=</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.2</span><span class="pln">
+</span><span class="typ">Mask</span><span class="pun">=</span><span class="lit">255.255</span><span class="pun">.</span><span class="lit">255.0</span><span class="pln">
+</span><span class="typ">Gateway</span><span class="pun">=</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.1</span><span class="pln">
+
+
+</span><span class="pun">/</span><span class="pln">sbin</span><span class="pun">/</span><span class="pln">ifconfig lo </span><span class="lit">127.0</span><span class="pun">.</span><span class="lit">0.1</span><span class="pln">
+ifconfig eth0 down
+ifconfig eth0 hw ether $MAC
+ifconfig eth0 $IP netmask $Mask up
+route add </span><span class="kwd">default</span><span class="pln"> gw $Gateway
+
+</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">mount </span><span class="pun">-</span><span class="pln">a
+</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">mount </span><span class="pun">-</span><span class="pln">t  sysfs sysfs </span><span class="pun">/</span><span class="pln">sys
+</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">mount </span><span class="pun">-</span><span class="pln">t tmpfs tmpfs </span><span class="pun">/</span><span class="pln">dev
+</span><span class="pun">/</span><span class="pln">sbin</span><span class="pun">/</span><span class="pln">mdev </span><span class="pun">-</span><span class="pln">s
+
+mount </span><span class="pun">-</span><span class="pln">o remount</span><span class="pun">,</span><span class="pln">rw</span><span class="pun">,</span><span class="pln">noatime </span><span class="pun">-</span><span class="pln">n </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">root </span><span class="pun">/</span></code></pre>
+
+<ul>
+<li><p>chmod 755 etc/init.d/rcS</p></li>
+<li><p>產生 rootfs, 可在temp 下新增修改檔案</p></li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">find </span><span class="pun">./</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> cpio </span><span class="pun">-</span><span class="pln">o </span><span class="pun">-</span><span class="pln">H newc </span><span class="pun">|</span><span class="pln"> gzip </span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">../</span><span class="pln">rootfs</span><span class="pun">.</span><span class="pln">img</span></code></pre>
+
+<h3 id="產生核心">產生核心</h3>
+
+<ul>
+<li>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi- vexpress_defconfig</li>
+<li>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi- menuconfig</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_EXPERIMENTAL</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># 使得編譯的內核包含一些調試信息，使得調試更容易。</span><span class="pln">
+CONFIG_DEBUG_INFO</span><span class="pun">=</span><span class="pln">y
+CONFIG_KGD</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># 使用串口進行通信</span><span class="pln">
+CONFIG_KGDB_SERIAL_CONSOLE</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># 使能該選項可以kgdb 不依賴 notifier_call_chain() 機制來獲取斷點異常, 這樣就可以對 no</span><span class="pln">
+tifier_call_chain</span><span class="pun">()</span><span class="pln"> </span><span class="pun">機制實現相關的函數進行單步調試。</span><span class="pln">
+CONFIG_KGDB_LOW_LEVEL_TRAP</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># 使能該選項將使得內核使用幀指針寄存器來維護堆棧，從而就可以正確地執行堆棧回溯，即函數調用</span><span class="pln">
+</span><span class="pun">棧信息。</span><span class="pln">
+CONFIG_FRAME_POINTER</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># ( 如果你選擇了KGDB_SERIAL_CONSOLE, 這個選項將自動被選上) 激活" 魔術 SysRq" 鍵. 該選</span><span class="pln">
+</span><span class="pun">項對</span><span class="pln">kgdboc </span><span class="pun">調試非常有用，</span><span class="pln">kgdb </span><span class="pun">向其註冊了</span><span class="str">'g'</span><span class="pln"> </span><span class="pun">魔術鍵來激活</span><span class="pln">kgdb </span><span class="pun">。</span><span class="pln">
+CONFIG_MAGIC_SYSRQ</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># 選擇這個選項來驅動qemu-kvm的網卡設備，以備以後使用。</span><span class="pln">
+CONFIG_8139CP</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># 該選項是將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span><span class="pln">
+CONFIG_DEBUG_SET_MODULE_RONX</span><span class="pun">=</span><span class="pln">n
+</span><span class="com"># 將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span><span class="pln">
+CONFIG_DEBUG_RODATA</span><span class="pun">=</span><span class="pln">n</span></code></pre>
+
+<ul>
+<li>make  ARCH=arm CROSS_COMPILE=arm-eabi- -j8</li>
+</ul>
+
+<h3 id="安裝-tftp">安裝 tftp</h3>
+
+<ul>
+<li>sudo apt-get install tftp-hpa tftpd-hpa</li>
+<li>/etc/default/tftpd-hpa</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="com"># /etc/default/tftpd-hpa</span><span class="pln">
+TFTP_USERNAME</span><span class="pun">=</span><span class="str">"tftp"</span><span class="pln">
+TFTP_DIRECTORY</span><span class="pun">=</span><span class="str">"/tftpboot"</span><span class="pln">
+TFTP_ADDRESS</span><span class="pun">=</span><span class="str">"0.0.0.0:69"</span><span class="pln">
+TFTP_OPTIONS</span><span class="pun">=</span><span class="str">"-l -c -s"</span></code></pre>
+
+<ul>
+<li>建立 tftpboot</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">sudo mkdir </span><span class="pun">/</span><span class="pln">tftpboot
+sudo chmod </span><span class="lit">777</span><span class="pln"> </span><span class="pun">/</span><span class="pln">tftpboot</span></code></pre>
+
+<ul>
+<li>restart service</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">sudo service tftpd</span><span class="pun">-</span><span class="pln">hpa restart</span></code></pre>
+
+<ul>
+<li>test tftp</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tftp host</span><span class="pun">—</span><span class="pln">ip  </span><span class="com">// ex tftp localhost</span><span class="pln">
+</span><span class="kwd">get</span><span class="pln"> </span><span class="kwd">or</span><span class="pln"> put</span></code></pre>
+
+<h3 id="啟動-tap">啟動 tap</h3>
+
+<ul>
+<li>sudo ./nettap.sh  // 必須加上 sudo </li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tunctl </span><span class="pun">-</span><span class="pln">u shihyu </span><span class="pun">-</span><span class="pln">t tap0 
+ifconfig tap0 </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.1</span><span class="pln"> up 
+echo </span><span class="lit">1</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="str">/proc/</span><span class="pln">sys</span><span class="pun">/</span><span class="pln">net</span><span class="pun">/</span><span class="pln">ipv4</span><span class="pun">/</span><span class="pln">ip_forward
+iptables </span><span class="pun">-</span><span class="pln">t nat </span><span class="pun">-</span><span class="pln">A POSTROUTING </span><span class="pun">-</span><span class="pln">o eth0 </span><span class="pun">-</span><span class="pln">j MASQUERADE
+iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><span class="lit">1</span><span class="pln"> </span><span class="pun">-</span><span class="pln">i tap0 </span><span class="pun">-</span><span class="pln">j ACCEPT
+iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><span class="lit">1</span><span class="pln"> </span><span class="pun">-</span><span class="pln">o tap0 </span><span class="pun">-</span><span class="pln">m state </span><span class="pun">--</span><span class="pln">state RELATED</span><span class="pun">,</span><span class="pln">ESTABLISHED </span><span class="pun">-</span><span class="pln">j ACCEPT</span></code></pre>
+
+<ul>
+<li>如果成功下ifconfig 會出現下面 message</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tap0      </span><span class="typ">Link</span><span class="pln"> encap</span><span class="pun">:</span><span class="typ">Ethernet</span><span class="pln">  </span><span class="typ">HWaddr</span><span class="pln"> </span><span class="lit">0a</span><span class="pun">:</span><span class="lit">18</span><span class="pun">:</span><span class="pln">ee</span><span class="pun">:</span><span class="pln">c4</span><span class="pun">:</span><span class="pln">f0</span><span class="pun">:</span><span class="pln">d0   
+          inet addr</span><span class="pun">:</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.1</span><span class="pln">  </span><span class="typ">Bcast</span><span class="pun">:</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.255</span><span class="pln">  </span><span class="typ">Mask</span><span class="pun">:</span><span class="lit">255.255</span><span class="pun">.</span><span class="lit">255.0</span><span class="pln"> 
+          UP BROADCAST MULTICAST  MTU</span><span class="pun">:</span><span class="lit">1500</span><span class="pln">  </span><span class="typ">Metric</span><span class="pun">:</span><span class="lit">1</span><span class="pln"> 
+          RX packets</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> errors</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> dropped</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> overruns</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> frame</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> 
+          TX packets</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> errors</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> dropped</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> overruns</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> carrier</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> 
+          collisions</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> txqueuelen</span><span class="pun">:</span><span class="lit">500</span><span class="pln">  
+          RX bytes</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.0</span><span class="pln"> B</span><span class="pun">)</span><span class="pln">  TX bytes</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.0</span><span class="pln"> B</span><span class="pun">)</span><span class="pln"> </span></code></pre><div class="se-section-delimiter"></div>
+
+<h3 id="啟動-qemu">啟動 QEMU</h3>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span></code></pre><div class="se-section-delimiter"></div>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre>
+
+<h3 id="啟動-gdb">啟動 GDB</h3>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln">gdb vmlinux
+target remote localhost</span><span class="pun">:</span><span class="lit">1234</span></code></pre></div></body>
+</html>
