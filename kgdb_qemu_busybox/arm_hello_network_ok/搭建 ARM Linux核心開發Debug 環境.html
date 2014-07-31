@@ -2,11 +2,13 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>New Markdown document</title>
+<title>Title2</title>
 <link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
 <script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
-<body><div class="container"><h1 id="搭建-arm-linux核心開發debug-環境">搭建 ARM Linux核心開發Debug 環境</h1>
+<body><div class="container"><div class="se-section-delimiter"></div><div class="se-section-delimiter"></div>
+
+<h1 id="搭建-arm-linux核心開發debug-環境">搭建 ARM Linux核心開發Debug 環境</h1>
 
 <h3 id="crosscompile-linaro">CROSS_COMPILE - linaro</h3>
 
@@ -19,38 +21,43 @@ https</span><span class="pun">:</span><span class="com">//launchpad.net/linaro-t
 
 arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">8.3</span><span class="pun">-</span><span class="lit">2013.12</span><span class="pln"> </span><span class="com">// 目前使用這成功</span></code></pre>
 
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">source build</span><span class="pun">.</span><span class="pln">env</span></code></pre>
+
 <ul>
-<li>source build.env</li>
 <li>成功可看到下面訊息</li>
 </ul><div class="se-section-delimiter"></div>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln">gcc </span><span class="pun">-</span><span class="pln">v
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">gcc </span><span class="pun">-</span><span class="pln">v
 
 </span><span class="typ">Using</span><span class="pln"> built</span><span class="pun">-</span><span class="kwd">in</span><span class="pln"> specs</span><span class="pun">.</span><span class="pln">
-COLLECT_GCC</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln">gcc
-COLLECT_LTO_WRAPPER</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">ssd</span><span class="pun">/</span><span class="pln">arm_work</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">9.1</span><span class="pun">-</span><span class="lit">2014.07</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/../</span><span class="pln">libexec</span><span class="pun">/</span><span class="pln">gcc</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="lit">4.9</span><span class="pun">.</span><span class="lit">1</span><span class="pun">/</span><span class="pln">lto</span><span class="pun">-</span><span class="pln">wrapper
-</span><span class="typ">Target</span><span class="pun">:</span><span class="pln"> arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi
-</span><span class="typ">Configured</span><span class="pln"> </span><span class="kwd">with</span><span class="pun">:</span><span class="pln"> </span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">linaro</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">src</span><span class="pun">/</span><span class="pln">gcc</span><span class="pun">-</span><span class="pln">linaro</span><span class="pun">-</span><span class="lit">4.9</span><span class="pun">-</span><span class="lit">2014.07</span><span class="pun">/</span><span class="pln">configure </span><span class="pun">--</span><span class="pln">build</span><span class="pun">=</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">build_unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu </span><span class="pun">--</span><span class="pln">host</span><span class="pun">=</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">build_unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu </span><span class="pun">--</span><span class="pln">target</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi </span><span class="pun">--</span><span class="pln">prefix</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">linaro</span><span class="pun">/</span><span class="pln">builds</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">sysroot</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">linaro</span><span class="pun">/</span><span class="pln">builds</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">libc </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">languages</span><span class="pun">=</span><span class="pln">c</span><span class="pun">,</span><span class="pln">c</span><span class="pun">++,</span><span class="pln">fortran </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">multilib </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">arch</span><span class="pun">=</span><span class="pln">armv7</span><span class="pun">-</span><span class="pln">a </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">tune</span><span class="pun">=</span><span class="pln">cortex</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">fpu</span><span class="pun">=</span><span class="pln">vfpv3</span><span class="pun">-</span><span class="pln">d16 </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="kwd">float</span><span class="pun">=</span><span class="pln">softfp </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">pkgversion</span><span class="pun">=</span><span class="str">'crosstool-NG linaro-1.13.1+bzr2673 - Linaro GCC 2014.07'</span><span class="pln"> </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">bugurl</span><span class="pun">=</span><span class="pln">https</span><span class="pun">:</span><span class="com">//bugs.launchpad.net/gcc-linaro --enable-__cxa_atexit --enable-libmudflap --enable-libgomp --enable-libssp --with-gmp=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-mpfr=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-mpc=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-isl=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-cloog=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --with-libelf=/media/hdd_linux/linaro/.build/arm-linux-gnueabi/build/static --enable-threads=posix --disable-libstdcxx-pch --enable-linker-build-id --enable-plugin --enable-gold --with-local-prefix=/media/hdd_linux/linaro/builds/arm-linux-gnueabi/arm-linux-gnueabi/libc --enable-c99 --enable-long-long --with-mode=thumb --with-float=softfp</span><span class="pln">
+COLLECT_GCC</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">gcc
+COLLECT_LTO_WRAPPER</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">ssd</span><span class="pun">/</span><span class="pln">arm_work</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">8.3</span><span class="pun">-</span><span class="lit">2013.12</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/../</span><span class="pln">libexec</span><span class="pun">/</span><span class="pln">gcc</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="lit">4.8</span><span class="pun">.</span><span class="lit">3</span><span class="pun">/</span><span class="pln">lto</span><span class="pun">-</span><span class="pln">wrapper
+</span><span class="typ">Target</span><span class="pun">:</span><span class="pln"> arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi
+</span><span class="typ">Configured</span><span class="pln"> </span><span class="kwd">with</span><span class="pun">:</span><span class="pln"> </span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">src</span><span class="pun">/</span><span class="pln">gcc</span><span class="pun">-</span><span class="pln">linaro</span><span class="pun">-</span><span class="lit">4.8</span><span class="pun">-</span><span class="lit">2013.12</span><span class="pun">/</span><span class="pln">configure </span><span class="pun">--</span><span class="pln">build</span><span class="pun">=</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">build_unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu </span><span class="pun">--</span><span class="pln">host</span><span class="pun">=</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">build_unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu </span><span class="pun">--</span><span class="pln">target</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi </span><span class="pun">--</span><span class="pln">prefix</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/</span><span class="pln">builds</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">sysroot</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/</span><span class="pln">builds</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">sysroot </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">languages</span><span class="pun">=</span><span class="pln">c</span><span class="pun">,</span><span class="pln">c</span><span class="pun">++,</span><span class="pln">fortran </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">arch</span><span class="pun">=</span><span class="pln">armv7</span><span class="pun">-</span><span class="pln">a </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">tune</span><span class="pun">=</span><span class="pln">cortex</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">fpu</span><span class="pun">=</span><span class="pln">vfpv3</span><span class="pun">-</span><span class="pln">d16 </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="kwd">float</span><span class="pun">=</span><span class="pln">softfp </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">pkgversion</span><span class="pun">=</span><span class="str">'crosstool-NG hg+default-4cfbdb295328 - Linaro GCC 2013.12'</span><span class="pln"> </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">__cxa_atexit </span><span class="pun">--</span><span class="pln">disable</span><span class="pun">-</span><span class="pln">libmudflap </span><span class="pun">--</span><span class="pln">disable</span><span class="pun">-</span><span class="pln">libgomp </span><span class="pun">--</span><span class="pln">disable</span><span class="pun">-</span><span class="pln">libssp </span><span class="pun">--</span><span class="pln">disable</span><span class="pun">-</span><span class="pln">libquadmath </span><span class="pun">--</span><span class="pln">disable</span><span class="pun">-</span><span class="pln">libquadmath</span><span class="pun">-</span><span class="pln">support </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">gmp</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">buildtools </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">mpfr</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">buildtools </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">mpc</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">buildtools </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">isl</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">buildtools </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">cloog</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">buildtools </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">libelf</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/.</span><span class="pln">build</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">buildtools </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">host</span><span class="pun">-</span><span class="pln">libstdcxx</span><span class="pun">=</span><span class="str">'-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm'</span><span class="pln"> </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">threads</span><span class="pun">=</span><span class="pln">posix </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">multilib </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="kwd">local</span><span class="pun">-</span><span class="pln">prefix</span><span class="pun">=</span><span class="str">/media/</span><span class="pln">hdd_linux</span><span class="pun">/</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">ng</span><span class="pun">/</span><span class="pln">builds</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">/</span><span class="pln">sysroot </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">c99 </span><span class="pun">--</span><span class="pln">enable</span><span class="pun">-</span><span class="kwd">long</span><span class="pun">-</span><span class="kwd">long</span><span class="pln"> </span><span class="pun">--</span><span class="kwd">with</span><span class="pun">-</span><span class="pln">mode</span><span class="pun">=</span><span class="pln">thumb </span><span class="pun">--</span><span class="pln">without</span><span class="pun">-</span><span class="pln">isl
 </span><span class="typ">Thread</span><span class="pln"> model</span><span class="pun">:</span><span class="pln"> posix
-gcc version </span><span class="lit">4.9</span><span class="pun">.</span><span class="lit">1</span><span class="pln"> </span><span class="lit">20140710</span><span class="pln"> </span><span class="pun">(</span><span class="pln">prerelease</span><span class="pun">)</span><span class="pln"> </span><span class="pun">(</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">NG linaro</span><span class="pun">-</span><span class="lit">1.13.1+bzr2673</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="typ">Linaro</span><span class="pln"> GCC </span><span class="lit">2014.07</span><span class="pun">)</span></code></pre>
+gcc version </span><span class="lit">4.8</span><span class="pun">.</span><span class="lit">3</span><span class="pln"> </span><span class="lit">20131202</span><span class="pln"> </span><span class="pun">(</span><span class="pln">prerelease</span><span class="pun">)</span><span class="pln"> </span><span class="pun">(</span><span class="pln">crosstool</span><span class="pun">-</span><span class="pln">NG hg</span><span class="pun">+</span><span class="kwd">default</span><span class="pun">-</span><span class="lit">4cfbdb295328</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="typ">Linaro</span><span class="pln"> GCC </span><span class="lit">2013.12</span><span class="pun">)</span></code></pre>
 
 <h3 id="產生根文件系統">產生根文件系統</h3>
 
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln"> defconfig</span></code></pre>
+
 <ul>
-<li>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi- defconfig</li>
 <li>打開 Busybox 選項</li>
 </ul>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_STATIC</span><span class="pun">=</span><span class="pln">y
 CONFIG_INSTALL_NO_USR</span><span class="pun">=</span><span class="pln">y
+
+
 CONFIG_FEATURE_PREFER_APPLETS</span><span class="pun">=</span><span class="pln">y
 CONFIG_FEATURE_SH_STANDALONE</span><span class="pun">=</span><span class="pln">y</span></code></pre>
 
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln"> 
+make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">  install </span><span class="com">// 產生  _install 資料夾</span></code></pre>
+
 <ul>
-<li><p>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi- </p></li>
-<li><p>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi-  install // 產生  _install 資料夾</p></li>
-<li><p>建立ARM version的root filesystem image</p></li>
-</ul>
+<li>建立ARM version的root filesystem image</li>
+</ul><div class="se-section-delimiter"></div>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><span class="pln">
 
@@ -58,7 +65,7 @@ CONFIG_FEATURE_SH_STANDALONE</span><span class="pun">=</span><span class="pln">y
 </span><span class="pun">{</span><span class="pln">
     printf</span><span class="pun">(</span><span class="str">"Hello world\n"</span><span class="pun">);</span><span class="pln">
     </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span></code></pre><div class="se-section-delimiter"></div>
+</span><span class="pun">}</span></code></pre>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">arm</span><span class="pun">-</span><span class="pln">eabi</span><span class="pun">-</span><span class="pln">readelf </span><span class="pun">-</span><span class="pln">a test </span><span class="pun">|</span><span class="pln"> ag </span><span class="str">'lib'</span><span class="pln">
       </span><span class="pun">[正在要求程式解譯器：/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">ld</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">3</span><span class="pun">]</span><span class="pln">
@@ -84,7 +91,7 @@ cp /media/ssd/arm_work/gcc-linaro-arm-linux-gnueabihf-4.8-2013.10_linux/arm-linu
 
 <ul>
 <li>掛載系統目錄</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">fstab 
 proc  </span><span class="pun">/</span><span class="pln">proc  proc  defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
@@ -101,7 +108,7 @@ EOF </span></code></pre>
 
 <ul>
 <li>etc/init.d/rcS</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="com">#! /bin/sh</span><span class="pln">
 
@@ -133,32 +140,35 @@ mount </span><span class="pun">-</span><span class="pln">o remount</span><span c
 
 <h3 id="產生核心">產生核心</h3>
 
-<ul>
-<li>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi- vexpress_defconfig</li>
-<li>make -j8 ARCH=arm CROSS_COMPILE=arm-eabi- menuconfig</li>
-</ul>
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln"> vexpress_defconfig
+
+make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln"> menuconfig</span></code></pre><div class="se-section-delimiter"></div>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_EXPERIMENTAL</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 使得編譯的內核包含一些調試信息，使得調試更容易。</span><span class="pln">
 CONFIG_DEBUG_INFO</span><span class="pun">=</span><span class="pln">y
-CONFIG_KGD</span><span class="pun">=</span><span class="pln">y
+CONFIG_KGDB</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 使用串口進行通信</span><span class="pln">
 CONFIG_KGDB_SERIAL_CONSOLE</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># 使能該選項可以kgdb 不依賴 notifier_call_chain() 機制來獲取斷點異常, 這樣就可以對 no</span><span class="pln">
-tifier_call_chain</span><span class="pun">()</span><span class="pln"> </span><span class="pun">機制實現相關的函數進行單步調試。</span><span class="pln">
+</span><span class="com"># 使能該選項可以kgdb 不依賴 notifier_call_chain() 機制來獲取斷點異常, 這樣就可以對 notifier_call_chain() 機制實現相關的函數進行單步調試。</span><span class="pln">
 CONFIG_KGDB_LOW_LEVEL_TRAP</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># 使能該選項將使得內核使用幀指針寄存器來維護堆棧，從而就可以正確地執行堆棧回溯，即函數調用</span><span class="pln">
-</span><span class="pun">棧信息。</span><span class="pln">
+</span><span class="com"># 使能該選項將使得內核使用幀指針寄存器來維護堆棧，從而就可以正確地執行堆棧回溯，即函數調用棧信息。</span><span class="pln">
 CONFIG_FRAME_POINTER</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># ( 如果你選擇了KGDB_SERIAL_CONSOLE, 這個選項將自動被選上) 激活" 魔術 SysRq" 鍵. 該選</span><span class="pln">
-</span><span class="pun">項對</span><span class="pln">kgdboc </span><span class="pun">調試非常有用，</span><span class="pln">kgdb </span><span class="pun">向其註冊了</span><span class="str">'g'</span><span class="pln"> </span><span class="pun">魔術鍵來激活</span><span class="pln">kgdb </span><span class="pun">。</span><span class="pln">
+</span><span class="com"># ( 如果你選擇了KGDB_SERIAL_CONSOLE, 這個選項將自動被選上) 激活" 魔術 SysRq" 鍵. 該選項對kgdboc 調試非常有用，kgdb 向其註冊了'g' 魔術鍵來激活kgdb 。</span><span class="pln">
 CONFIG_MAGIC_SYSRQ</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 選擇這個選項來驅動qemu-kvm的網卡設備，以備以後使用。</span><span class="pln">
 CONFIG_8139CP</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 該選項是將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span><span class="pln">
 CONFIG_DEBUG_SET_MODULE_RONX</span><span class="pun">=</span><span class="pln">n
 </span><span class="com"># 將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span><span class="pln">
-CONFIG_DEBUG_RODATA</span><span class="pun">=</span><span class="pln">n</span></code></pre>
+CONFIG_DEBUG_RODATA</span><span class="pun">=</span><span class="pln">n
+
+
+CONFIG_MODULE_FORCE_LOAD</span><span class="pun">=</span><span class="pln">y
+CONFIG_MODULE_UNLOAD</span><span class="pun">=</span><span class="pln">y
+CONFIG_MODULE_FORCE_UNLOAD</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># CONFIG_MODVERSIONS is not set</span><span class="pln">
+</span><span class="com"># CONFIG_MODULE_SRCVERSION_ALL is not set</span></code></pre>
 
 <ul>
 <li>make  ARCH=arm CROSS_COMPILE=arm-eabi- -j8</li>
@@ -220,16 +230,282 @@ iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><sp
           RX packets</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> errors</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> dropped</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> overruns</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> frame</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> 
           TX packets</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> errors</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> dropped</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> overruns</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> carrier</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> 
           collisions</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> txqueuelen</span><span class="pun">:</span><span class="lit">500</span><span class="pln">  
-          RX bytes</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.0</span><span class="pln"> B</span><span class="pun">)</span><span class="pln">  TX bytes</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.0</span><span class="pln"> B</span><span class="pun">)</span><span class="pln"> </span></code></pre><div class="se-section-delimiter"></div>
+          RX bytes</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.0</span><span class="pln"> B</span><span class="pun">)</span><span class="pln">  TX bytes</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.0</span><span class="pln"> B</span><span class="pun">)</span><span class="pln"> </span></code></pre>
 
 <h3 id="啟動-qemu">啟動 QEMU</h3>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span></code></pre><div class="se-section-delimiter"></div>
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span></code></pre>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre>
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre><div class="se-section-delimiter"></div>
 
 <h3 id="啟動-gdb">啟動 GDB</h3>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">gdb </span><span class="pun">./</span><span class="pln">vmlinux
-target remote localhost</span><span class="pun">:</span><span class="lit">1234</span></code></pre></div></body>
+target remote localhost</span><span class="pun">:</span><span class="lit">1234</span></code></pre>
+
+<h3 id="debug-module">Debug Module</h3>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">time make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span></code></pre>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="com">// globalmem.c</span><span class="pln">
+</span><span class="com">/*======================================================================
+    A globalmem driver as an example of char device drivers
+
+    The initial developer of the original code is Baohua Song
+    &lt;author@linuxdriver.cn&gt;. All Rights Reserved.
+======================================================================*/</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/module.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/types.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/fs.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/errno.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/mm.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/sched.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/init.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/cdev.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;asm/io.h&gt;</span><span class="pln">
+</span><span class="com">//#include &lt;asm/system.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;asm/uaccess.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/slab.h&gt;</span><span class="pln">
+
+</span><span class="com">#define</span><span class="pln"> GLOBALMEM_SIZE  </span><span class="lit">0x1000</span><span class="pln">  </span><span class="com">/*全局内存最大4K字节*/</span><span class="pln">
+</span><span class="com">#define</span><span class="pln"> MEM_CLEAR </span><span class="lit">0x1</span><span class="pln">  </span><span class="com">/*清0全局内存*/</span><span class="pln">
+</span><span class="com">#define</span><span class="pln"> GLOBALMEM_MAJOR </span><span class="lit">245</span><span class="pln">    </span><span class="com">/*预设的globalmem的主设备号*/</span><span class="pln">
+
+</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> globalmem_major </span><span class="pun">=</span><span class="pln"> GLOBALMEM_MAJOR</span><span class="pun">;</span><span class="pln">
+</span><span class="com">/*globalmem设备结构体*/</span><span class="pln">
+</span><span class="kwd">struct</span><span class="pln"> globalmem_dev </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">struct</span><span class="pln"> cdev cdev</span><span class="pun">;</span><span class="pln"> </span><span class="com">/*cdev结构体*/</span><span class="pln">
+    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> mem</span><span class="pun">[</span><span class="pln">GLOBALMEM_SIZE</span><span class="pun">];</span><span class="pln"> </span><span class="com">/*全局内存*/</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+
+</span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> globalmem_devp</span><span class="pun">;</span><span class="pln"> </span><span class="com">/*设备结构体指针*/</span><span class="pln">
+</span><span class="com">/*文件打开函数*/</span><span class="pln">
+</span><span class="kwd">int</span><span class="pln"> globalmem_open</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> inode</span><span class="pun">*</span><span class="pln"> inode</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="com">/*将设备结构体指针赋值给文件私有数据指针*/</span><span class="pln">
+    filp</span><span class="pun">-&gt;</span><span class="pln">private_data </span><span class="pun">=</span><span class="pln"> globalmem_devp</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="com">/*文件释放函数*/</span><span class="pln">
+</span><span class="kwd">int</span><span class="pln"> globalmem_release</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> inode</span><span class="pun">*</span><span class="pln"> inode</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/* ioctl设备控制函数 */</span><span class="pln">
+</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> globalmem_ioctl</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> inode</span><span class="pun">*</span><span class="pln"> inodep</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">unsigned</span><span class="pln">
+                           </span><span class="kwd">int</span><span class="pln"> cmd</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> arg</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> dev </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">private_data</span><span class="pun">;</span><span class="com">/*获得设备结构体指针*/</span><span class="pln">
+
+    </span><span class="kwd">switch</span><span class="pln"> </span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">case</span><span class="pln"> MEM_CLEAR</span><span class="pun">:</span><span class="pln">
+        memset</span><span class="pun">(</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">mem</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">);</span><span class="pln">
+        printk</span><span class="pun">(</span><span class="pln">KERN_INFO </span><span class="str">"globalmem is set to zero\n"</span><span class="pun">);</span><span class="pln">
+        </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+
+    </span><span class="kwd">default</span><span class="pun">:</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/*读函数*/</span><span class="pln">
+</span><span class="kwd">static</span><span class="pln"> </span><span class="typ">ssize_t</span><span class="pln"> globalmem_read</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> __user</span><span class="pun">*</span><span class="pln"> buf</span><span class="pun">,</span><span class="pln"> </span><span class="typ">size_t</span><span class="pln"> size</span><span class="pun">,</span><span class="pln">
+                              </span><span class="typ">loff_t</span><span class="pun">*</span><span class="pln"> ppos</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> p </span><span class="pun">=</span><span class="pln">  </span><span class="pun">*</span><span class="pln">ppos</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> count </span><span class="pun">=</span><span class="pln"> size</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">int</span><span class="pln"> ret </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> dev </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">private_data</span><span class="pun">;</span><span class="pln"> </span><span class="com">/*获得设备结构体指针*/</span><span class="pln">
+
+    </span><span class="com">/*分析和获取有效的写长度*/</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">p </span><span class="pun">&gt;=</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> count </span><span class="pun">?</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> ENXIO </span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">count </span><span class="pun">&gt;</span><span class="pln"> GLOBALMEM_SIZE </span><span class="pun">-</span><span class="pln"> p</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        count </span><span class="pun">=</span><span class="pln"> GLOBALMEM_SIZE </span><span class="pun">-</span><span class="pln"> p</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="com">/*内核空间-&gt;用户空间*/</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">copy_to_user</span><span class="pun">(</span><span class="pln">buf</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">*)(</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">mem </span><span class="pun">+</span><span class="pln"> p</span><span class="pun">),</span><span class="pln"> count</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EFAULT</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="pun">*</span><span class="pln">ppos </span><span class="pun">+=</span><span class="pln"> count</span><span class="pun">;</span><span class="pln">
+        ret </span><span class="pun">=</span><span class="pln"> count</span><span class="pun">;</span><span class="pln">
+
+        printk</span><span class="pun">(</span><span class="pln">KERN_INFO </span><span class="str">"read %d bytes(s) from %d\n"</span><span class="pun">,</span><span class="pln"> count</span><span class="pun">,</span><span class="pln"> p</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">return</span><span class="pln"> ret</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/*写函数*/</span><span class="pln">
+</span><span class="kwd">static</span><span class="pln"> </span><span class="typ">ssize_t</span><span class="pln"> globalmem_write</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">const</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> __user</span><span class="pun">*</span><span class="pln"> buf</span><span class="pun">,</span><span class="pln">
+                               </span><span class="typ">size_t</span><span class="pln"> size</span><span class="pun">,</span><span class="pln"> </span><span class="typ">loff_t</span><span class="pun">*</span><span class="pln"> ppos</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> p </span><span class="pun">=</span><span class="pln">  </span><span class="pun">*</span><span class="pln">ppos</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> count </span><span class="pun">=</span><span class="pln"> size</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">int</span><span class="pln"> ret </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> dev </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">private_data</span><span class="pun">;</span><span class="pln"> </span><span class="com">/*获得设备结构体指针*/</span><span class="pln">
+
+    </span><span class="com">/*分析和获取有效的写长度*/</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">p </span><span class="pun">&gt;=</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> count </span><span class="pun">?</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> ENXIO </span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">count </span><span class="pun">&gt;</span><span class="pln"> GLOBALMEM_SIZE </span><span class="pun">-</span><span class="pln"> p</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        count </span><span class="pun">=</span><span class="pln"> GLOBALMEM_SIZE </span><span class="pun">-</span><span class="pln"> p</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="com">/*用户空间-&gt;内核空间*/</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">copy_from_user</span><span class="pun">(</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">mem </span><span class="pun">+</span><span class="pln"> p</span><span class="pun">,</span><span class="pln"> buf</span><span class="pun">,</span><span class="pln"> count</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EFAULT</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="pun">*</span><span class="pln">ppos </span><span class="pun">+=</span><span class="pln"> count</span><span class="pun">;</span><span class="pln">
+        ret </span><span class="pun">=</span><span class="pln"> count</span><span class="pun">;</span><span class="pln">
+
+        printk</span><span class="pun">(</span><span class="pln">KERN_INFO </span><span class="str">"written %d bytes(s) from %d\n"</span><span class="pun">,</span><span class="pln"> count</span><span class="pun">,</span><span class="pln"> p</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">return</span><span class="pln"> ret</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/* seek文件定位函数 */</span><span class="pln">
+</span><span class="kwd">static</span><span class="pln"> </span><span class="typ">loff_t</span><span class="pln"> globalmem_llseek</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">,</span><span class="pln"> </span><span class="typ">loff_t</span><span class="pln"> offset</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> orig</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="typ">loff_t</span><span class="pln"> ret </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+
+    </span><span class="kwd">switch</span><span class="pln"> </span><span class="pun">(</span><span class="pln">orig</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">case</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln">   </span><span class="com">/*相对文件开始位置偏移*/</span><span class="pln">
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">offset </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
+            </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">((</span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">)</span><span class="pln">offset </span><span class="pun">&gt;</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
+            </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+
+        filp</span><span class="pun">-&gt;</span><span class="pln">f_pos </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">)</span><span class="pln">offset</span><span class="pun">;</span><span class="pln">
+        ret </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">f_pos</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+
+    </span><span class="kwd">case</span><span class="pln"> </span><span class="lit">1</span><span class="pun">:</span><span class="pln">   </span><span class="com">/*相对文件当前位置偏移*/</span><span class="pln">
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">((</span><span class="pln">filp</span><span class="pun">-&gt;</span><span class="pln">f_pos </span><span class="pun">+</span><span class="pln"> offset</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
+            </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">((</span><span class="pln">filp</span><span class="pun">-&gt;</span><span class="pln">f_pos </span><span class="pun">+</span><span class="pln"> offset</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
+            </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+
+        filp</span><span class="pun">-&gt;</span><span class="pln">f_pos </span><span class="pun">+=</span><span class="pln"> offset</span><span class="pun">;</span><span class="pln">
+        ret </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">f_pos</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+
+    </span><span class="kwd">default</span><span class="pun">:</span><span class="pln">
+        ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">return</span><span class="pln"> ret</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/*文件操作结构体*/</span><span class="pln">
+</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">const</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> file_operations globalmem_fops </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">owner </span><span class="pun">=</span><span class="pln"> THIS_MODULE</span><span class="pun">,</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">llseek </span><span class="pun">=</span><span class="pln"> globalmem_llseek</span><span class="pun">,</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">read </span><span class="pun">=</span><span class="pln"> globalmem_read</span><span class="pun">,</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">write </span><span class="pun">=</span><span class="pln"> globalmem_write</span><span class="pun">,</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">unlocked_ioctl </span><span class="pun">=</span><span class="pln"> globalmem_ioctl</span><span class="pun">,</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">open </span><span class="pun">=</span><span class="pln"> globalmem_open</span><span class="pun">,</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">release </span><span class="pun">=</span><span class="pln"> globalmem_release</span><span class="pun">,</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+
+</span><span class="com">/*初始化并注册cdev*/</span><span class="pln">
+</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> globalmem_setup_cdev</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> dev</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> index</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">int</span><span class="pln"> err</span><span class="pun">,</span><span class="pln"> devno </span><span class="pun">=</span><span class="pln"> MKDEV</span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">,</span><span class="pln"> index</span><span class="pun">);</span><span class="pln">
+
+    cdev_init</span><span class="pun">(&amp;</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">,</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">globalmem_fops</span><span class="pun">);</span><span class="pln">
+    dev</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">.</span><span class="pln">owner </span><span class="pun">=</span><span class="pln"> THIS_MODULE</span><span class="pun">;</span><span class="pln">
+    dev</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">.</span><span class="pln">ops </span><span class="pun">=</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">globalmem_fops</span><span class="pun">;</span><span class="pln">
+    err </span><span class="pun">=</span><span class="pln"> cdev_add</span><span class="pun">(&amp;</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">,</span><span class="pln"> devno</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        printk</span><span class="pun">(</span><span class="pln">KERN_NOTICE </span><span class="str">"Error %d adding LED%d"</span><span class="pun">,</span><span class="pln"> err</span><span class="pun">,</span><span class="pln"> index</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/*设备驱动模块加载函数*/</span><span class="pln">
+</span><span class="kwd">int</span><span class="pln"> globalmem_init</span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">int</span><span class="pln"> result</span><span class="pun">;</span><span class="pln">
+    </span><span class="typ">dev_t</span><span class="pln"> devno </span><span class="pun">=</span><span class="pln"> MKDEV</span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">);</span><span class="pln">
+
+    </span><span class="com">/* 申请设备号*/</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        result </span><span class="pun">=</span><span class="pln"> register_chrdev_region</span><span class="pun">(</span><span class="pln">devno</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="str">"globalmem"</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">/* 动态申请设备号 */</span><span class="pln">
+        result </span><span class="pun">=</span><span class="pln"> alloc_chrdev_region</span><span class="pun">(&amp;</span><span class="pln">devno</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="str">"globalmem"</span><span class="pun">);</span><span class="pln">
+        globalmem_major </span><span class="pun">=</span><span class="pln"> MAJOR</span><span class="pun">(</span><span class="pln">devno</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">result </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> result</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="com">/* 动态申请设备结构体的内存*/</span><span class="pln">
+    globalmem_devp </span><span class="pun">=</span><span class="pln"> kmalloc</span><span class="pun">(</span><span class="kwd">sizeof</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">),</span><span class="pln"> GFP_KERNEL</span><span class="pun">);</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">globalmem_devp</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">  </span><span class="com">/*申请失败*/</span><span class="pln">
+        result </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> ENOMEM</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">goto</span><span class="pln"> fail_malloc</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    memset</span><span class="pun">(</span><span class="pln">globalmem_devp</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">sizeof</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">));</span><span class="pln">
+
+    globalmem_setup_cdev</span><span class="pun">(</span><span class="pln">globalmem_devp</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+
+fail_malloc</span><span class="pun">:</span><span class="pln">
+    unregister_chrdev_region</span><span class="pun">(</span><span class="pln">devno</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> result</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/*模块卸载函数*/</span><span class="pln">
+</span><span class="kwd">void</span><span class="pln"> globalmem_exit</span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    cdev_del</span><span class="pun">(&amp;</span><span class="pln">globalmem_devp</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">);</span><span class="pln">   </span><span class="com">/*注销cdev*/</span><span class="pln">
+    kfree</span><span class="pun">(</span><span class="pln">globalmem_devp</span><span class="pun">);</span><span class="pln">     </span><span class="com">/*释放设备结构体内存*/</span><span class="pln">
+    unregister_chrdev_region</span><span class="pun">(</span><span class="pln">MKDEV</span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">),</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln"> </span><span class="com">/*释放设备号*/</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+MODULE_AUTHOR</span><span class="pun">(</span><span class="str">"Song Baohua"</span><span class="pun">);</span><span class="pln">
+MODULE_LICENSE</span><span class="pun">(</span><span class="str">"Dual BSD/GPL"</span><span class="pun">);</span><span class="pln">
+
+module_param</span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">,</span><span class="pln"> S_IRUGO</span><span class="pun">);</span><span class="pln">
+
+module_init</span><span class="pun">(</span><span class="pln">globalmem_init</span><span class="pun">);</span><span class="pln">
+module_exit</span><span class="pun">(</span><span class="pln">globalmem_exit</span><span class="pun">);</span></code></pre>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">obj</span><span class="pun">-</span><span class="pln">m   </span><span class="pun">+=</span><span class="pln"> globalmem</span><span class="pun">.</span><span class="pln">o
+KDIR    </span><span class="pun">=</span><span class="pln"> </span><span class="str">/media/</span><span class="pln">ssd</span><span class="pun">/</span><span class="pln">arm_work</span><span class="pun">/</span><span class="pln">linux</span><span class="pun">-</span><span class="lit">3.15</span><span class="pun">.</span><span class="lit">7</span><span class="pln">
+
+EXTRA_CFLAGS</span><span class="pun">=-</span><span class="pln">g </span><span class="pun">-</span><span class="pln">O0
+
+build</span><span class="pun">:</span><span class="pln">kernel_modules
+
+kernel_modules</span><span class="pun">:</span><span class="pln">
+    make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> modules
+
+clean</span><span class="pun">:</span><span class="pln">
+    make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> clean </span></code></pre>
+
+<p>break 必須加上* 目前原因不清楚 , x86 沒這問題</p><div class="se-section-delimiter"></div>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">insmod globalmem</span><span class="pun">.</span><span class="pln">ko
+mknod </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">globalmem c </span><span class="lit">245</span><span class="pln"> </span><span class="lit">0</span><span class="pln">
+
+b </span><span class="pun">*</span><span class="pln">globalmem_write
+b </span><span class="pun">*</span><span class="pln">globalmem_read
+c
+echo </span><span class="str">"Hello world"</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="str">/dev/</span><span class="pln">globalmem   </span></code></pre></div></body>
 </html>
