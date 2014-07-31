@@ -56,6 +56,36 @@ mkdir -p dev etc/init.d mnt proc root sys tmp lib
 chmod a+rwxt tmp
 cp -rf ../busybox/_install/* ./
 ```
+```
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    printf("Hello world\n");
+    return 0;
+}
+```
+
+```
+ldd ./test
+
+	linux-vdso.so.1 =>  (0x00007fff4bd8f000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fbd55e5f000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fbd55a9f000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fbd5617b000)
+```
+
+```
+test 執行檔用到  /lib64/  跟  /lib/x86_64-linux-gnu/
+cd lib 
+cp -a /lib/x86_64-linux-gnu/ .
+cd ..
+cp -a /lib64/ .
+
+之後在可以在QEMU內執行支援動態函數庫的執行檔
+
+```
+
 - 掛載系統目錄
 ```
 cat << EOF > etc/fstab 

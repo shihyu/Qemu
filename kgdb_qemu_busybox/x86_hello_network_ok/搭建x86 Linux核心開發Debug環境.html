@@ -79,9 +79,32 @@ CONFIG_INSTALL_NO_USR</span><span class="pun">=</span><span class="pln">y</span>
 chmod a</span><span class="pun">+</span><span class="pln">rwxt tmp
 cp </span><span class="pun">-</span><span class="pln">rf </span><span class="pun">../</span><span class="pln">busybox</span><span class="pun">/</span><span class="pln">_install</span><span class="com">/* ./</span></code></pre>
 
+<pre class="prettyprint prettyprinted" style=""><code><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><span class="pln">
+
+</span><span class="kwd">int</span><span class="pln"> main</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> argc</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln">argv</span><span class="pun">[])</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+    printf</span><span class="pun">(</span><span class="str">"Hello world\n"</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">ldd </span><span class="pun">./</span><span class="pln">test
+
+    linux</span><span class="pun">-</span><span class="pln">vdso</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">1</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln">  </span><span class="pun">(</span><span class="lit">0x00007fff4bd8f000</span><span class="pun">)</span><span class="pln">
+    libm</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu</span><span class="pun">/</span><span class="pln">libm</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0x00007fbd55e5f000</span><span class="pun">)</span><span class="pln">
+    libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu</span><span class="pun">/</span><span class="pln">libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0x00007fbd55a9f000</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">/</span><span class="pln">lib64</span><span class="pun">/</span><span class="pln">ld</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">x86</span><span class="pun">-</span><span class="lit">64.so</span><span class="pun">.</span><span class="lit">2</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0x00007fbd5617b000</span><span class="pun">)</span></code></pre>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">test </span><span class="pun">執行檔用到</span><span class="pln">  </span><span class="pun">/</span><span class="pln">lib64</span><span class="pun">/</span><span class="pln">  </span><span class="pun">跟</span><span class="pln">  </span><span class="pun">/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu</span><span class="pun">/</span><span class="pln">
+cd lib 
+cp </span><span class="pun">-</span><span class="pln">a </span><span class="pun">/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu</span><span class="pun">/</span><span class="pln"> </span><span class="pun">.</span><span class="pln">
+cd </span><span class="pun">..</span><span class="pln">
+cp </span><span class="pun">-</span><span class="pln">a </span><span class="pun">/</span><span class="pln">lib64</span><span class="pun">/</span><span class="pln"> </span><span class="pun">.</span><span class="pln">
+
+</span><span class="pun">之後在可以在</span><span class="pln">QEMU</span><span class="pun">內執行支援動態函數庫的執行檔</span></code></pre>
+
 <ul>
 <li>掛載系統目錄</li>
-</ul>
+</ul><div class="se-section-delimiter"></div>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">fstab 
 proc  </span><span class="pun">/</span><span class="pln">proc  proc  defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
