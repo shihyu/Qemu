@@ -2,8 +2,8 @@
 
 ### 方案
 - 我的測試系統在QEMU中運行, Host和Guest的架構都是x86_64,用Busybox生成的initrd做為根文件系統, KGDB做為調試器, 
-- Kernel : linux-3.15.5
-- Kernel linux-2.6.35.9 // gcc-4.4 才可以編譯 , Module 也可以使用gdb
+- Kernel : linux-3.15.7  + gcc-4.7 or linux-3.15.5 + gcc-4.8 都 ok Module 可以使用gdb
+- Kernel linux-2.6.35.9 // gcc-4.4 才可以編譯 , Module 可以使用gdb
 - Busybox : busybox-1.22.1
 ### 產生核心
 - 核心中需要打開的選項是
@@ -26,6 +26,13 @@ CONFIG_8139CP=y
 CONFIG_DEBUG_SET_MODULE_RONX=n
 # 將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效
 CONFIG_DEBUG_RODATA=n
+
+
+CONFIG_MODULE_FORCE_LOAD=y
+CONFIG_MODULE_UNLOAD=y
+CONFIG_MODULE_FORCE_UNLOAD=y
+# CONFIG_MODVERSIONS is not set
+# CONFIG_MODULE_SRCVERSION_ALL is not set
 ```
 - make menuconfig
 - time make -j8 2>&1 | tee build.log
@@ -415,12 +422,12 @@ module_init(globalmem_init);
 module_exit(globalmem_exit);
 
 ```
-- Makefile
+- Makefile  必須加上 -O0
 ```
 obj-m   += globalmem.o
 KDIR    = /home/shihyu/data/work/linux-3.15.5
 
-EXTRA_CFLAGS=-g
+EXTRA_CFLAGS=-g -O0
 
 build:kernel_modules
 

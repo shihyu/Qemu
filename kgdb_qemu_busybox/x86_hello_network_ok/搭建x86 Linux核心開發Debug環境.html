@@ -6,18 +6,16 @@
 <link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
 <script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
-<body><div class="container"><div class="se-section-delimiter"></div><div class="se-section-delimiter"></div>
-
-<h1 id="搭建x86-linux核心開發debug環境">搭建x86 Linux核心開發Debug環境</h1>
+<body><div class="container"><h1 id="搭建x86-linux核心開發debug環境">搭建x86 Linux核心開發Debug環境</h1>
 
 <h3 id="方案">方案</h3>
 
 <ul>
 <li>我的測試系統在QEMU中運行, Host和Guest的架構都是x86_64,用Busybox生成的initrd做為根文件系統, KGDB做為調試器, </li>
-<li>Kernel : linux-3.15.5</li>
-<li>Kernel linux-2.6.35.9 // gcc-4.4 才可以編譯 , Module 也可以使用gdb</li>
+<li>Kernel : linux-3.15.7  + gcc-4.7 or linux-3.15.5 + gcc-4.8 都 ok Module 可以使用gdb</li>
+<li>Kernel linux-2.6.35.9 // gcc-4.4 才可以編譯 , Module 可以使用gdb</li>
 <li>Busybox : busybox-1.22.1</li>
-</ul>
+</ul><div class="se-section-delimiter"></div>
 
 <h3 id="產生核心">產生核心</h3>
 
@@ -25,7 +23,7 @@
 <li>核心中需要打開的選項是</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">CONFIG_EXPERIMENTAL</span><span class="pun">=</span><span class="pln">y
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_EXPERIMENTAL</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 使得編譯的內核包含一些調試信息，使得調試更容易。</span><span class="pln">
 CONFIG_DEBUG_INFO</span><span class="pun">=</span><span class="pln">y
 CONFIG_KGDB</span><span class="pun">=</span><span class="pln">y
@@ -42,7 +40,14 @@ CONFIG_8139CP</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 該選項是將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span><span class="pln">
 CONFIG_DEBUG_SET_MODULE_RONX</span><span class="pun">=</span><span class="pln">n
 </span><span class="com"># 將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span><span class="pln">
-CONFIG_DEBUG_RODATA</span><span class="pun">=</span><span class="pln">n</span></code></pre>
+CONFIG_DEBUG_RODATA</span><span class="pun">=</span><span class="pln">n
+
+
+CONFIG_MODULE_FORCE_LOAD</span><span class="pun">=</span><span class="pln">y
+CONFIG_MODULE_UNLOAD</span><span class="pun">=</span><span class="pln">y
+CONFIG_MODULE_FORCE_UNLOAD</span><span class="pun">=</span><span class="pln">y
+</span><span class="com"># CONFIG_MODVERSIONS is not set</span><span class="pln">
+</span><span class="com"># CONFIG_MODULE_SRCVERSION_ALL is not set</span></code></pre>
 
 <ul>
 <li>make menuconfig</li>
@@ -55,7 +60,7 @@ CONFIG_DEBUG_RODATA</span><span class="pun">=</span><span class="pln">n</span></
 <li>打開 Busybox 選項</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">CONFIG_STATIC</span><span class="pun">=</span><span class="pln">y
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_STATIC</span><span class="pun">=</span><span class="pln">y
 CONFIG_INSTALL_NO_USR</span><span class="pun">=</span><span class="pln">y</span></code></pre>
 
 <ul>
@@ -70,21 +75,21 @@ CONFIG_INSTALL_NO_USR</span><span class="pun">=</span><span class="pln">y</span>
 <li><p>創建系統目錄 // 注意尾行的空白, 去除空白</p></li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">mkdir </span><span class="pun">-</span><span class="pln">p dev etc</span><span class="pun">/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d mnt proc root sys tmp lib
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">mkdir </span><span class="pun">-</span><span class="pln">p dev etc</span><span class="pun">/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d mnt proc root sys tmp lib
 chmod a</span><span class="pun">+</span><span class="pln">rwxt tmp
 cp </span><span class="pun">-</span><span class="pln">rf </span><span class="pun">../</span><span class="pln">busybox</span><span class="pun">/</span><span class="pln">_install</span><span class="com">/* ./</span></code></pre>
 
 <ul>
 <li>掛載系統目錄</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">fstab 
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">fstab 
 proc  </span><span class="pun">/</span><span class="pln">proc  proc  defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
 sysfs  </span><span class="pun">/</span><span class="pln">sys  sysfs defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
 tmpfs  </span><span class="pun">/</span><span class="pln">tmp  tmpfs defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
 EOF</span></code></pre>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">inittab 
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">inittab 
 </span><span class="pun">::</span><span class="pln">sysinit</span><span class="pun">:</span><span class="str">/etc/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d</span><span class="pun">/</span><span class="pln">rcS
 </span><span class="pun">::</span><span class="pln">respawn</span><span class="pun">:-/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">sh
 tty2</span><span class="pun">::</span><span class="pln">askfirst</span><span class="pun">:-/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">sh
@@ -95,7 +100,7 @@ EOF </span></code></pre>
 <li>etc/init.d/rcS</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="com">#! /bin/sh</span><span class="pln">
+<pre class="prettyprint prettyprinted" style=""><code><span class="com">#! /bin/sh</span><span class="pln">
 
 MAC</span><span class="pun">=</span><span class="lit">08</span><span class="pun">:</span><span class="lit">90</span><span class="pun">:</span><span class="lit">90</span><span class="pun">:</span><span class="lit">59</span><span class="pun">:</span><span class="lit">62</span><span class="pun">:</span><span class="lit">21</span><span class="pln">
 IP</span><span class="pun">=</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.2</span><span class="pln">
@@ -121,7 +126,7 @@ mount </span><span class="pun">-</span><span class="pln">o remount</span><span c
 <li><p>產生 rootfs, 可在temp 下新增修改檔案</p></li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">find </span><span class="pun">./</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> cpio </span><span class="pun">-</span><span class="pln">o </span><span class="pun">-</span><span class="pln">H newc </span><span class="pun">|</span><span class="pln"> gzip </span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">../</span><span class="pln">rootfs</span><span class="pun">.</span><span class="pln">img</span></code></pre>
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">find </span><span class="pun">./</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> cpio </span><span class="pun">-</span><span class="pln">o </span><span class="pun">-</span><span class="pln">H newc </span><span class="pun">|</span><span class="pln"> gzip </span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">../</span><span class="pln">rootfs</span><span class="pun">.</span><span class="pln">img</span></code></pre>
 
 <h3 id="安裝-tftp">安裝 tftp</h3>
 
@@ -130,7 +135,7 @@ mount </span><span class="pun">-</span><span class="pln">o remount</span><span c
 <li>/etc/default/tftpd-hpa</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="com"># /etc/default/tftpd-hpa</span><span class="pln">
+<pre class="prettyprint prettyprinted" style=""><code><span class="com"># /etc/default/tftpd-hpa</span><span class="pln">
 TFTP_USERNAME</span><span class="pun">=</span><span class="str">"tftp"</span><span class="pln">
 TFTP_DIRECTORY</span><span class="pun">=</span><span class="str">"/tftpboot"</span><span class="pln">
 TFTP_ADDRESS</span><span class="pun">=</span><span class="str">"0.0.0.0:69"</span><span class="pln">
@@ -140,20 +145,20 @@ TFTP_OPTIONS</span><span class="pun">=</span><span class="str">"-l -c -s"</span>
 <li>建立 tftpboot</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">sudo mkdir </span><span class="pun">/</span><span class="pln">tftpboot
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">sudo mkdir </span><span class="pun">/</span><span class="pln">tftpboot
 sudo chmod </span><span class="lit">777</span><span class="pln"> </span><span class="pun">/</span><span class="pln">tftpboot</span></code></pre>
 
 <ul>
 <li>restart service</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">sudo service tftpd</span><span class="pun">-</span><span class="pln">hpa restart</span></code></pre>
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">sudo service tftpd</span><span class="pun">-</span><span class="pln">hpa restart</span></code></pre>
 
 <ul>
 <li>test tftp</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">tftp host</span><span class="pun">—</span><span class="pln">ip  </span><span class="com">// ex tftp localhost</span><span class="pln">
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tftp host</span><span class="pun">—</span><span class="pln">ip  </span><span class="com">// ex tftp localhost</span><span class="pln">
 </span><span class="kwd">get</span><span class="pln"> </span><span class="kwd">or</span><span class="pln"> put</span></code></pre>
 
 <h3 id="啟動-tap">啟動 tap</h3>
@@ -162,7 +167,7 @@ sudo chmod </span><span class="lit">777</span><span class="pln"> </span><span cl
 <li>sudo ./nettap.sh  // 必須加上 sudo </li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">tunctl </span><span class="pun">-</span><span class="pln">u shihyu </span><span class="pun">-</span><span class="pln">t tap0 
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tunctl </span><span class="pun">-</span><span class="pln">u shihyu </span><span class="pun">-</span><span class="pln">t tap0 
 ifconfig tap0 </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.1</span><span class="pln"> up 
 echo </span><span class="lit">1</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="str">/proc/</span><span class="pln">sys</span><span class="pun">/</span><span class="pln">net</span><span class="pun">/</span><span class="pln">ipv4</span><span class="pun">/</span><span class="pln">ip_forward
 iptables </span><span class="pun">-</span><span class="pln">t nat </span><span class="pun">-</span><span class="pln">A POSTROUTING </span><span class="pun">-</span><span class="pln">o eth0 </span><span class="pun">-</span><span class="pln">j MASQUERADE
@@ -173,7 +178,7 @@ iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><sp
 <li>如果成功下ifconfig 會出現下面 message</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">tap0      </span><span class="typ">Link</span><span class="pln"> encap</span><span class="pun">:</span><span class="typ">Ethernet</span><span class="pln">  </span><span class="typ">HWaddr</span><span class="pln"> </span><span class="lit">0a</span><span class="pun">:</span><span class="lit">18</span><span class="pun">:</span><span class="pln">ee</span><span class="pun">:</span><span class="pln">c4</span><span class="pun">:</span><span class="pln">f0</span><span class="pun">:</span><span class="pln">d0   
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tap0      </span><span class="typ">Link</span><span class="pln"> encap</span><span class="pun">:</span><span class="typ">Ethernet</span><span class="pln">  </span><span class="typ">HWaddr</span><span class="pln"> </span><span class="lit">0a</span><span class="pun">:</span><span class="lit">18</span><span class="pun">:</span><span class="pln">ee</span><span class="pun">:</span><span class="pln">c4</span><span class="pun">:</span><span class="pln">f0</span><span class="pun">:</span><span class="pln">d0   
           inet addr</span><span class="pun">:</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.1</span><span class="pln">  </span><span class="typ">Bcast</span><span class="pun">:</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.255</span><span class="pln">  </span><span class="typ">Mask</span><span class="pun">:</span><span class="lit">255.255</span><span class="pun">.</span><span class="lit">255.0</span><span class="pln"> 
           UP BROADCAST MULTICAST  MTU</span><span class="pun">:</span><span class="lit">1500</span><span class="pln">  </span><span class="typ">Metric</span><span class="pun">:</span><span class="lit">1</span><span class="pln"> 
           RX packets</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> errors</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> dropped</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> overruns</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> frame</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> 
@@ -183,13 +188,13 @@ iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><sp
 
 <h3 id="啟動qemu">啟動QEMU</h3>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span></code></pre>
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span></code></pre>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span><span class="pln">  </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre>
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span><span class="pln">  </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre>
 
 <h3 id="啟動-gdb">啟動 GDB</h3>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">cgdb </span><span class="pun">./</span><span class="pln">vmlinux
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cgdb </span><span class="pun">./</span><span class="pln">vmlinux
 target remote localhost</span><span class="pun">:</span><span class="lit">1234</span></code></pre>
 
 <ul>
@@ -203,7 +208,7 @@ target remote localhost</span><span class="pun">:</span><span class="lit">1234</
 <li>gcc -static test.c -o test //記得加上 -static , 因為沒動態函數庫支援</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><span class="pln">
+<pre class="prettyprint prettyprinted" style=""><code><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><span class="pln">
 
 </span><span class="kwd">int</span><span class="pln"> main</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> argc</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln">argv</span><span class="pun">[])</span><span class="pln">
 </span><span class="pun">{</span><span class="pln">
@@ -217,7 +222,7 @@ target remote localhost</span><span class="pun">:</span><span class="lit">1234</
 <li>globalmem.c</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="com">/*====================================================================
+<pre class="prettyprint prettyprinted" style=""><code><span class="com">/*====================================================================
     A globalmem driver as an example of char device drivers
 
     The initial developer of the original code is Baohua Song
@@ -456,13 +461,13 @@ module_init</span><span class="pun">(</span><span class="pln">globalmem_init</sp
 module_exit</span><span class="pun">(</span><span class="pln">globalmem_exit</span><span class="pun">);</span></code></pre>
 
 <ul>
-<li>Makefile</li>
-</ul>
+<li>Makefile  必須加上 -O0</li>
+</ul><div class="se-section-delimiter"></div>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">obj</span><span class="pun">-</span><span class="pln">m   </span><span class="pun">+=</span><span class="pln"> globalmem</span><span class="pun">.</span><span class="pln">o
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">obj</span><span class="pun">-</span><span class="pln">m   </span><span class="pun">+=</span><span class="pln"> globalmem</span><span class="pun">.</span><span class="pln">o
 KDIR    </span><span class="pun">=</span><span class="pln"> </span><span class="str">/home/</span><span class="pln">shihyu</span><span class="pun">/</span><span class="pln">data</span><span class="pun">/</span><span class="pln">work</span><span class="pun">/</span><span class="pln">linux</span><span class="pun">-</span><span class="lit">3.15</span><span class="pun">.</span><span class="lit">5</span><span class="pln">
 
-EXTRA_CFLAGS</span><span class="pun">=-</span><span class="pln">g
+EXTRA_CFLAGS</span><span class="pun">=-</span><span class="pln">g </span><span class="pun">-</span><span class="pln">O0
 
 build</span><span class="pun">:</span><span class="pln">kernel_modules
 
@@ -470,9 +475,9 @@ kernel_modules</span><span class="pun">:</span><span class="pln">
     make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> modules
 
 clean</span><span class="pun">:</span><span class="pln">
-    make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> clean </span></code></pre>
+    make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> clean </span></code></pre><div class="se-section-delimiter"></div>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">insmod globalmem</span><span class="pun">.</span><span class="pln">ko
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">insmod globalmem</span><span class="pun">.</span><span class="pln">ko
 mknod </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">globalmem c </span><span class="lit">245</span><span class="pln"> </span><span class="lit">0</span><span class="pln">
 </span><span class="com"># section.sh globalmem &gt; gdb</span><span class="pln">
 </span><span class="com"># put.sh gdb</span></code></pre>
@@ -481,7 +486,7 @@ mknod </span><span class="pun">/</span><span class="pln">dev</span><span class="
 <li>gdb 加入 ./globalmem.ko ; 0xffffffffa0000000 是 .text address</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="pln">add</span><span class="pun">-</span><span class="pln">symbol</span><span class="pun">-</span><span class="pln">file </span><span class="pun">./</span><span class="pln">globalmem</span><span class="pun">.</span><span class="pln">ko </span><span class="lit">0xffffffffa0000000</span><span class="pln"> \
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">add</span><span class="pun">-</span><span class="pln">symbol</span><span class="pun">-</span><span class="pln">file </span><span class="pun">./</span><span class="pln">globalmem</span><span class="pun">.</span><span class="pln">ko </span><span class="lit">0xffffffffa0000000</span><span class="pln"> \
    </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">bss </span><span class="lit">0xffffffffa0000900</span><span class="pln"> \
    </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">data </span><span class="lit">0xffffffffa0000698</span><span class="pln"> \
    </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">gnu</span><span class="pun">.</span><span class="pln">linkonce</span><span class="pun">.</span><span class="pln">this_module </span><span class="lit">0xffffffffa00006a0</span><span class="pln"> \
@@ -498,7 +503,7 @@ mknod </span><span class="pun">/</span><span class="pln">dev</span><span class="
 <li>(gdb) source MyGdbInit_first</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="com"># MyGdbInit_first</span><span class="pln">
+<pre class="prettyprint prettyprinted" style=""><code><span class="com"># MyGdbInit_first</span><span class="pln">
 target remote localhost</span><span class="pun">:</span><span class="lit">1234</span><span class="pln">
 source </span><span class="pun">/</span><span class="pln">tftpboot</span><span class="pun">/</span><span class="pln">gdb
 c</span></code></pre>
@@ -507,7 +512,7 @@ c</span></code></pre>
 <li>(gdb) source MyGdbInit_second</li>
 </ul>
 
-<pre class="prettyprint prettyprinted"><code><span class="com"># MyGdbInit_second</span><span class="pln">
+<pre class="prettyprint prettyprinted" style=""><code><span class="com"># MyGdbInit_second</span><span class="pln">
 b globalmem_write
 b globalmem_read
 c
