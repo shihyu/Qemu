@@ -40,6 +40,9 @@ Qemu 編譯
 3. sudo make install
 
 
+arm支持較好的qemu版本: qemu-linaro 
+git clone git://git.linaro.org/qemu/qemu-linaro.git
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 # 建立一個小而美的 initramfs
 
