@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Title3</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><div class="se-section-delimiter"></div><div class="se-section-delimiter"></div>
+
+<h1 id="gdb-debugging-arm-u-boot-on-qemu">GDB Debugging ARM U-Boot on QEMU</h1>
+
+<ul>
+<li>編譯器使用</li>
+</ul>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">https</span><span class="pun">:</span><span class="com">//github.com/Christopher83/linaro_toolchains_2013</span><span class="pln">
+linaro_toolchains_2013
+arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">linaro_4</span><span class="pun">.</span><span class="lit">8.3</span><span class="pun">-</span><span class="lit">2013.12</span></code></pre><div class="se-section-delimiter"></div>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">http</span><span class="pun">:</span><span class="com">//ftp.denx.de/pub/u-boot/u-boot-2014.07.tar.bz2</span><span class="pln">
+
+make vexpress_ca9x4_config ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">
+
+make all ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span></code></pre>
+
+<ul>
+<li>運行u-boot.bin:</li>
+</ul><div class="se-section-delimiter"></div>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9  </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">kernel u</span><span class="pun">-</span><span class="pln">boot</span></code></pre>
+
+<h3 id="gdb">GDB</h3>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="lit">1.</span><span class="pln"> </span><span class="pun">先運行</span><span class="pln">
+qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9  </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">kernel u</span><span class="pun">-</span><span class="pln">boot </span><span class="pun">-</span><span class="pln">s </span><span class="pun">-</span><span class="pln">S
+</span><span class="pun">然後，在另一個虛擬終端窗口執行：</span><span class="pln">
+
+arm</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">gdb u</span><span class="pun">-</span><span class="pln">boot
+</span><span class="pun">...</span><span class="pln">
+</span><span class="pun">(</span><span class="pln">gdb</span><span class="pun">)</span><span class="pln"> target remote localhost</span><span class="pun">:</span><span class="lit">1234</span></code></pre>
+
+<p>“` <br>
+GDB Debugging ARM U-Boot on QEMU <br>
+1 Introduction</p>
+
+<p>QEMU is a generic and open source machine emulator and virtualizer. In this article, we will use it as a machine emulator and run the U-Boot on top of it. It will also be demonstrated about how to debug U-Boot with GDB. </p>
+
+<p>2 Installation and Compilation</p>
+
+<p>2.1 Cross Toolchain</p>
+
+<p>Install one of the cross toolchain accordingly. available toolchains:  <br>
+DENX - ELDK (Embedded Linux Development Kit) : document <br>
+Mentor Graphics - Sourcery ARM EABI toolchain : document <br>
+BuildRoot - buildroot-2011.11.tar.bz2 : document</p>
+
+<p>2.2 QEMU package</p>
+
+<p>Install Debian QEMU package. </p><div class="se-section-delimiter"></div>
+
+<h1 id="apt-get-install-qemu">apt-get install qemu</h1>
+
+<p>Or on a host running Ubuntu, try  <br>
+<span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true" style=""><nobr><span class="math" id="MathJax-Span-1" style="width: 36.012em; display: inline-block;"><span style="display: inline-block; position: relative; width: 29.755em; height: 0px; font-size: 121%;"><span style="position: absolute; clip: rect(3.368em 1000.003em 6.969em -0.469em); top: -4.247em; left: 0.003em;"><span class="mrow" id="MathJax-Span-2"><span style="display: inline-block; position: relative; width: 29.755em; height: 0px;"><span style="position: absolute; clip: rect(3.132em 1000.003em 4.371em -0.469em); top: -4.011em; left: 0.003em;"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-4" style="font-family: MathJax_Math; font-style: italic;">u</span><span class="mi" id="MathJax-Span-5" style="font-family: MathJax_Math; font-style: italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-7" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-8" style="font-family: MathJax_Math; font-style: italic;">p</span><span class="mi" id="MathJax-Span-9" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mo" id="MathJax-Span-10" style="font-family: MathJax_Main; padding-left: 0.239em;">−</span><span class="mi" id="MathJax-Span-11" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.239em;">g<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-12" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-13" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mi" id="MathJax-Span-14" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-15" style="font-family: MathJax_Math; font-style: italic;">n</span><span class="mi" id="MathJax-Span-16" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-17" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mi" id="MathJax-Span-18" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math; font-style: italic;">l</span><span class="mi" id="MathJax-Span-20" style="font-family: MathJax_Math; font-style: italic;">l</span><span class="mi" id="MathJax-Span-21" style="font-family: MathJax_Math; font-style: italic;">q<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-22" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-23" style="font-family: MathJax_Math; font-style: italic;">m</span><span class="mi" id="MathJax-Span-24" style="font-family: MathJax_Math; font-style: italic;">u</span><span class="mo" id="MathJax-Span-25" style="font-family: MathJax_Main; padding-left: 0.239em;">−</span><span class="mi" id="MathJax-Span-26" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.239em;">k</span><span class="mi" id="MathJax-Span-27" style="font-family: MathJax_Math; font-style: italic;">v</span><span class="mi" id="MathJax-Span-28" style="font-family: MathJax_Math; font-style: italic;">m</span><span style="display: inline-block; width: 0px; height: 4.017em;"></span></span><span style="position: absolute; clip: rect(3.132em 1000.003em 4.371em -0.469em); top: -2.653em; left: 0.003em;"><span class="mo" id="MathJax-Span-29" style="font-family: MathJax_Main;">−</span><span class="mi" id="MathJax-Span-30" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.239em;">e</span><span class="mi" id="MathJax-Span-31" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mi" id="MathJax-Span-32" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mi" id="MathJax-Span-33" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-34" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-35" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-36" style="font-family: MathJax_Math; font-style: italic;">W<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.121em;"></span></span><span class="mi" id="MathJax-Span-37" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-38" style="font-family: MathJax_Math; font-style: italic;">m</span><span class="mi" id="MathJax-Span-39" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-40" style="font-family: MathJax_Math; font-style: italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-41" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-42" style="font-family: MathJax_Math; font-style: italic;">l</span><span class="mi" id="MathJax-Span-43" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-44" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-45" style="font-family: MathJax_Math; font-style: italic;">c</span><span class="mi" id="MathJax-Span-46" style="font-family: MathJax_Math; font-style: italic;">h</span><span class="mi" id="MathJax-Span-47" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-48" style="font-family: MathJax_Math; font-style: italic;">c</span><span class="mi" id="MathJax-Span-49" style="font-family: MathJax_Math; font-style: italic;">k</span><span class="mi" id="MathJax-Span-50" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-51" style="font-family: MathJax_Math; font-style: italic;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span class="mi" id="MathJax-Span-52" style="font-family: MathJax_Math; font-style: italic;">A</span><span class="mi" id="MathJax-Span-53" style="font-family: MathJax_Math; font-style: italic;">R</span><span class="mi" id="MathJax-Span-54" style="font-family: MathJax_Math; font-style: italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span class="mi" id="MathJax-Span-55" style="font-family: MathJax_Math; font-style: italic;">v</span><span class="mi" id="MathJax-Span-56" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-57" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-58" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-59" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-60" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mi" id="MathJax-Span-61" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-62" style="font-family: MathJax_Math; font-style: italic;">l</span><span class="mi" id="MathJax-Span-63" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-64" style="font-family: MathJax_Math; font-style: italic;">P<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.121em;"></span></span><span class="mi" id="MathJax-Span-65" style="font-family: MathJax_Math; font-style: italic;">B</span><span class="mi" id="MathJax-Span-66" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-67" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-68" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-69" style="font-family: MathJax_Math; font-style: italic;">u</span><span class="mi" id="MathJax-Span-70" style="font-family: MathJax_Math; font-style: italic;">p</span><span class="mi" id="MathJax-Span-71" style="font-family: MathJax_Math; font-style: italic;">p</span><span class="mi" id="MathJax-Span-72" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-73" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-74" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mi" id="MathJax-Span-75" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-76" style="font-family: MathJax_Math; font-style: italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-77" style="font-family: MathJax_Math; font-style: italic;">b</span><span class="mi" id="MathJax-Span-78" style="font-family: MathJax_Math; font-style: italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-79" style="font-family: MathJax_Math; font-style: italic;">Q</span><span class="mi" id="MathJax-Span-80" style="font-family: MathJax_Math; font-style: italic;">E<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-81" style="font-family: MathJax_Math; font-style: italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span class="mi" id="MathJax-Span-82" style="font-family: MathJax_Math; font-style: italic;">U<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span style="display: inline-block; width: 0px; height: 4.017em;"></span></span><span style="position: absolute; clip: rect(3.722em 1000.003em 4.194em -0.469em); top: -1.473em; left: 0.003em;"><span class="mo" id="MathJax-Span-83" style="font-family: MathJax_Main;">.</span><span style="display: inline-block; width: 0px; height: 4.017em;"></span></span></span></span><span style="display: inline-block; width: 0px; height: 4.253em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 4.075em; vertical-align: -3.139em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-1"> sudo apt-get install qemu-kvm-extras
+We may also check if ARM versatilePB is supported by QEMU. 
+</script> qemu-system-arm -M \?</p>
+
+<p>2.3 Download U-Boot</p>
+
+<p>Fetch the current Das U-Boot source code through git.  <br>
+$ git clone git://git.denx.de/u-boot.git <br>
+Or download a released version from ftp site.</p>
+
+<p>2.4 Compile U-Boot.</p>
+
+<p><span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-2-Frame" role="textbox" aria-readonly="true" style=""><nobr><span class="math" id="MathJax-Span-84" style="width: 6.142em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.08em; height: 0px; font-size: 121%;"><span style="position: absolute; clip: rect(1.892em 1000.003em 3.25em -0.469em); top: -2.831em; left: 0.003em;"><span class="mrow" id="MathJax-Span-85"><span class="mi" id="MathJax-Span-86" style="font-family: MathJax_Math; font-style: italic;">c</span><span class="mi" id="MathJax-Span-87" style="font-family: MathJax_Math; font-style: italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-88" style="font-family: MathJax_Math; font-style: italic;">u</span><span class="mo" id="MathJax-Span-89" style="font-family: MathJax_Main; padding-left: 0.239em;">−</span><span class="mi" id="MathJax-Span-90" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.239em;">b</span><span class="mi" id="MathJax-Span-91" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-92" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-93" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="texatom" id="MathJax-Span-94"><span class="mrow" id="MathJax-Span-95"><span class="mo" id="MathJax-Span-96" style="font-family: MathJax_Main;">/</span></span></span></span><span style="display: inline-block; width: 0px; height: 2.836em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.361em; vertical-align: -0.354em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-2"> cd u-boot/
+</script> make versatileqemu_config <br>
+<span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-3-Frame" role="textbox" aria-readonly="true" style=""><nobr><span class="math" id="MathJax-Span-97" style="width: 28.811em; display: inline-block;"><span style="display: inline-block; position: relative; width: 23.793em; height: 0px; font-size: 121%;"><span style="position: absolute; clip: rect(3.132em 1000.003em 5.847em -0.528em); top: -4.011em; left: 0.003em;"><span class="mrow" id="MathJax-Span-98"><span style="display: inline-block; position: relative; width: 23.793em; height: 0px;"><span style="position: absolute; clip: rect(3.132em 1000.003em 4.371em -0.528em); top: -4.011em; left: 0.003em;"><span class="mi" id="MathJax-Span-99" style="font-family: MathJax_Math; font-style: italic;">m</span><span class="mi" id="MathJax-Span-100" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-101" style="font-family: MathJax_Math; font-style: italic;">k</span><span class="mi" id="MathJax-Span-102" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-103" style="font-family: MathJax_Math; font-style: italic;">O</span><span class="mi" id="MathJax-Span-104" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-105" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-106" style="font-family: MathJax_Math; font-style: italic;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span class="mi" id="MathJax-Span-107" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-108" style="font-family: MathJax_Math; font-style: italic;">c</span><span class="mi" id="MathJax-Span-109" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-110" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-111" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-112" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-113" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mi" id="MathJax-Span-114" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-115" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-116" style="font-family: MathJax_Math; font-style: italic;">l</span><span class="mi" id="MathJax-Span-117" style="font-family: MathJax_Math; font-style: italic;">c</span><span class="mi" id="MathJax-Span-118" style="font-family: MathJax_Math; font-style: italic;">h</span><span class="mi" id="MathJax-Span-119" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-120" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-121" style="font-family: MathJax_Math; font-style: italic;">n</span><span class="mi" id="MathJax-Span-122" style="font-family: MathJax_Math; font-style: italic;">w</span><span class="mi" id="MathJax-Span-123" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-124" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mi" id="MathJax-Span-125" style="font-family: MathJax_Math; font-style: italic;">h</span><span class="mi" id="MathJax-Span-126" style="font-family: MathJax_Math; font-style: italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-127" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-128" style="font-family: MathJax_Math; font-style: italic;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span class="mi" id="MathJax-Span-129" style="font-family: MathJax_Math; font-style: italic;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span class="mi" id="MathJax-Span-130" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-131" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-132" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-133" style="font-family: MathJax_Math; font-style: italic;">n</span><span class="mi" id="MathJax-Span-134" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mi" id="MathJax-Span-135" style="font-family: MathJax_Math; font-style: italic;">p</span><span class="mi" id="MathJax-Span-136" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-137" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-138" style="font-family: MathJax_Math; font-style: italic;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span class="mi" id="MathJax-Span-139" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-140" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mi" id="MathJax-Span-141" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-142" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-143" style="font-family: MathJax_Math; font-style: italic;">u</span><span class="mi" id="MathJax-Span-144" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mi" id="MathJax-Span-145" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-146" style="font-family: MathJax_Math; font-style: italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mo" id="MathJax-Span-147" style="font-family: MathJax_Main;">,</span><span style="display: inline-block; width: 0px; height: 4.017em;"></span></span><span style="position: absolute; clip: rect(3.014em 1000.003em 4.371em -0.469em); top: -2.594em; left: 0.003em;"><span class="mi" id="MathJax-Span-148" style="font-family: MathJax_Math; font-style: italic;">E<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-149" style="font-family: MathJax_Math; font-style: italic;">L</span><span class="mi" id="MathJax-Span-150" style="font-family: MathJax_Math; font-style: italic;">D</span><span class="msup" id="MathJax-Span-151"><span style="display: inline-block; position: relative; width: 1.243em; height: 0px;"><span style="position: absolute; clip: rect(1.715em 1000.003em 2.777em -0.469em); top: -2.594em; left: 0.003em;"><span class="mi" id="MathJax-Span-152" style="font-family: MathJax_Math; font-style: italic;">K<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span style="display: inline-block; width: 0px; height: 2.6em;"></span></span><span style="position: absolute; top: -2.772em; left: 1.006em;"><span class="mo" id="MathJax-Span-153" style="font-size: 70.7%; font-family: MathJax_Main;">′</span><span style="display: inline-block; width: 0px; height: 2.364em;"></span></span></span></span><span class="mi" id="MathJax-Span-154" style="font-family: MathJax_Math; font-style: italic;">s</span><span class="mo" id="MathJax-Span-155" style="font-family: MathJax_Main; padding-left: 0.298em;">"</span><span class="mi" id="MathJax-Span-156" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.298em;">a</span><span class="mi" id="MathJax-Span-157" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-158" style="font-family: MathJax_Math; font-style: italic;">m</span><span class="mo" id="MathJax-Span-159" style="font-family: MathJax_Main; padding-left: 0.239em;">−</span><span class="mi" id="MathJax-Span-160" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.239em;">l</span><span class="mi" id="MathJax-Span-161" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mi" id="MathJax-Span-162" style="font-family: MathJax_Math; font-style: italic;">n</span><span class="mi" id="MathJax-Span-163" style="font-family: MathJax_Math; font-style: italic;">u</span><span class="mi" id="MathJax-Span-164" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mo" id="MathJax-Span-165" style="font-family: MathJax_Main; padding-left: 0.239em;">−</span><span class="mi" id="MathJax-Span-166" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.239em;">g<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-167" style="font-family: MathJax_Math; font-style: italic;">n</span><span class="mi" id="MathJax-Span-168" style="font-family: MathJax_Math; font-style: italic;">u</span><span class="mi" id="MathJax-Span-169" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-170" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-171" style="font-family: MathJax_Math; font-style: italic;">b</span><span class="mi" id="MathJax-Span-172" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mo" id="MathJax-Span-173" style="font-family: MathJax_Main;">−</span><span class="mo" id="MathJax-Span-174" style="font-family: MathJax_Main; padding-left: 0.298em;">"</span><span class="mi" id="MathJax-Span-175" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.298em;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.062em;"></span></span><span class="mi" id="MathJax-Span-176" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-177" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mi" id="MathJax-Span-178" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-179" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mi" id="MathJax-Span-180" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-181" style="font-family: MathJax_Math; font-style: italic;">m</span><span class="mi" id="MathJax-Span-182" style="font-family: MathJax_Math; font-style: italic;">p</span><span class="mi" id="MathJax-Span-183" style="font-family: MathJax_Math; font-style: italic;">l</span><span class="mi" id="MathJax-Span-184" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mo" id="MathJax-Span-185" style="font-family: MathJax_Main;">,</span><span style="display: inline-block; width: 0px; height: 4.017em;"></span></span></span></span><span style="display: inline-block; width: 0px; height: 4.017em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 3.004em; vertical-align: -2.068em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-3"> make
+Or if a cross toolchain with different prefix is used, ELDK's "arm-linux-gnueabi-" for example, 
+</script> make CROSS_COMPILE=arm-linux-gnueabi-</p>
+
+<p>3 Testing and Debugging</p>
+
+<p>3.1 Normal Mode</p>
+
+<p>We can execute QEMU to run U-Boot for ARM, then develop and debug as we wish.  <br>
+$ qemu-system-arm -nographic -M versatilepb -m 128 -kernel u-boot <br>
+U-Boot 2011.12-00046-gbfcc40b-dirty (Dec 26 2011 - 18:11:37)</p>
+
+<p>DRAM:  128 MiB <br>
+WARNING: Caches not enabled <br>
+Using default environment</p>
+
+<p>In:    serial <br>
+Out:   serial <br>
+Err:   serial <br>
+Net:   SMC91111-0 <br>
+Warning: failed to set MAC address</p>
+
+<p>VersatilePB #</p>
+
+<p>A list of u-boot commands and environment variables,  <br>
+VersatilePB # help <br>
+?       - alias for ‘help’ <br>
+base    - print or set address offset <br>
+bdinfo  - print Board Info structure <br>
+bootm   - boot application image from memory <br>
+bootp   - boot image via network using BOOTP/TFTP protocol <br>
+cmp     - memory compare <br>
+cp      - memory copy <br>
+crc32   - checksum calculation <br>
+dhcp    - boot image via network using DHCP/TFTP protocol <br>
+env     - environment handling commands <br>
+erase   - erase FLASH memory <br>
+flinfo  - print FLASH memory information <br>
+go      - start application at address ‘addr’ <br>
+help    - print command description/usage <br>
+iminfo  - print header information for application image <br>
+loop    - infinite loop on address range <br>
+md      - memory display <br>
+mm      - memory modify (auto-incrementing address) <br>
+mtest   - simple RAM read/write test <br>
+mw      - memory write (fill) <br>
+nm      - memory modify (constant address) <br>
+ping    - send ICMP ECHO_REQUEST to network host <br>
+printenv- print environment variables <br>
+protect - enable or disable FLASH write protection <br>
+reset   - Perform RESET of the CPU <br>
+setenv  - set environment variables <br>
+tftpboot- boot image via network using TFTP protocol <br>
+version - print monitor, compiler and linker version <br>
+VersatilePB # <br>
+VersatilePB # printenv <br>
+baudrate=38400 <br>
+bootargs=root=/dev/nfs mem=128M ip=dhcp netdev=25,0,0xf1010000,0xf1010010,eth0 <br>
+bootdelay=2 <br>
+bootfile=/tftpboot/uImage <br>
+ethact=SMC91111-0 <br>
+stderr=serial <br>
+stdin=serial <br>
+stdout=serial <br>
+verify=n</p>
+
+<p>Environment size: 219/8188 bytes <br>
+VersatilePB #</p>
+
+<p>3.2 Debugging with GDB</p>
+
+<p>While QEMU’s built-in monitor provides limited debugging support, it can act as a remote debugging target for GDB.  <br>
+$ qemu-system-arm -nographic -M versatilepb -m 128 -kernel u-boot -S -s <br>
+‘-S’ tells QEMU not to start CPU at startup. We must type ‘c’ in monitor to let it continue. ‘-s’ is shorthand for ‘-gdb tcp::1234’, telling QEMU to wait for gdb connection on TCP port 1234. </p>
+
+<p>On the other hand, we start the ARM GDB and set target to TCP port 1234 as well.  <br>
+$ arm-linux-gnueabi-gdb u-boot <br>
+GNU gdb (GDB) 7.3 <br>
+Copyright (C) 2011 Free Software Foundation, Inc. <br>
+License GPLv3+: GNU GPL version 3 or later <a href="http://gnu.org/licenses/gpl.html">http://gnu.org/licenses/gpl.html</a> <br>
+This is free software: you are free to change and redistribute it. <br>
+There is NO WARRANTY, to the extent permitted by law.  Type “show copying” <br>
+and “show warranty” for details. <br>
+This GDB was configured as “–host=i686-eldk-linux –target=arm-linux-gnueabi”. <br>
+For bug reporting instructions, please see: <br>
+<a href="http://www.gnu.org/software/gdb/bugs/">http://www.gnu.org/software/gdb/bugs/</a>… <br>
+Reading symbols from /home/winfred/u-boot/u-boot…done. <br>
+(gdb) target remote :1234 <br>
+Remote debugging using :1234 <br>
+_start () at start.S:64 <br>
+64              b       reset <br>
+(gdb)</p>
+
+<p>We are able to use GDB for source level debugging now.  <br>
+(gdb) n <br>
+188             mrs     r0,cpsr <br>
+(gdb) n <br>
+189             bic     r0,r0,#0x1f <br>
+(gdb) b board_init_f <br>
+Breakpoint 1 at 0x10b70: file board.c, line 270. <br>
+(gdb) c <br>
+Continuing.</p>
+
+<p>Breakpoint 1, board_init_f (bootflag=0) at board.c:270 <br>
+270             gd = (gd_t *) ((CONFIG_SYS_INIT_SP_ADDR) &amp; ~0x07); <br>
+(gdb)</p>
+
+<p>3.3 Debugging After Relocation</p>
+
+<p>In order to debug U-Boot after relocation, we need to know the address which U-Boot relocates itself to. There are couple of ways to get it,  <br>
+Get it from U-Boot ‘bdinfo’ command. <br>
+VersatilePB # bdinfo <br>
+arch_number = 0x00000183 <br>
+boot_params = 0x00000100 <br>
+DRAM bank   = 0x00000000 <br>
+-&gt; start    = 0x00000000 <br>
+-&gt; size     = 0x08000000 <br>
+ethaddr     = (not set) <br>
+ip_addr     = 0.0.0.0 <br>
+baudrate    = 38400 bps <br>
+TLB addr    = 0x07FF0000 <br>
+relocaddr   = 0x07FC5000 <br>
+reloc off   = 0x07FB5000 <br>
+irq_sp      = 0x07FA2F70 <br>
+sp start    = 0x07FA2F60 <br>
+FB base     = 0x00000000 <br>
+VersatilePB # <br>
+Print the value of gd-&gt;relocaddr. Since gd is avalable after board_init_f(), and it is storeed in register $r1, <br>
+(gdb) b relocate_code <br>
+Breakpoint 1 at 0x1007c: file start.S, line 226. <br>
+(gdb) c <br>
+Continuing.</p>
+
+<p>Breakpoint 1, relocate_code () at start.S:226 <br>
+226             mov     r5, r1  /* save addr of gd */ <br>
+(gdb) p/x ((gd_t *)<span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-4-Frame" role="textbox" aria-readonly="true" style=""><nobr><span class="math" id="MathJax-Span-186" style="width: 9.448em; display: inline-block;"><span style="display: inline-block; position: relative; width: 7.795em; height: 0px; font-size: 121%;"><span style="position: absolute; clip: rect(1.892em 1000.003em 3.25em -0.528em); top: -2.831em; left: 0.003em;"><span class="mrow" id="MathJax-Span-187"><span class="mi" id="MathJax-Span-188" style="font-family: MathJax_Math; font-style: italic;">r</span><span class="mn" id="MathJax-Span-189" style="font-family: MathJax_Main;">1</span><span class="mo" id="MathJax-Span-190" style="font-family: MathJax_Main;">)</span><span class="mo" id="MathJax-Span-191" style="font-family: MathJax_Main;">−</span><span class="mo" id="MathJax-Span-192" style="font-family: MathJax_Main; padding-left: 0.298em;">&gt;</span><span class="mi" id="MathJax-Span-193" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.298em;">r</span><span class="mi" id="MathJax-Span-194" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mi" id="MathJax-Span-195" style="font-family: MathJax_Math; font-style: italic;">l</span><span class="mi" id="MathJax-Span-196" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-197" style="font-family: MathJax_Math; font-style: italic;">c</span><span class="mi" id="MathJax-Span-198" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-199" style="font-family: MathJax_Math; font-style: italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-200" style="font-family: MathJax_Math; font-style: italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-201" style="font-family: MathJax_Math; font-style: italic;">r</span></span><span style="display: inline-block; width: 0px; height: 2.836em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.361em; vertical-align: -0.354em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-4">r1)->relocaddr
+</script>1 = 0x7fc5000 <br>
+(gdb)</p>
+
+<p>Having the relocated address, we need to reload the symbol file accordingly.  <br>
+(gdb) d <br>
+Delete all breakpoints? (y or n) y <br>
+(gdb) symbol-file <br>
+Discard symbol table from `/home/winfred/u-boot/u-boot’? (y or n) y <br>
+No symbol file now. <br>
+(gdb) add-symbol-file u-boot 0x7fc5000 <br>
+add symbol table from file “u-boot” at <br>
+.text_addr = 0x7fc5000 <br>
+(y or n) y <br>
+Reading symbols from /home/winfred/u-boot/u-boot…done. <br>
+(gdb)</p>
+
+<p>Then, debug U-Boot after relocation. Let’s try to break at the first function after the relocation,  <br>
+(gdb) b board_init_r <br>
+Breakpoint 2 at 0x7fc5d64: file board.c, line 455. <br>
+(gdb) c <br>
+Continuing.</p>
+
+<p>Breakpoint 2, board_init_r (id=0x7fa2f70, dest_addr=133976064) at board.c:455 <br>
+455             gd = id; <br>
+(gdb)</p>
+
+<p>Happy debugging.</p>
+
+<p>4 Reference <br>
+Balau, U-boot for ARM on QEMU <br>
+Balau, Booting Linux with U-Boot on QEMU ARM <br>
+Khem Raj, Debugging Linux systems using GDB and QEMU <br>
+QEMU Documentation <br>
+U-Boot Documentation - Debugging UBoot <br>
+GDB Documentation - Debugging Remote Programs <br>
+Date: 2011-12-26 Thu <br>
+HTML generated by org-mode 6.33x in emacs 23</p></div></body>
+</html>
