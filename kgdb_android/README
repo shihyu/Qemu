@@ -1,6 +1,6 @@
 # 下載code
 4.2.2 
-// kernel 
+// kernel 目前測試2.69 才可以 , kernel 3.4 lsmod 模組address 0x00000000 原因目前不知道 
 git clone http://android.googlesource.com/kernel/goldfish.git
 
 
@@ -20,6 +20,8 @@ git clone http://android.googlesource.com/kernel/goldfish.git
 3. (qemu) gdbserver
 
 4. arm-eabi-gdb ./vmlinux
+
+5. target remote localhost:1234
 
 
 # using gdb for driver module 
@@ -43,5 +45,5 @@ or
 (gdb) add-symbol-file ../first_arm_hello_driver_example/hello.ko hello_exit // 這樣直接給函數可以印出位址目前才在測試
 
 
-10. b hello_exit
+10. b *hello_exit // 必須加上 *
 11. emulator 中下 rmmod hello 即中斷在 hello_exit 函數 

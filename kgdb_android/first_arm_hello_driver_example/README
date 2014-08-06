@@ -1,3 +1,5 @@
+1. make menuconfig 選中enable loadable module suppot選項
+
 是情況修改下面路徑跟名稱
 CROSS_COMPILE 
 KRNELDIR
