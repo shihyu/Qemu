@@ -188,6 +188,15 @@ tap0      Link encap:Ethernet  HWaddr 0a:18:ee:c4:f0:d0
 ```
  qemu-system-x86_64 -kernel bzImage -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no -enable-kvm -m 2048 -smp 2  -gdb tcp::1234 -S
 ```
+
+```
+使用 qemu-linaro 啟動要加上 sudo 目前原因不清楚 
+SIOCSIFADDR: 拒絕不符權限的操作 
+SIOCSIFFLAGS: 拒絕不符權限的操作 
+SIOCSIFFLAGS: 拒絕不符權限的操作
+
+必須 sudo qemu-system-x86_64 -kernel bzImage -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no -enable-kvm -m 2048 -smp 2  -gdb tcp::1234 -S 
+```
 ### 啟動 GDB
 ```
 cgdb ./vmlinux

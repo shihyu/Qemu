@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>New Markdown document</title>
+<title>Title4</title>
 <link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
 <script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
@@ -15,7 +15,7 @@
 <li>Kernel : linux-3.15.7  + gcc-4.7 or linux-3.15.5 + gcc-4.8 都 ok Module 可以使用gdb</li>
 <li>Kernel linux-2.6.35.9 // gcc-4.4 才可以編譯 , Module 可以使用gdb</li>
 <li>Busybox : busybox-1.22.1</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
 <h3 id="產生核心">產生核心</h3>
 
@@ -52,7 +52,7 @@ CONFIG_MODULE_FORCE_UNLOAD</span><span class="pun">=</span><span class="pln">y
 <ul>
 <li>make menuconfig</li>
 <li>time make -j8 2&gt;&amp;1 | tee build.log</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
 <h3 id="產生根文件系統">產生根文件系統</h3>
 
@@ -104,7 +104,7 @@ cp </span><span class="pun">-</span><span class="pln">a </span><span class="pun"
 
 <ul>
 <li>掛載系統目錄</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">fstab 
 proc  </span><span class="pun">/</span><span class="pln">proc  proc  defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
@@ -214,6 +214,13 @@ iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><sp
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span></code></pre>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span><span class="pln">  </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pun">使用</span><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">linaro </span><span class="pun">啟動要加上</span><span class="pln"> sudo </span><span class="pun">目前原因不清楚</span><span class="pln"> 
+SIOCSIFADDR</span><span class="pun">:</span><span class="pln"> </span><span class="pun">拒絕不符權限的操作</span><span class="pln"> 
+SIOCSIFFLAGS</span><span class="pun">:</span><span class="pln"> </span><span class="pun">拒絕不符權限的操作</span><span class="pln"> 
+SIOCSIFFLAGS</span><span class="pun">:</span><span class="pln"> </span><span class="pun">拒絕不符權限的操作</span><span class="pln">
+
+</span><span class="pun">必須</span><span class="pln"> sudo qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span><span class="pln">  </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S </span></code></pre><div class="se-section-delimiter"></div>
 
 <h3 id="啟動-gdb">啟動 GDB</h3>
 
@@ -485,7 +492,7 @@ module_exit</span><span class="pun">(</span><span class="pln">globalmem_exit</sp
 
 <ul>
 <li>Makefile  必須加上 -O0</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">obj</span><span class="pun">-</span><span class="pln">m   </span><span class="pun">+=</span><span class="pln"> globalmem</span><span class="pun">.</span><span class="pln">o
 KDIR    </span><span class="pun">=</span><span class="pln"> </span><span class="str">/home/</span><span class="pln">shihyu</span><span class="pun">/</span><span class="pln">data</span><span class="pun">/</span><span class="pln">work</span><span class="pun">/</span><span class="pln">linux</span><span class="pun">-</span><span class="lit">3.15</span><span class="pun">.</span><span class="lit">5</span><span class="pln">
@@ -498,7 +505,7 @@ kernel_modules</span><span class="pun">:</span><span class="pln">
     make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> modules
 
 clean</span><span class="pun">:</span><span class="pln">
-    make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> clean </span></code></pre><div class="se-section-delimiter"></div>
+    make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> clean </span></code></pre>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">insmod globalmem</span><span class="pun">.</span><span class="pln">ko
 mknod </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">globalmem c </span><span class="lit">245</span><span class="pln"> </span><span class="lit">0</span><span class="pln">
