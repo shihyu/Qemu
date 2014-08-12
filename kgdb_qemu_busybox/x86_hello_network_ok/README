@@ -50,6 +50,9 @@ qemu-system-x86_64 -kernel bzImage -append "root=/dev/ram rdinit=/sbin/init" -in
 
 qemu-system-x86_64 -kernel bzImage -append "root=/dev/ram rdinit=/sbin/init" -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no  -gdb tcp::1234 -S
 
+
+qemu-linaro 啟動要加上 sudo 目前原因不清楚 SIOCSIFADDR: 拒絕不符權限的操作 SIOCSIFFLAGS: 拒絕不符權限的操作 SIOCSIFFLAGS: 拒絕不符權限的操作
+
 3. 產生 rootfs , 可在temp 下新增修改檔案 
 
 find ./ | cpio -o -H newc | gzip > ../rootfs.img
