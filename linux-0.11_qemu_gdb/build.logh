@@ -1,0 +1,9 @@
+kernel/kernel.o: In function `number':
+/home/shihyu/data/linux-cd/linux-0.11/kernel/vsprintf.c:92: 未定義參考到「__stack_chk_fail」
+fs/fs.o: In function `do_execve':
+/home/shihyu/data/linux-cd/linux-0.11/fs/exec.c:353: 未定義參考到「__stack_chk_fail」
+kernel/chr_drv/chr_drv.a(tty_ioctl.o): In function `get_termio':
+/home/shihyu/data/linux-cd/linux-0.11/kernel/chr_drv/tty_ioctl.c:92: 未定義參考到「__stack_chk_fail」
+kernel/chr_drv/chr_drv.a(tty_ioctl.o): In function `set_termio':
+/home/shihyu/data/linux-cd/linux-0.11/kernel/chr_drv/tty_ioctl.c:113: 未定義參考到「__stack_chk_fail」
+make: *** [tools/system] Error 1

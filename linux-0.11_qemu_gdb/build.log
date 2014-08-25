@@ -1,0 +1,38 @@
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/boot'
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/boot'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/boot'
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/boot'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/boot'
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/boot'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/kernel'
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/kernel'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/mm'
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/mm'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/fs'
+exec.c: In function ‘copy_strings’:
+exec.c:139:45: warning: assignment makes integer from pointer without a cast [enabled by default]
+         !(pag = (char *) (page[p/PAGE_SIZE] =
+                                             ^
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/fs'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/kernel/blk_drv'
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/kernel/blk_drv'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/kernel/chr_drv'
+sync
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/kernel/chr_drv'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/kernel/math'
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/kernel/math'
+make[1]: Entering directory `/home/shihyu/data/linux-cd/linux-0.11/lib'
+malloc.c: In function ‘malloc’:
+malloc.c:156:47: warning: assignment makes pointer from integer without a cast [enabled by default]
+   bdesc->page = bdesc->freeptr = (void *) (cp = get_free_page());
+                                               ^
+make[1]: Leaving directory `/home/shihyu/data/linux-cd/linux-0.11/lib'
+kernel/kernel.o: In function `number':
+/home/shihyu/data/linux-cd/linux-0.11/kernel/vsprintf.c:92: 未定義參考到「__stack_chk_fail」
+fs/fs.o: In function `do_execve':
+/home/shihyu/data/linux-cd/linux-0.11/fs/exec.c:353: 未定義參考到「__stack_chk_fail」
+kernel/chr_drv/chr_drv.a(tty_ioctl.o): In function `get_termio':
+/home/shihyu/data/linux-cd/linux-0.11/kernel/chr_drv/tty_ioctl.c:92: 未定義參考到「__stack_chk_fail」
+kernel/chr_drv/chr_drv.a(tty_ioctl.o): In function `set_termio':
+/home/shihyu/data/linux-cd/linux-0.11/kernel/chr_drv/tty_ioctl.c:113: 未定義參考到「__stack_chk_fail」
+make: *** [tools/system] Error 1
