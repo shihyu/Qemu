@@ -2,11 +2,13 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Title4</title>
+<title>New Markdown document</title>
 <link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
 <script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body><div class="container"><h1 id="搭建x86-linux核心開發debug環境">搭建x86 Linux核心開發Debug環境</h1>
+
+
 
 <h3 id="方案">方案</h3>
 
@@ -17,42 +19,48 @@
 <li>Busybox : busybox-1.22.1</li>
 </ul>
 
+
+
 <h3 id="產生核心">產生核心</h3>
 
 <ul>
 <li>核心中需要打開的選項是</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_EXPERIMENTAL</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># 使得編譯的內核包含一些調試信息，使得調試更容易。</span><span class="pln">
-CONFIG_DEBUG_INFO</span><span class="pun">=</span><span class="pln">y
-CONFIG_KGDB</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># 使用串口進行通信</span><span class="pln">
-CONFIG_KGDB_SERIAL_CONSOLE</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># 使能該選項可以kgdb 不依賴 notifier_call_chain() 機制來獲取斷點異常, 這樣就可以對 notifier_call_chain() 機制實現相關的函數進行單步調試。</span><span class="pln">
-CONFIG_KGDB_LOW_LEVEL_TRAP</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># 使能該選項將使得內核使用幀指針寄存器來維護堆棧，從而就可以正確地執行堆棧回溯，即函數調用棧信息。</span><span class="pln">
-CONFIG_FRAME_POINTER</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># ( 如果你選擇了KGDB_SERIAL_CONSOLE, 這個選項將自動被選上) 激活" 魔術 SysRq" 鍵. 該選項對kgdboc 調試非常有用，kgdb 向其註冊了'g' 魔術鍵來激活kgdb 。</span><span class="pln">
-CONFIG_MAGIC_SYSRQ</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># 選擇這個選項來驅動qemu-kvm的網卡設備，以備以後使用。</span><span class="pln">
-CONFIG_8139CP</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># 該選項是將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span><span class="pln">
-CONFIG_DEBUG_SET_MODULE_RONX</span><span class="pun">=</span><span class="pln">n
-</span><span class="com"># 將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span><span class="pln">
-CONFIG_DEBUG_RODATA</span><span class="pun">=</span><span class="pln">n
 
 
-CONFIG_MODULE_FORCE_LOAD</span><span class="pun">=</span><span class="pln">y
-CONFIG_MODULE_UNLOAD</span><span class="pun">=</span><span class="pln">y
-CONFIG_MODULE_FORCE_UNLOAD</span><span class="pun">=</span><span class="pln">y
-</span><span class="com"># CONFIG_MODVERSIONS is not set</span><span class="pln">
-</span><span class="com"># CONFIG_MODULE_SRCVERSION_ALL is not set</span></code></pre>
+<pre class="prettyprint"><code class=" hljs makefile"><span class="hljs-constant">CONFIG_EXPERIMENTAL</span>=y
+<span class="hljs-comment"># 使得編譯的內核包含一些調試信息，使得調試更容易。</span>
+<span class="hljs-constant">CONFIG_DEBUG_INFO</span>=y
+<span class="hljs-constant">CONFIG_KGDB</span>=y
+<span class="hljs-comment"># 使用串口進行通信</span>
+<span class="hljs-constant">CONFIG_KGDB_SERIAL_CONSOLE</span>=y
+<span class="hljs-comment"># 使能該選項可以kgdb 不依賴 notifier_call_chain() 機制來獲取斷點異常, 這樣就可以對 notifier_call_chain() 機制實現相關的函數進行單步調試。</span>
+<span class="hljs-constant">CONFIG_KGDB_LOW_LEVEL_TRAP</span>=y
+<span class="hljs-comment"># 使能該選項將使得內核使用幀指針寄存器來維護堆棧，從而就可以正確地執行堆棧回溯，即函數調用棧信息。</span>
+<span class="hljs-constant">CONFIG_FRAME_POINTER</span>=y
+<span class="hljs-comment"># ( 如果你選擇了KGDB_SERIAL_CONSOLE, 這個選項將自動被選上) 激活" 魔術 SysRq" 鍵. 該選項對kgdboc 調試非常有用，kgdb 向其註冊了'g' 魔術鍵來激活kgdb 。</span>
+<span class="hljs-constant">CONFIG_MAGIC_SYSRQ</span>=y
+<span class="hljs-comment"># 選擇這個選項來驅動qemu-kvm的網卡設備，以備以後使用。</span>
+<span class="hljs-constant">CONFIG_8139CP</span>=y
+<span class="hljs-comment"># 該選項是將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span>
+<span class="hljs-constant">CONFIG_DEBUG_SET_MODULE_RONX</span>=n
+<span class="hljs-comment"># 將內核的一些內存區域空間設置為只讀，這樣可能導致kgdb 的設置軟斷點功能失效</span>
+<span class="hljs-constant">CONFIG_DEBUG_RODATA</span>=n
+
+
+<span class="hljs-constant">CONFIG_MODULE_FORCE_LOAD</span>=y
+<span class="hljs-constant">CONFIG_MODULE_UNLOAD</span>=y
+<span class="hljs-constant">CONFIG_MODULE_FORCE_UNLOAD</span>=y
+<span class="hljs-comment"># CONFIG_MODVERSIONS is not set</span>
+<span class="hljs-comment"># CONFIG_MODULE_SRCVERSION_ALL is not set</span></code></pre>
 
 <ul>
 <li>make menuconfig</li>
 <li>time make -j8 2&gt;&amp;1 | tee build.log</li>
 </ul>
+
+
 
 <h3 id="產生根文件系統">產生根文件系統</h3>
 
@@ -60,13 +68,17 @@ CONFIG_MODULE_FORCE_UNLOAD</span><span class="pun">=</span><span class="pln">y
 <li>打開 Busybox 選項</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_STATIC</span><span class="pun">=</span><span class="pln">y
-CONFIG_INSTALL_NO_USR</span><span class="pun">=</span><span class="pln">y</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs ini"><span class="hljs-setting">CONFIG_STATIC=<span class="hljs-value">y</span></span>
+<span class="hljs-setting">CONFIG_INSTALL_NO_USR=<span class="hljs-value">y</span></span></code></pre>
 
 <ul>
 <li><p>time make -j8 2&gt;&amp;1 | tee build.log</p></li>
 <li><p>make install</p></li>
 </ul>
+
+
 
 <h3 id="創建initrd根文件系統">創建initrd根文件系統</h3>
 
@@ -75,81 +87,99 @@ CONFIG_INSTALL_NO_USR</span><span class="pun">=</span><span class="pln">y</span>
 <li><p>創建系統目錄 // 注意尾行的空白, 去除空白</p></li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">mkdir </span><span class="pun">-</span><span class="pln">p dev etc</span><span class="pun">/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d mnt proc root sys tmp lib
-chmod a</span><span class="pun">+</span><span class="pln">rwxt tmp
-cp </span><span class="pun">-</span><span class="pln">rf </span><span class="pun">../</span><span class="pln">busybox</span><span class="pun">/</span><span class="pln">_install</span><span class="com">/* ./</span></code></pre>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><span class="pln">
 
-</span><span class="kwd">int</span><span class="pln"> main</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> argc</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln">argv</span><span class="pun">[])</span><span class="pln">
-</span><span class="pun">{</span><span class="pln">
-    printf</span><span class="pun">(</span><span class="str">"Hello world\n"</span><span class="pun">);</span><span class="pln">
-    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span></code></pre>
+<pre class="prettyprint"><code class=" hljs lasso">mkdir <span class="hljs-attribute">-p</span> dev etc/init<span class="hljs-built_in">.</span>d mnt proc root sys tmp lib 
+mkdir <span class="hljs-attribute">-p</span> modules/<span class="hljs-number">3.15</span><span class="hljs-number">.5</span>  <span class="hljs-comment">// 3.15.5 版本依實際情況而改 , rmmod 才可以正常使用</span>
+chmod a<span class="hljs-subst">+</span>rwxt tmp
+cp <span class="hljs-attribute">-rf</span> <span class="hljs-built_in">..</span>/busybox/_install<span class="hljs-comment">/* ./</span></code></pre>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">ldd </span><span class="pun">./</span><span class="pln">test
+<pre class="prettyprint"><code class=" hljs cpp"><span class="hljs-preprocessor">#include &lt;stdio.h&gt;</span>
 
-    linux</span><span class="pun">-</span><span class="pln">vdso</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">1</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln">  </span><span class="pun">(</span><span class="lit">0x00007fff4bd8f000</span><span class="pun">)</span><span class="pln">
-    libm</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu</span><span class="pun">/</span><span class="pln">libm</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0x00007fbd55e5f000</span><span class="pun">)</span><span class="pln">
-    libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu</span><span class="pun">/</span><span class="pln">libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0x00007fbd55a9f000</span><span class="pun">)</span><span class="pln">
-    </span><span class="pun">/</span><span class="pln">lib64</span><span class="pun">/</span><span class="pln">ld</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">x86</span><span class="pun">-</span><span class="lit">64.so</span><span class="pun">.</span><span class="lit">2</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0x00007fbd5617b000</span><span class="pun">)</span></code></pre>
+<span class="hljs-keyword">int</span> main(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])
+{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world\n"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">test </span><span class="pun">執行檔用到</span><span class="pln">  </span><span class="pun">/</span><span class="pln">lib64</span><span class="pun">/</span><span class="pln">  </span><span class="pun">跟</span><span class="pln">  </span><span class="pun">/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu</span><span class="pun">/</span><span class="pln">
+
+
+<pre class="prettyprint"><code class=" hljs avrasm"><span class="hljs-keyword">ldd</span> ./test
+
+    linux-vdso<span class="hljs-preprocessor">.so</span><span class="hljs-number">.1</span> =&gt;  (<span class="hljs-number">0x00007fff4bd8f000</span>)
+    libm<span class="hljs-preprocessor">.so</span><span class="hljs-number">.6</span> =&gt; /lib/x86_64-linux-gnu/libm<span class="hljs-preprocessor">.so</span><span class="hljs-number">.6</span> (<span class="hljs-number">0x00007fbd55e5f000</span>)
+    libc<span class="hljs-preprocessor">.so</span><span class="hljs-number">.6</span> =&gt; /lib/x86_64-linux-gnu/libc<span class="hljs-preprocessor">.so</span><span class="hljs-number">.6</span> (<span class="hljs-number">0x00007fbd55a9f000</span>)
+    /lib64/<span class="hljs-keyword">ld</span>-linux-x86-<span class="hljs-number">64.</span>so<span class="hljs-number">.2</span> (<span class="hljs-number">0x00007fbd5617b000</span>)</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs lasso">test 執行檔用到  /lib64<span class="hljs-subst">/</span>  跟  /lib/x86_64<span class="hljs-attribute">-linux</span><span class="hljs-attribute">-gnu</span><span class="hljs-subst">/</span>
 cd lib 
-cp </span><span class="pun">-</span><span class="pln">a </span><span class="pun">/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">x86_64</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnu</span><span class="pun">/</span><span class="pln"> </span><span class="pun">.</span><span class="pln">
-cd </span><span class="pun">..</span><span class="pln">
-cp </span><span class="pun">-</span><span class="pln">a </span><span class="pun">/</span><span class="pln">lib64</span><span class="pun">/</span><span class="pln"> </span><span class="pun">.</span><span class="pln">
+cp <span class="hljs-attribute">-a</span> /lib/x86_64<span class="hljs-attribute">-linux</span><span class="hljs-attribute">-gnu</span><span class="hljs-subst">/</span> <span class="hljs-built_in">.</span>
+cd <span class="hljs-built_in">..</span>
+cp <span class="hljs-attribute">-a</span> /lib64<span class="hljs-subst">/</span> <span class="hljs-built_in">.</span>
 
-</span><span class="pun">之後在可以在</span><span class="pln">QEMU</span><span class="pun">內執行支援動態函數庫的執行檔</span></code></pre>
+之後在可以在QEMU內執行支援動態函數庫的執行檔
+</code></pre>
 
 <ul>
 <li>掛載系統目錄</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">fstab 
-proc  </span><span class="pun">/</span><span class="pln">proc  proc  defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
-sysfs  </span><span class="pun">/</span><span class="pln">sys  sysfs defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
-tmpfs  </span><span class="pun">/</span><span class="pln">tmp  tmpfs defaults  </span><span class="lit">0</span><span class="pln">  </span><span class="lit">0</span><span class="pln">
-EOF</span></code></pre>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cat </span><span class="pun">&lt;&lt;</span><span class="pln"> EOF </span><span class="pun">&gt;</span><span class="pln"> etc</span><span class="pun">/</span><span class="pln">inittab 
-</span><span class="pun">::</span><span class="pln">sysinit</span><span class="pun">:</span><span class="str">/etc/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d</span><span class="pun">/</span><span class="pln">rcS
-</span><span class="pun">::</span><span class="pln">respawn</span><span class="pun">:-/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">sh
-tty2</span><span class="pun">::</span><span class="pln">askfirst</span><span class="pun">:-/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">sh
-</span><span class="pun">::</span><span class="pln">ctrlaltdel</span><span class="pun">:</span><span class="str">/bin/</span><span class="pln">umount </span><span class="pun">-</span><span class="pln">a </span><span class="pun">-</span><span class="pln">r
-EOF </span></code></pre>
+
+<pre class="prettyprint"><code class=" hljs mel">cat &lt;&lt; EOF &gt; etc/fstab 
+<span class="hljs-keyword">proc</span>  /<span class="hljs-keyword">proc</span>  <span class="hljs-keyword">proc</span>  defaults  <span class="hljs-number">0</span>  <span class="hljs-number">0</span>
+sysfs  /sys  sysfs defaults  <span class="hljs-number">0</span>  <span class="hljs-number">0</span>
+tmpfs  /tmp  tmpfs defaults  <span class="hljs-number">0</span>  <span class="hljs-number">0</span>
+EOF</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs asciidoc">cat &lt;&lt; EOF &gt; etc/inittab 
+<span class="hljs-attribute">::sysinit:/etc/init.d/rcS</span>
+<span class="hljs-attribute">::respawn:-/bin/sh</span>
+tty2::askfirst:-/bin/sh
+<span class="hljs-attribute">::ctrlaltdel:/bin/umount</span> -a -r
+EOF </code></pre>
 
 <ul>
 <li>etc/init.d/rcS</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="com">#! /bin/sh</span><span class="pln">
-
-MAC</span><span class="pun">=</span><span class="lit">08</span><span class="pun">:</span><span class="lit">90</span><span class="pun">:</span><span class="lit">90</span><span class="pun">:</span><span class="lit">59</span><span class="pun">:</span><span class="lit">62</span><span class="pun">:</span><span class="lit">21</span><span class="pln">
-IP</span><span class="pun">=</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.2</span><span class="pln">
-</span><span class="typ">Mask</span><span class="pun">=</span><span class="lit">255.255</span><span class="pun">.</span><span class="lit">255.0</span><span class="pln">
-</span><span class="typ">Gateway</span><span class="pun">=</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.1</span><span class="pln">
 
 
-</span><span class="pun">/</span><span class="pln">sbin</span><span class="pun">/</span><span class="pln">ifconfig lo </span><span class="lit">127.0</span><span class="pun">.</span><span class="lit">0.1</span><span class="pln">
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-shebang">#! /bin/sh
+</span>
+MAC=<span class="hljs-number">08</span>:<span class="hljs-number">90</span>:<span class="hljs-number">90</span>:<span class="hljs-number">59</span>:<span class="hljs-number">62</span>:<span class="hljs-number">21</span>
+IP=<span class="hljs-number">192.168</span>.<span class="hljs-number">100.2</span>
+Mask=<span class="hljs-number">255.255</span>.<span class="hljs-number">255.0</span>
+Gateway=<span class="hljs-number">192.168</span>.<span class="hljs-number">100.1</span>
+
+
+/sbin/ifconfig lo <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
 ifconfig eth0 down
-ifconfig eth0 hw ether $MAC
-ifconfig eth0 $IP netmask $Mask up
-route add </span><span class="kwd">default</span><span class="pln"> gw $Gateway
+ifconfig eth0 hw ether <span class="hljs-variable">$MAC</span>
+ifconfig eth0 <span class="hljs-variable">$IP</span> netmask <span class="hljs-variable">$Mask</span> up
+route add default gw <span class="hljs-variable">$Gateway</span>
 
-</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">mount </span><span class="pun">-</span><span class="pln">a
-</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">mount </span><span class="pun">-</span><span class="pln">t  sysfs sysfs </span><span class="pun">/</span><span class="pln">sys
-</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">mount </span><span class="pun">-</span><span class="pln">t tmpfs tmpfs </span><span class="pun">/</span><span class="pln">dev
-</span><span class="pun">/</span><span class="pln">sbin</span><span class="pun">/</span><span class="pln">mdev </span><span class="pun">-</span><span class="pln">s
+/bin/mount <span class="hljs-operator">-a</span>
+/bin/mount -t  sysfs sysfs /sys
+/bin/mount -t tmpfs tmpfs /dev
+/sbin/mdev <span class="hljs-operator">-s</span>
 
-mount </span><span class="pun">-</span><span class="pln">o remount</span><span class="pun">,</span><span class="pln">rw</span><span class="pun">,</span><span class="pln">noatime </span><span class="pun">-</span><span class="pln">n </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">root </span><span class="pun">/</span></code></pre>
+mount -o remount,rw,noatime -n /dev/root /</code></pre>
 
 <ul>
 <li><p>chmod 755 etc/init.d/rcS</p></li>
 <li><p>產生 rootfs, 可在temp 下新增修改檔案</p></li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">find </span><span class="pun">./</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> cpio </span><span class="pun">-</span><span class="pln">o </span><span class="pun">-</span><span class="pln">H newc </span><span class="pun">|</span><span class="pln"> gzip </span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">../</span><span class="pln">rootfs</span><span class="pun">.</span><span class="pln">img</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs lasso">find <span class="hljs-built_in">.</span><span class="hljs-subst">/</span> <span class="hljs-subst">|</span> cpio <span class="hljs-attribute">-o</span> <span class="hljs-attribute">-H</span> newc <span class="hljs-subst">|</span> gzip <span class="hljs-subst">&gt;</span> <span class="hljs-built_in">..</span>/rootfs<span class="hljs-built_in">.</span>img</code></pre>
+
+
 
 <h3 id="安裝-tftp">安裝 tftp</h3>
 
@@ -158,31 +188,41 @@ mount </span><span class="pun">-</span><span class="pln">o remount</span><span c
 <li>/etc/default/tftpd-hpa</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="com"># /etc/default/tftpd-hpa</span><span class="pln">
-TFTP_USERNAME</span><span class="pun">=</span><span class="str">"tftp"</span><span class="pln">
-TFTP_DIRECTORY</span><span class="pun">=</span><span class="str">"/tftpboot"</span><span class="pln">
-TFTP_ADDRESS</span><span class="pun">=</span><span class="str">"0.0.0.0:69"</span><span class="pln">
-TFTP_OPTIONS</span><span class="pun">=</span><span class="str">"-l -c -s"</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs vala"><span class="hljs-preprocessor"># /etc/default/tftpd-hpa</span>
+TFTP_USERNAME=<span class="hljs-string">"tftp"</span>
+TFTP_DIRECTORY=<span class="hljs-string">"/tftpboot"</span>
+TFTP_ADDRESS=<span class="hljs-string">"0.0.0.0:69"</span>
+TFTP_OPTIONS=<span class="hljs-string">"-l -c -s"</span></code></pre>
 
 <ul>
 <li>建立 tftpboot</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">sudo mkdir </span><span class="pun">/</span><span class="pln">tftpboot
-sudo chmod </span><span class="lit">777</span><span class="pln"> </span><span class="pun">/</span><span class="pln">tftpboot</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-built_in">sudo</span> mkdir /tftpboot
+<span class="hljs-built_in">sudo</span> chmod <span class="hljs-number">777</span> /tftpboot</code></pre>
 
 <ul>
 <li>restart service</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">sudo service tftpd</span><span class="pun">-</span><span class="pln">hpa restart</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-built_in">sudo</span> service tftpd-hpa restart</code></pre>
 
 <ul>
 <li>test tftp</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tftp host</span><span class="pun">—</span><span class="pln">ip  </span><span class="com">// ex tftp localhost</span><span class="pln">
-</span><span class="kwd">get</span><span class="pln"> </span><span class="kwd">or</span><span class="pln"> put</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs livecodeserver">tftp host—ip <span class="hljs-comment"> // ex tftp localhost</span>
+<span class="hljs-built_in">get</span> <span class="hljs-operator">or</span> <span class="hljs-built_in">put</span></code></pre>
+
+
 
 <h3 id="啟動-tap">啟動 tap</h3>
 
@@ -190,47 +230,65 @@ sudo chmod </span><span class="lit">777</span><span class="pln"> </span><span cl
 <li>sudo ./nettap.sh  // 必須加上 sudo </li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tunctl </span><span class="pun">-</span><span class="pln">u shihyu </span><span class="pun">-</span><span class="pln">t tap0 
-ifconfig tap0 </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.1</span><span class="pln"> up 
-echo </span><span class="lit">1</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="str">/proc/</span><span class="pln">sys</span><span class="pun">/</span><span class="pln">net</span><span class="pun">/</span><span class="pln">ipv4</span><span class="pun">/</span><span class="pln">ip_forward
-iptables </span><span class="pun">-</span><span class="pln">t nat </span><span class="pun">-</span><span class="pln">A POSTROUTING </span><span class="pun">-</span><span class="pln">o eth0 </span><span class="pun">-</span><span class="pln">j MASQUERADE
-iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><span class="lit">1</span><span class="pln"> </span><span class="pun">-</span><span class="pln">i tap0 </span><span class="pun">-</span><span class="pln">j ACCEPT
-iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><span class="lit">1</span><span class="pln"> </span><span class="pun">-</span><span class="pln">o tap0 </span><span class="pun">-</span><span class="pln">m state </span><span class="pun">--</span><span class="pln">state RELATED</span><span class="pun">,</span><span class="pln">ESTABLISHED </span><span class="pun">-</span><span class="pln">j ACCEPT</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs lasso">tunctl <span class="hljs-attribute">-u</span> shihyu <span class="hljs-attribute">-t</span> tap0 
+ifconfig tap0 <span class="hljs-number">192.168</span><span class="hljs-number">.100</span><span class="hljs-number">.1</span> up 
+echo <span class="hljs-number">1</span> <span class="hljs-subst">&gt;</span> /proc/sys/net/ipv4/ip_forward
+iptables <span class="hljs-attribute">-t</span> nat <span class="hljs-attribute">-A</span> POSTROUTING <span class="hljs-attribute">-o</span> eth0 <span class="hljs-attribute">-j</span> MASQUERADE
+iptables <span class="hljs-attribute">-I</span> FORWARD <span class="hljs-number">1</span> <span class="hljs-attribute">-i</span> tap0 <span class="hljs-attribute">-j</span> ACCEPT
+iptables <span class="hljs-attribute">-I</span> FORWARD <span class="hljs-number">1</span> <span class="hljs-attribute">-o</span> tap0 <span class="hljs-attribute">-m</span> state <span class="hljs-subst">--</span>state RELATED,ESTABLISHED <span class="hljs-attribute">-j</span> ACCEPT</code></pre>
 
 <ul>
 <li>如果成功下ifconfig 會出現下面 message</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">tap0      </span><span class="typ">Link</span><span class="pln"> encap</span><span class="pun">:</span><span class="typ">Ethernet</span><span class="pln">  </span><span class="typ">HWaddr</span><span class="pln"> </span><span class="lit">0a</span><span class="pun">:</span><span class="lit">18</span><span class="pun">:</span><span class="pln">ee</span><span class="pun">:</span><span class="pln">c4</span><span class="pun">:</span><span class="pln">f0</span><span class="pun">:</span><span class="pln">d0   
-          inet addr</span><span class="pun">:</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.1</span><span class="pln">  </span><span class="typ">Bcast</span><span class="pun">:</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">100.255</span><span class="pln">  </span><span class="typ">Mask</span><span class="pun">:</span><span class="lit">255.255</span><span class="pun">.</span><span class="lit">255.0</span><span class="pln"> 
-          UP BROADCAST MULTICAST  MTU</span><span class="pun">:</span><span class="lit">1500</span><span class="pln">  </span><span class="typ">Metric</span><span class="pun">:</span><span class="lit">1</span><span class="pln"> 
-          RX packets</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> errors</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> dropped</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> overruns</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> frame</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> 
-          TX packets</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> errors</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> dropped</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> overruns</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> carrier</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> 
-          collisions</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> txqueuelen</span><span class="pun">:</span><span class="lit">500</span><span class="pln">  
-          RX bytes</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.0</span><span class="pln"> B</span><span class="pun">)</span><span class="pln">  TX bytes</span><span class="pun">:</span><span class="lit">0</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.0</span><span class="pln"> B</span><span class="pun">)</span><span class="pln"> </span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs css"><span class="hljs-tag">tap0</span>      <span class="hljs-tag">Link</span> <span class="hljs-tag">encap</span><span class="hljs-pseudo">:Ethernet</span>  <span class="hljs-tag">HWaddr</span> 0<span class="hljs-tag">a</span><span class="hljs-pseudo">:18</span><span class="hljs-pseudo">:ee</span><span class="hljs-pseudo">:c4</span><span class="hljs-pseudo">:f0</span><span class="hljs-pseudo">:d0</span>   
+          <span class="hljs-tag">inet</span> <span class="hljs-tag">addr</span><span class="hljs-pseudo">:192</span><span class="hljs-class">.168</span><span class="hljs-class">.100</span><span class="hljs-class">.1</span>  <span class="hljs-tag">Bcast</span><span class="hljs-pseudo">:192</span><span class="hljs-class">.168</span><span class="hljs-class">.100</span><span class="hljs-class">.255</span>  <span class="hljs-tag">Mask</span><span class="hljs-pseudo">:255</span><span class="hljs-class">.255</span><span class="hljs-class">.255</span><span class="hljs-class">.0</span> 
+          <span class="hljs-tag">UP</span> <span class="hljs-tag">BROADCAST</span> <span class="hljs-tag">MULTICAST</span>  <span class="hljs-tag">MTU</span><span class="hljs-pseudo">:1500</span>  <span class="hljs-tag">Metric</span><span class="hljs-pseudo">:1</span> 
+          <span class="hljs-tag">RX</span> <span class="hljs-tag">packets</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">errors</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">dropped</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">overruns</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">frame</span><span class="hljs-pseudo">:0</span> 
+          <span class="hljs-tag">TX</span> <span class="hljs-tag">packets</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">errors</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">dropped</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">overruns</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">carrier</span><span class="hljs-pseudo">:0</span> 
+          <span class="hljs-tag">collisions</span><span class="hljs-pseudo">:0</span> <span class="hljs-tag">txqueuelen</span><span class="hljs-pseudo">:500</span>  
+          <span class="hljs-tag">RX</span> <span class="hljs-tag">bytes</span><span class="hljs-pseudo">:0</span> (0<span class="hljs-class">.0</span> <span class="hljs-tag">B</span>)  <span class="hljs-tag">TX</span> <span class="hljs-tag">bytes</span><span class="hljs-pseudo">:0</span> (0<span class="hljs-class">.0</span> <span class="hljs-tag">B</span>) </code></pre>
+
+
 
 <h3 id="啟動qemu">啟動QEMU</h3>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span></code></pre>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span><span class="pln">  </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pun">使用</span><span class="pln"> qemu</span><span class="pun">-</span><span class="pln">linaro </span><span class="pun">啟動要加上</span><span class="pln"> sudo </span><span class="pun">目前原因不清楚</span><span class="pln"> 
-SIOCSIFADDR</span><span class="pun">:</span><span class="pln"> </span><span class="pun">拒絕不符權限的操作</span><span class="pln"> 
-SIOCSIFFLAGS</span><span class="pun">:</span><span class="pln"> </span><span class="pun">拒絕不符權限的操作</span><span class="pln"> 
-SIOCSIFFLAGS</span><span class="pun">:</span><span class="pln"> </span><span class="pun">拒絕不符權限的操作</span><span class="pln">
+<pre class="prettyprint"><code class=" hljs lasso"> qemu<span class="hljs-attribute">-system</span><span class="hljs-attribute">-x86_64</span> <span class="hljs-attribute">-kernel</span> bzImage <span class="hljs-attribute">-serial</span> stdio <span class="hljs-attribute">-append</span> <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> <span class="hljs-attribute">-initrd</span> rootfs<span class="hljs-built_in">.</span>img  <span class="hljs-attribute">-k</span> en<span class="hljs-attribute">-us</span> <span class="hljs-attribute">-net</span> nic,model<span class="hljs-subst">=</span>virtio <span class="hljs-attribute">-net</span> tap,ifname<span class="hljs-subst">=</span>tap0,script<span class="hljs-subst">=</span>no <span class="hljs-attribute">-enable</span><span class="hljs-attribute">-kvm</span> <span class="hljs-attribute">-m</span> <span class="hljs-number">2048</span> <span class="hljs-attribute">-smp</span> <span class="hljs-number">2</span></code></pre>
 
-</span><span class="pun">必須</span><span class="pln"> sudo qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">x86_64 </span><span class="pun">-</span><span class="pln">kernel bzImage </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img  </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic</span><span class="pun">,</span><span class="pln">model</span><span class="pun">=</span><span class="pln">virtio </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">enable</span><span class="pun">-</span><span class="pln">kvm </span><span class="pun">-</span><span class="pln">m </span><span class="lit">2048</span><span class="pln"> </span><span class="pun">-</span><span class="pln">smp </span><span class="lit">2</span><span class="pln">  </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S </span></code></pre><div class="se-section-delimiter"></div>
+
+
+<pre class="prettyprint"><code class=" hljs perl"> qemu-<span class="hljs-keyword">system</span>-x86_64 -kernel bzImage -serial stdio -append <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap<span class="hljs-number">0</span>,script=<span class="hljs-keyword">no</span> -enable-kvm -<span class="hljs-keyword">m</span> <span class="hljs-number">2048</span> -smp <span class="hljs-number">2</span>  -gdb tcp::<span class="hljs-number">1234</span> -S</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">使用 qemu-linaro 啟動要加上 sudo 目前原因不清楚 
+<span class="hljs-label">SIOCSIFADDR:</span> 拒絕不符權限的操作 
+<span class="hljs-label">SIOCSIFFLAGS:</span> 拒絕不符權限的操作 
+<span class="hljs-label">SIOCSIFFLAGS:</span> 拒絕不符權限的操作
+
+必須 sudo qemu-system-x86_64 -kernel bzImage -serial stdio -append <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> -initrd rootfs<span class="hljs-preprocessor">.img</span>  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no -enable-kvm -m <span class="hljs-number">2048</span> -smp <span class="hljs-number">2</span>  -gdb tcp::<span class="hljs-number">1234</span> -S </code></pre>
+
+
 
 <h3 id="啟動-gdb">啟動 GDB</h3>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">cgdb </span><span class="pun">./</span><span class="pln">vmlinux
-target remote localhost</span><span class="pun">:</span><span class="lit">1234</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs dos">cgdb ./vmlinux
+target <span class="hljs-comment">remote localhost:1234</span></code></pre>
 
 <ul>
 <li><p>比如在sched_clock函數處設置斷點 break sched_clock , continue 繼續運行, 到達斷點後打印jiffies_64變量 print jiffies_64 等等</p></li>
 <li><p>另外, 運行過程中可以在測試系統裡執行 echo g &gt; /proc/sysrq­trigger 讓gdb重新得到控制權</p></li>
 </ul>
+
+
 
 <h3 id="hello-world">Hello world</h3>
 
@@ -238,13 +296,17 @@ target remote localhost</span><span class="pun">:</span><span class="lit">1234</
 <li>gcc -static test.c -o test //記得加上 -static , 因為沒動態函數庫支援</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><span class="pln">
 
-</span><span class="kwd">int</span><span class="pln"> main</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> argc</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln">argv</span><span class="pun">[])</span><span class="pln">
-</span><span class="pun">{</span><span class="pln">
-    printf</span><span class="pun">(</span><span class="str">"\nHello world\n"</span><span class="pun">);</span><span class="pln">
-    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span></code></pre>
+
+<pre class="prettyprint"><code class=" hljs cpp"><span class="hljs-preprocessor">#include &lt;stdio.h&gt;</span>
+
+<span class="hljs-keyword">int</span> main(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])
+{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nHello world\n"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre>
+
+
 
 <h3 id="載入-linux-module">載入 Linux Module</h3>
 
@@ -252,299 +314,313 @@ target remote localhost</span><span class="pun">:</span><span class="lit">1234</
 <li>globalmem.c</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="com">/*====================================================================
+
+
+<pre class="prettyprint"><code class=" hljs cpp"><span class="hljs-comment">/*====================================================================
     A globalmem driver as an example of char device drivers
 
     The initial developer of the original code is Baohua Song
     &lt;author@linuxdriver.cn&gt;. All Rights Reserved.
-======================================================================*/</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/module.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/types.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/fs.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/errno.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/mm.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/sched.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/init.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/cdev.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;asm/io.h&gt;</span><span class="pln">
-</span><span class="com">//#include &lt;asm/system.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;asm/uaccess.h&gt;</span><span class="pln">
-</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;linux/slab.h&gt;</span><span class="pln">
+======================================================================*/</span>
+<span class="hljs-preprocessor">#include &lt;linux/module.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;linux/types.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;linux/fs.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;linux/errno.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;linux/mm.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;linux/sched.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;linux/init.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;linux/cdev.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;asm/io.h&gt;</span>
+<span class="hljs-comment">//#include &lt;asm/system.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;asm/uaccess.h&gt;</span>
+<span class="hljs-preprocessor">#include &lt;linux/slab.h&gt;</span>
 
-</span><span class="com">#define</span><span class="pln"> GLOBALMEM_SIZE  </span><span class="lit">0x1000</span><span class="pln">  </span><span class="com">/*全局内存最大4K字节*/</span><span class="pln">
-</span><span class="com">#define</span><span class="pln"> MEM_CLEAR </span><span class="lit">0x1</span><span class="pln">  </span><span class="com">/*清0全局内存*/</span><span class="pln">
-</span><span class="com">#define</span><span class="pln"> GLOBALMEM_MAJOR </span><span class="lit">245</span><span class="pln">    </span><span class="com">/*预设的globalmem的主设备号*/</span><span class="pln">
+<span class="hljs-preprocessor">#define GLOBALMEM_SIZE  0x1000  /*全局内存最大4K字节*/</span>
+<span class="hljs-preprocessor">#define MEM_CLEAR 0x1  /*清0全局内存*/</span>
+<span class="hljs-preprocessor">#define GLOBALMEM_MAJOR 245    /*预设的globalmem的主设备号*/</span>
 
-</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> globalmem_major </span><span class="pun">=</span><span class="pln"> GLOBALMEM_MAJOR</span><span class="pun">;</span><span class="pln">
-</span><span class="com">/*globalmem设备结构体*/</span><span class="pln">
-</span><span class="kwd">struct</span><span class="pln"> globalmem_dev </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">struct</span><span class="pln"> cdev cdev</span><span class="pun">;</span><span class="pln"> </span><span class="com">/*cdev结构体*/</span><span class="pln">
-    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> mem</span><span class="pun">[</span><span class="pln">GLOBALMEM_SIZE</span><span class="pun">];</span><span class="pln"> </span><span class="com">/*全局内存*/</span><span class="pln">
-</span><span class="pun">};</span><span class="pln">
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> globalmem_major = GLOBALMEM_MAJOR;
+<span class="hljs-comment">/*globalmem设备结构体*/</span>
+<span class="hljs-keyword">struct</span> globalmem_dev {
+    <span class="hljs-keyword">struct</span> cdev cdev; <span class="hljs-comment">/*cdev结构体*/</span>
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> mem[GLOBALMEM_SIZE]; <span class="hljs-comment">/*全局内存*/</span>
+};
 
-</span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> globalmem_devp</span><span class="pun">;</span><span class="pln"> </span><span class="com">/*设备结构体指针*/</span><span class="pln">
-</span><span class="com">/*文件打开函数*/</span><span class="pln">
-</span><span class="kwd">int</span><span class="pln"> globalmem_open</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> inode</span><span class="pun">*</span><span class="pln"> inode</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="com">/*将设备结构体指针赋值给文件私有数据指针*/</span><span class="pln">
-    filp</span><span class="pun">-&gt;</span><span class="pln">private_data </span><span class="pun">=</span><span class="pln"> globalmem_devp</span><span class="pun">;</span><span class="pln">
-    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
-</span><span class="com">/*文件释放函数*/</span><span class="pln">
-</span><span class="kwd">int</span><span class="pln"> globalmem_release</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> inode</span><span class="pun">*</span><span class="pln"> inode</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
+<span class="hljs-keyword">struct</span> globalmem_dev* globalmem_devp; <span class="hljs-comment">/*设备结构体指针*/</span>
+<span class="hljs-comment">/*文件打开函数*/</span>
+<span class="hljs-keyword">int</span> globalmem_open(<span class="hljs-keyword">struct</span> inode* inode, <span class="hljs-keyword">struct</span> file* filp) {
+    <span class="hljs-comment">/*将设备结构体指针赋值给文件私有数据指针*/</span>
+    filp-&gt;private_data = globalmem_devp;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">/*文件释放函数*/</span>
+<span class="hljs-keyword">int</span> globalmem_release(<span class="hljs-keyword">struct</span> inode* inode, <span class="hljs-keyword">struct</span> file* filp) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
 
-</span><span class="com">/* ioctl设备控制函数 */</span><span class="pln">
-</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> globalmem_ioctl</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> inode</span><span class="pun">*</span><span class="pln"> inodep</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">unsigned</span><span class="pln">
-                           </span><span class="kwd">int</span><span class="pln"> cmd</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> arg</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> dev </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">private_data</span><span class="pun">;</span><span class="com">/*获得设备结构体指针*/</span><span class="pln">
+<span class="hljs-comment">/* ioctl设备控制函数 */</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> globalmem_ioctl(<span class="hljs-keyword">struct</span> inode* inodep, <span class="hljs-keyword">struct</span> file* filp, <span class="hljs-keyword">unsigned</span>
+                           <span class="hljs-keyword">int</span> cmd, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> arg) {
+    <span class="hljs-keyword">struct</span> globalmem_dev* dev = filp-&gt;private_data;<span class="hljs-comment">/*获得设备结构体指针*/</span>
 
-    </span><span class="kwd">switch</span><span class="pln"> </span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">case</span><span class="pln"> MEM_CLEAR</span><span class="pun">:</span><span class="pln">
-        memset</span><span class="pun">(</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">mem</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">);</span><span class="pln">
-        printk</span><span class="pun">(</span><span class="pln">KERN_INFO </span><span class="str">"globalmem is set to zero\n"</span><span class="pun">);</span><span class="pln">
-        </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+    <span class="hljs-keyword">switch</span> (cmd) {
+    <span class="hljs-keyword">case</span> MEM_CLEAR:
+        <span class="hljs-built_in">memset</span>(dev-&gt;mem, <span class="hljs-number">0</span>, GLOBALMEM_SIZE);
+        printk(KERN_INFO <span class="hljs-string">"globalmem is set to zero\n"</span>);
+        <span class="hljs-keyword">break</span>;
 
-    </span><span class="kwd">default</span><span class="pun">:</span><span class="pln">
-        </span><span class="kwd">return</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">return</span>  - EINVAL;
+    }
 
-    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
 
-</span><span class="com">/*读函数*/</span><span class="pln">
-</span><span class="kwd">static</span><span class="pln"> </span><span class="typ">ssize_t</span><span class="pln"> globalmem_read</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> __user</span><span class="pun">*</span><span class="pln"> buf</span><span class="pun">,</span><span class="pln"> </span><span class="typ">size_t</span><span class="pln"> size</span><span class="pun">,</span><span class="pln">
-                              </span><span class="typ">loff_t</span><span class="pun">*</span><span class="pln"> ppos</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> p </span><span class="pun">=</span><span class="pln">  </span><span class="pun">*</span><span class="pln">ppos</span><span class="pun">;</span><span class="pln">
-    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> count </span><span class="pun">=</span><span class="pln"> size</span><span class="pun">;</span><span class="pln">
-    </span><span class="kwd">int</span><span class="pln"> ret </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-    </span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> dev </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">private_data</span><span class="pun">;</span><span class="pln"> </span><span class="com">/*获得设备结构体指针*/</span><span class="pln">
+<span class="hljs-comment">/*读函数*/</span>
+<span class="hljs-keyword">static</span> ssize_t globalmem_read(<span class="hljs-keyword">struct</span> file* filp, <span class="hljs-keyword">char</span> __user* buf, size_t size,
+                              loff_t* ppos) {
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> p =  *ppos;
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> count = size;
+    <span class="hljs-keyword">int</span> ret = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">struct</span> globalmem_dev* dev = filp-&gt;private_data; <span class="hljs-comment">/*获得设备结构体指针*/</span>
 
-    </span><span class="com">/*分析和获取有效的写长度*/</span><span class="pln">
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">p </span><span class="pun">&gt;=</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        </span><span class="kwd">return</span><span class="pln"> count </span><span class="pun">?</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> ENXIO </span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-comment">/*分析和获取有效的写长度*/</span>
+    <span class="hljs-keyword">if</span> (p &gt;= GLOBALMEM_SIZE) {
+        <span class="hljs-keyword">return</span> count ?  - ENXIO : <span class="hljs-number">0</span>;
+    }
 
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">count </span><span class="pun">&gt;</span><span class="pln"> GLOBALMEM_SIZE </span><span class="pun">-</span><span class="pln"> p</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        count </span><span class="pun">=</span><span class="pln"> GLOBALMEM_SIZE </span><span class="pun">-</span><span class="pln"> p</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">if</span> (count &gt; GLOBALMEM_SIZE - p) {
+        count = GLOBALMEM_SIZE - p;
+    }
 
-    </span><span class="com">/*内核空间-&gt;用户空间*/</span><span class="pln">
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">copy_to_user</span><span class="pun">(</span><span class="pln">buf</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">*)(</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">mem </span><span class="pun">+</span><span class="pln"> p</span><span class="pun">),</span><span class="pln"> count</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EFAULT</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        </span><span class="pun">*</span><span class="pln">ppos </span><span class="pun">+=</span><span class="pln"> count</span><span class="pun">;</span><span class="pln">
-        ret </span><span class="pun">=</span><span class="pln"> count</span><span class="pun">;</span><span class="pln">
+    <span class="hljs-comment">/*内核空间-&gt;用户空间*/</span>
+    <span class="hljs-keyword">if</span> (copy_to_user(buf, (<span class="hljs-keyword">void</span>*)(dev-&gt;mem + p), count)) {
+        ret =  - EFAULT;
+    } <span class="hljs-keyword">else</span> {
+        *ppos += count;
+        ret = count;
 
-        printk</span><span class="pun">(</span><span class="pln">KERN_INFO </span><span class="str">"read %d bytes(s) from %d\n"</span><span class="pun">,</span><span class="pln"> count</span><span class="pun">,</span><span class="pln"> p</span><span class="pun">);</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+        printk(KERN_INFO <span class="hljs-string">"read %d bytes(s) from %d\n"</span>, count, p);
+    }
 
-    </span><span class="kwd">return</span><span class="pln"> ret</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">return</span> ret;
+}
 
-</span><span class="com">/*写函数*/</span><span class="pln">
-</span><span class="kwd">static</span><span class="pln"> </span><span class="typ">ssize_t</span><span class="pln"> globalmem_write</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">const</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> __user</span><span class="pun">*</span><span class="pln"> buf</span><span class="pun">,</span><span class="pln">
-                               </span><span class="typ">size_t</span><span class="pln"> size</span><span class="pun">,</span><span class="pln"> </span><span class="typ">loff_t</span><span class="pun">*</span><span class="pln"> ppos</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> p </span><span class="pun">=</span><span class="pln">  </span><span class="pun">*</span><span class="pln">ppos</span><span class="pun">;</span><span class="pln">
-    </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> count </span><span class="pun">=</span><span class="pln"> size</span><span class="pun">;</span><span class="pln">
-    </span><span class="kwd">int</span><span class="pln"> ret </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-    </span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> dev </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">private_data</span><span class="pun">;</span><span class="pln"> </span><span class="com">/*获得设备结构体指针*/</span><span class="pln">
+<span class="hljs-comment">/*写函数*/</span>
+<span class="hljs-keyword">static</span> ssize_t globalmem_write(<span class="hljs-keyword">struct</span> file* filp, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> __user* buf,
+                               size_t size, loff_t* ppos) {
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> p =  *ppos;
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> count = size;
+    <span class="hljs-keyword">int</span> ret = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">struct</span> globalmem_dev* dev = filp-&gt;private_data; <span class="hljs-comment">/*获得设备结构体指针*/</span>
 
-    </span><span class="com">/*分析和获取有效的写长度*/</span><span class="pln">
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">p </span><span class="pun">&gt;=</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        </span><span class="kwd">return</span><span class="pln"> count </span><span class="pun">?</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> ENXIO </span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-comment">/*分析和获取有效的写长度*/</span>
+    <span class="hljs-keyword">if</span> (p &gt;= GLOBALMEM_SIZE) {
+        <span class="hljs-keyword">return</span> count ?  - ENXIO : <span class="hljs-number">0</span>;
+    }
 
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">count </span><span class="pun">&gt;</span><span class="pln"> GLOBALMEM_SIZE </span><span class="pun">-</span><span class="pln"> p</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        count </span><span class="pun">=</span><span class="pln"> GLOBALMEM_SIZE </span><span class="pun">-</span><span class="pln"> p</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">if</span> (count &gt; GLOBALMEM_SIZE - p) {
+        count = GLOBALMEM_SIZE - p;
+    }
 
-    </span><span class="com">/*用户空间-&gt;内核空间*/</span><span class="pln">
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">copy_from_user</span><span class="pun">(</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">mem </span><span class="pun">+</span><span class="pln"> p</span><span class="pun">,</span><span class="pln"> buf</span><span class="pun">,</span><span class="pln"> count</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EFAULT</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        </span><span class="pun">*</span><span class="pln">ppos </span><span class="pun">+=</span><span class="pln"> count</span><span class="pun">;</span><span class="pln">
-        ret </span><span class="pun">=</span><span class="pln"> count</span><span class="pun">;</span><span class="pln">
+    <span class="hljs-comment">/*用户空间-&gt;内核空间*/</span>
+    <span class="hljs-keyword">if</span> (copy_from_user(dev-&gt;mem + p, buf, count)) {
+        ret =  - EFAULT;
+    } <span class="hljs-keyword">else</span> {
+        *ppos += count;
+        ret = count;
 
-        printk</span><span class="pun">(</span><span class="pln">KERN_INFO </span><span class="str">"written %d bytes(s) from %d\n"</span><span class="pun">,</span><span class="pln"> count</span><span class="pun">,</span><span class="pln"> p</span><span class="pun">);</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+        printk(KERN_INFO <span class="hljs-string">"written %d bytes(s) from %d\n"</span>, count, p);
+    }
 
-    </span><span class="kwd">return</span><span class="pln"> ret</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">return</span> ret;
+}
 
-</span><span class="com">/* seek文件定位函数 */</span><span class="pln">
-</span><span class="kwd">static</span><span class="pln"> </span><span class="typ">loff_t</span><span class="pln"> globalmem_llseek</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> file</span><span class="pun">*</span><span class="pln"> filp</span><span class="pun">,</span><span class="pln"> </span><span class="typ">loff_t</span><span class="pln"> offset</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> orig</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="typ">loff_t</span><span class="pln"> ret </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+<span class="hljs-comment">/* seek文件定位函数 */</span>
+<span class="hljs-keyword">static</span> loff_t globalmem_llseek(<span class="hljs-keyword">struct</span> file* filp, loff_t offset, <span class="hljs-keyword">int</span> orig) {
+    loff_t ret = <span class="hljs-number">0</span>;
 
-    </span><span class="kwd">switch</span><span class="pln"> </span><span class="pun">(</span><span class="pln">orig</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">case</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln">   </span><span class="com">/*相对文件开始位置偏移*/</span><span class="pln">
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">offset </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-            ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
-            </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
-        </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">switch</span> (orig) {
+    <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:   <span class="hljs-comment">/*相对文件开始位置偏移*/</span>
+        <span class="hljs-keyword">if</span> (offset &lt; <span class="hljs-number">0</span>) {
+            ret =  - EINVAL;
+            <span class="hljs-keyword">break</span>;
+        }
 
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">((</span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">)</span><span class="pln">offset </span><span class="pun">&gt;</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-            ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
-            </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
-        </span><span class="pun">}</span><span class="pln">
+        <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>)offset &gt; GLOBALMEM_SIZE) {
+            ret =  - EINVAL;
+            <span class="hljs-keyword">break</span>;
+        }
 
-        filp</span><span class="pun">-&gt;</span><span class="pln">f_pos </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">)</span><span class="pln">offset</span><span class="pun">;</span><span class="pln">
-        ret </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">f_pos</span><span class="pun">;</span><span class="pln">
-        </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+        filp-&gt;f_pos = (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>)offset;
+        ret = filp-&gt;f_pos;
+        <span class="hljs-keyword">break</span>;
 
-    </span><span class="kwd">case</span><span class="pln"> </span><span class="lit">1</span><span class="pun">:</span><span class="pln">   </span><span class="com">/*相对文件当前位置偏移*/</span><span class="pln">
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">((</span><span class="pln">filp</span><span class="pun">-&gt;</span><span class="pln">f_pos </span><span class="pun">+</span><span class="pln"> offset</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> GLOBALMEM_SIZE</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-            ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
-            </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
-        </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:   <span class="hljs-comment">/*相对文件当前位置偏移*/</span>
+        <span class="hljs-keyword">if</span> ((filp-&gt;f_pos + offset) &gt; GLOBALMEM_SIZE) {
+            ret =  - EINVAL;
+            <span class="hljs-keyword">break</span>;
+        }
 
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">((</span><span class="pln">filp</span><span class="pun">-&gt;</span><span class="pln">f_pos </span><span class="pun">+</span><span class="pln"> offset</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-            ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
-            </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
-        </span><span class="pun">}</span><span class="pln">
+        <span class="hljs-keyword">if</span> ((filp-&gt;f_pos + offset) &lt; <span class="hljs-number">0</span>) {
+            ret =  - EINVAL;
+            <span class="hljs-keyword">break</span>;
+        }
 
-        filp</span><span class="pun">-&gt;</span><span class="pln">f_pos </span><span class="pun">+=</span><span class="pln"> offset</span><span class="pun">;</span><span class="pln">
-        ret </span><span class="pun">=</span><span class="pln"> filp</span><span class="pun">-&gt;</span><span class="pln">f_pos</span><span class="pun">;</span><span class="pln">
-        </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+        filp-&gt;f_pos += offset;
+        ret = filp-&gt;f_pos;
+        <span class="hljs-keyword">break</span>;
 
-    </span><span class="kwd">default</span><span class="pun">:</span><span class="pln">
-        ret </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> EINVAL</span><span class="pun">;</span><span class="pln">
-        </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">default</span>:
+        ret =  - EINVAL;
+        <span class="hljs-keyword">break</span>;
+    }
 
-    </span><span class="kwd">return</span><span class="pln"> ret</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">return</span> ret;
+}
 
-</span><span class="com">/*文件操作结构体*/</span><span class="pln">
-</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">const</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> file_operations globalmem_fops </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="pun">.</span><span class="pln">owner </span><span class="pun">=</span><span class="pln"> THIS_MODULE</span><span class="pun">,</span><span class="pln">
-    </span><span class="pun">.</span><span class="pln">llseek </span><span class="pun">=</span><span class="pln"> globalmem_llseek</span><span class="pun">,</span><span class="pln">
-    </span><span class="pun">.</span><span class="pln">read </span><span class="pun">=</span><span class="pln"> globalmem_read</span><span class="pun">,</span><span class="pln">
-    </span><span class="pun">.</span><span class="pln">write </span><span class="pun">=</span><span class="pln"> globalmem_write</span><span class="pun">,</span><span class="pln">
-    </span><span class="pun">.</span><span class="pln">unlocked_ioctl </span><span class="pun">=</span><span class="pln"> globalmem_ioctl</span><span class="pun">,</span><span class="pln">
-    </span><span class="pun">.</span><span class="pln">open </span><span class="pun">=</span><span class="pln"> globalmem_open</span><span class="pun">,</span><span class="pln">
-    </span><span class="pun">.</span><span class="pln">release </span><span class="pun">=</span><span class="pln"> globalmem_release</span><span class="pun">,</span><span class="pln">
-</span><span class="pun">};</span><span class="pln">
+<span class="hljs-comment">/*文件操作结构体*/</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">struct</span> file_operations globalmem_fops = {
+    .owner = THIS_MODULE,
+    .llseek = globalmem_llseek,
+    .read = globalmem_read,
+    .write = globalmem_write,
+    .unlocked_ioctl = globalmem_ioctl,
+    .open = globalmem_open,
+    .release = globalmem_release,
+};
 
-</span><span class="com">/*初始化并注册cdev*/</span><span class="pln">
-</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> globalmem_setup_cdev</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">*</span><span class="pln"> dev</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> index</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">int</span><span class="pln"> err</span><span class="pun">,</span><span class="pln"> devno </span><span class="pun">=</span><span class="pln"> MKDEV</span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">,</span><span class="pln"> index</span><span class="pun">);</span><span class="pln">
+<span class="hljs-comment">/*初始化并注册cdev*/</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> globalmem_setup_cdev(<span class="hljs-keyword">struct</span> globalmem_dev* dev, <span class="hljs-keyword">int</span> index) {
+    <span class="hljs-keyword">int</span> err, devno = MKDEV(globalmem_major, index);
 
-    cdev_init</span><span class="pun">(&amp;</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">,</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">globalmem_fops</span><span class="pun">);</span><span class="pln">
-    dev</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">.</span><span class="pln">owner </span><span class="pun">=</span><span class="pln"> THIS_MODULE</span><span class="pun">;</span><span class="pln">
-    dev</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">.</span><span class="pln">ops </span><span class="pun">=</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">globalmem_fops</span><span class="pun">;</span><span class="pln">
-    err </span><span class="pun">=</span><span class="pln"> cdev_add</span><span class="pun">(&amp;</span><span class="pln">dev</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">,</span><span class="pln"> devno</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln">
+    cdev_init(&amp;dev-&gt;cdev, &amp;globalmem_fops);
+    dev-&gt;cdev.owner = THIS_MODULE;
+    dev-&gt;cdev.ops = &amp;globalmem_fops;
+    err = cdev_add(&amp;dev-&gt;cdev, devno, <span class="hljs-number">1</span>);
 
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        printk</span><span class="pun">(</span><span class="pln">KERN_NOTICE </span><span class="str">"Error %d adding LED%d"</span><span class="pun">,</span><span class="pln"> err</span><span class="pun">,</span><span class="pln"> index</span><span class="pun">);</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">if</span> (err) {
+        printk(KERN_NOTICE <span class="hljs-string">"Error %d adding LED%d"</span>, err, index);
+    }
+}
 
-</span><span class="com">/*设备驱动模块加载函数*/</span><span class="pln">
-</span><span class="kwd">int</span><span class="pln"> globalmem_init</span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="kwd">int</span><span class="pln"> result</span><span class="pun">;</span><span class="pln">
-    </span><span class="typ">dev_t</span><span class="pln"> devno </span><span class="pun">=</span><span class="pln"> MKDEV</span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">);</span><span class="pln">
+<span class="hljs-comment">/*设备驱动模块加载函数*/</span>
+<span class="hljs-keyword">int</span> globalmem_init(<span class="hljs-keyword">void</span>) {
+    <span class="hljs-keyword">int</span> result;
+    dev_t devno = MKDEV(globalmem_major, <span class="hljs-number">0</span>);
 
-    </span><span class="com">/* 申请设备号*/</span><span class="pln">
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        result </span><span class="pun">=</span><span class="pln"> register_chrdev_region</span><span class="pun">(</span><span class="pln">devno</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="str">"globalmem"</span><span class="pun">);</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">/* 动态申请设备号 */</span><span class="pln">
-        result </span><span class="pun">=</span><span class="pln"> alloc_chrdev_region</span><span class="pun">(&amp;</span><span class="pln">devno</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="str">"globalmem"</span><span class="pun">);</span><span class="pln">
-        globalmem_major </span><span class="pun">=</span><span class="pln"> MAJOR</span><span class="pun">(</span><span class="pln">devno</span><span class="pun">);</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-comment">/* 申请设备号*/</span>
+    <span class="hljs-keyword">if</span> (globalmem_major) {
+        result = register_chrdev_region(devno, <span class="hljs-number">1</span>, <span class="hljs-string">"globalmem"</span>);
+    } <span class="hljs-keyword">else</span> { <span class="hljs-comment">/* 动态申请设备号 */</span>
+        result = alloc_chrdev_region(&amp;devno, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-string">"globalmem"</span>);
+        globalmem_major = MAJOR(devno);
+    }
 
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">result </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        </span><span class="kwd">return</span><span class="pln"> result</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">if</span> (result &lt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> result;
+    }
 
-    </span><span class="com">/* 动态申请设备结构体的内存*/</span><span class="pln">
-    globalmem_devp </span><span class="pun">=</span><span class="pln"> kmalloc</span><span class="pun">(</span><span class="kwd">sizeof</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">),</span><span class="pln"> GFP_KERNEL</span><span class="pun">);</span><span class="pln">
+    <span class="hljs-comment">/* 动态申请设备结构体的内存*/</span>
+    globalmem_devp = kmalloc(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> globalmem_dev), GFP_KERNEL);
 
-    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">globalmem_devp</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">  </span><span class="com">/*申请失败*/</span><span class="pln">
-        result </span><span class="pun">=</span><span class="pln">  </span><span class="pun">-</span><span class="pln"> ENOMEM</span><span class="pun">;</span><span class="pln">
-        </span><span class="kwd">goto</span><span class="pln"> fail_malloc</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
+    <span class="hljs-keyword">if</span> (!globalmem_devp) {  <span class="hljs-comment">/*申请失败*/</span>
+        result =  - ENOMEM;
+        <span class="hljs-keyword">goto</span> fail_malloc;
+    }
 
-    memset</span><span class="pun">(</span><span class="pln">globalmem_devp</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">sizeof</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> globalmem_dev</span><span class="pun">));</span><span class="pln">
+    <span class="hljs-built_in">memset</span>(globalmem_devp, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> globalmem_dev));
 
-    globalmem_setup_cdev</span><span class="pun">(</span><span class="pln">globalmem_devp</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">);</span><span class="pln">
-    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+    globalmem_setup_cdev(globalmem_devp, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 
-fail_malloc</span><span class="pun">:</span><span class="pln">
-    unregister_chrdev_region</span><span class="pun">(</span><span class="pln">devno</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln">
-    </span><span class="kwd">return</span><span class="pln"> result</span><span class="pun">;</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
+fail_malloc:
+    unregister_chrdev_region(devno, <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">return</span> result;
+}
 
-</span><span class="com">/*模块卸载函数*/</span><span class="pln">
-</span><span class="kwd">void</span><span class="pln"> globalmem_exit</span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    cdev_del</span><span class="pun">(&amp;</span><span class="pln">globalmem_devp</span><span class="pun">-&gt;</span><span class="pln">cdev</span><span class="pun">);</span><span class="pln">   </span><span class="com">/*注销cdev*/</span><span class="pln">
-    kfree</span><span class="pun">(</span><span class="pln">globalmem_devp</span><span class="pun">);</span><span class="pln">     </span><span class="com">/*释放设备结构体内存*/</span><span class="pln">
-    unregister_chrdev_region</span><span class="pun">(</span><span class="pln">MKDEV</span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">),</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln"> </span><span class="com">/*释放设备号*/</span><span class="pln">
-</span><span class="pun">}</span><span class="pln">
+<span class="hljs-comment">/*模块卸载函数*/</span>
+<span class="hljs-keyword">void</span> globalmem_exit(<span class="hljs-keyword">void</span>) {
+    cdev_del(&amp;globalmem_devp-&gt;cdev);   <span class="hljs-comment">/*注销cdev*/</span>
+    kfree(globalmem_devp);     <span class="hljs-comment">/*释放设备结构体内存*/</span>
+    unregister_chrdev_region(MKDEV(globalmem_major, <span class="hljs-number">0</span>), <span class="hljs-number">1</span>); <span class="hljs-comment">/*释放设备号*/</span>
+}
 
-MODULE_AUTHOR</span><span class="pun">(</span><span class="str">"Song Baohua"</span><span class="pun">);</span><span class="pln">
-MODULE_LICENSE</span><span class="pun">(</span><span class="str">"Dual BSD/GPL"</span><span class="pun">);</span><span class="pln">
+MODULE_AUTHOR(<span class="hljs-string">"Song Baohua"</span>);
+MODULE_LICENSE(<span class="hljs-string">"Dual BSD/GPL"</span>);
 
-module_param</span><span class="pun">(</span><span class="pln">globalmem_major</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">,</span><span class="pln"> S_IRUGO</span><span class="pun">);</span><span class="pln">
+module_param(globalmem_major, <span class="hljs-keyword">int</span>, S_IRUGO);
 
-module_init</span><span class="pun">(</span><span class="pln">globalmem_init</span><span class="pun">);</span><span class="pln">
-module_exit</span><span class="pun">(</span><span class="pln">globalmem_exit</span><span class="pun">);</span></code></pre>
+module_init(globalmem_init);
+module_exit(globalmem_exit);
+</code></pre>
 
 <ul>
 <li>Makefile  必須加上 -O0</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">obj</span><span class="pun">-</span><span class="pln">m   </span><span class="pun">+=</span><span class="pln"> globalmem</span><span class="pun">.</span><span class="pln">o
-KDIR    </span><span class="pun">=</span><span class="pln"> </span><span class="str">/home/</span><span class="pln">shihyu</span><span class="pun">/</span><span class="pln">data</span><span class="pun">/</span><span class="pln">work</span><span class="pun">/</span><span class="pln">linux</span><span class="pun">-</span><span class="lit">3.15</span><span class="pun">.</span><span class="lit">5</span><span class="pln">
 
-EXTRA_CFLAGS</span><span class="pun">=-</span><span class="pln">g </span><span class="pun">-</span><span class="pln">O0
 
-build</span><span class="pun">:</span><span class="pln">kernel_modules
+<pre class="prettyprint"><code class=" hljs javascript">obj-m   += globalmem.o
+KDIR    = <span class="hljs-regexp">/home/</span>shihyu/data/work/linux-<span class="hljs-number">3.15</span><span class="hljs-number">.5</span>
 
-kernel_modules</span><span class="pun">:</span><span class="pln">
-    make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> modules
+EXTRA_CFLAGS=-g -O0
 
-clean</span><span class="pun">:</span><span class="pln">
-    make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> clean </span></code></pre>
+build:kernel_modules
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">insmod globalmem</span><span class="pun">.</span><span class="pln">ko
-mknod </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">globalmem c </span><span class="lit">245</span><span class="pln"> </span><span class="lit">0</span><span class="pln">
-</span><span class="com"># section.sh globalmem &gt; gdb</span><span class="pln">
-</span><span class="com"># put.sh gdb</span></code></pre>
+kernel_modules:
+    make -C $(KDIR) M=$(CURDIR) modules
+
+clean:
+    make -C $(KDIR) M=$(CURDIR) clean </code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs vala">insmod globalmem.ko
+mknod /dev/globalmem c <span class="hljs-number">245</span> <span class="hljs-number">0</span>
+<span class="hljs-preprocessor"># section.sh globalmem &gt; gdb</span>
+<span class="hljs-preprocessor"># put.sh gdb</span>
+</code></pre>
 
 <ul>
 <li>gdb 加入 ./globalmem.ko ; 0xffffffffa0000000 是 .text address</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">add</span><span class="pun">-</span><span class="pln">symbol</span><span class="pun">-</span><span class="pln">file </span><span class="pun">./</span><span class="pln">globalmem</span><span class="pun">.</span><span class="pln">ko </span><span class="lit">0xffffffffa0000000</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">bss </span><span class="lit">0xffffffffa0000900</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">data </span><span class="lit">0xffffffffa0000698</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">gnu</span><span class="pun">.</span><span class="pln">linkonce</span><span class="pun">.</span><span class="pln">this_module </span><span class="lit">0xffffffffa00006a0</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">note</span><span class="pun">.</span><span class="pln">gnu</span><span class="pun">.</span><span class="pln">build</span><span class="pun">-</span><span class="pln">id </span><span class="lit">0xffffffffa0000488</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">rodata </span><span class="lit">0xffffffffa0000560</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">rodata</span><span class="pun">.</span><span class="pln">str1</span><span class="pun">.</span><span class="lit">1</span><span class="pln"> </span><span class="lit">0xffffffffa00004ac</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">rodata</span><span class="pun">.</span><span class="pln">str1</span><span class="pun">.</span><span class="lit">8</span><span class="pln"> </span><span class="lit">0xffffffffa0000508</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">strtab </span><span class="lit">0xffffffffa00025e8</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s </span><span class="pun">.</span><span class="pln">symtab </span><span class="lit">0xffffffffa0002000</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s __mcount_loc </span><span class="lit">0xffffffffa0000658</span><span class="pln"> \
-   </span><span class="pun">-</span><span class="pln">s __param </span><span class="lit">0xffffffffa0000528</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs haml">add-symbol-file ./globalmem.ko 0xffffffffa0000000 \
+   -<span class="ruby">s .bss <span class="hljs-number">0xffffffffa0000900</span> \
+</span>   -<span class="ruby">s .data <span class="hljs-number">0xffffffffa0000698</span> \
+</span>   -<span class="ruby">s .gnu.linkonce.this_module <span class="hljs-number">0xffffffffa00006a0</span> \
+</span>   -<span class="ruby">s .note.gnu.build-id <span class="hljs-number">0xffffffffa0000488</span> \
+</span>   -<span class="ruby">s .rodata <span class="hljs-number">0xffffffffa0000560</span> \
+</span>   -<span class="ruby">s .rodata.str1.<span class="hljs-number">1</span> <span class="hljs-number">0xffffffffa00004ac</span> \
+</span>   -<span class="ruby">s .rodata.str1.<span class="hljs-number">8</span> <span class="hljs-number">0xffffffffa0000508</span> \
+</span>   -<span class="ruby">s .strtab <span class="hljs-number">0xffffffffa00025e8</span> \
+</span>   -<span class="ruby">s .symtab <span class="hljs-number">0xffffffffa0002000</span> \
+</span>   -<span class="ruby">s __mcount_loc <span class="hljs-number">0xffffffffa0000658</span> \
+</span>   -<span class="ruby">s __param <span class="hljs-number">0xffffffffa0000528</span></span></code></pre>
 
 <ul>
 <li>(gdb) source MyGdbInit_first</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="com"># MyGdbInit_first</span><span class="pln">
-target remote localhost</span><span class="pun">:</span><span class="lit">1234</span><span class="pln">
-source </span><span class="pun">/</span><span class="pln">tftpboot</span><span class="pun">/</span><span class="pln">gdb
-c</span></code></pre>
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-comment"># MyGdbInit_first</span>
+target remote localhost:<span class="hljs-number">1234</span>
+<span class="hljs-built_in">source</span> /tftpboot/gdb
+c</code></pre>
 
 <ul>
 <li>(gdb) source MyGdbInit_second</li>
 </ul>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="com"># MyGdbInit_second</span><span class="pln">
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-comment"># MyGdbInit_second</span>
 b globalmem_write
-b globalmem_read
+b globalmem_<span class="hljs-built_in">read</span>
 c
-echo </span><span class="str">"Hello world"</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="str">/dev/</span><span class="pln">globalmem    </span></code></pre></div></body>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello world"</span> &gt; /dev/globalmem    </code></pre></div></body>
 </html>

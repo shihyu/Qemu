@@ -52,7 +52,8 @@ CONFIG_INSTALL_NO_USR=y
 
 - 創建系統目錄 // 注意尾行的空白, 去除空白
 ```
-mkdir -p dev etc/init.d mnt proc root sys tmp lib
+mkdir -p dev etc/init.d mnt proc root sys tmp lib 
+mkdir -p modules/3.15.5  // 3.15.5 版本依實際情況而改 , rmmod 才可以正常使用
 chmod a+rwxt tmp
 cp -rf ../busybox/_install/* ./
 ```
