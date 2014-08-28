@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>New Markdown document</title>
+<title>Title3</title>
 <link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
 <script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
@@ -53,14 +53,13 @@
 <span class="hljs-constant">CONFIG_MODULE_UNLOAD</span>=y
 <span class="hljs-constant">CONFIG_MODULE_FORCE_UNLOAD</span>=y
 <span class="hljs-comment"># CONFIG_MODVERSIONS is not set</span>
-<span class="hljs-comment"># CONFIG_MODULE_SRCVERSION_ALL is not set</span></code></pre>
+<span class="hljs-comment"># CONFIG_MODULE_SRCVERSION_ALL is not set</span>
 
-<ul>
-<li>make menuconfig</li>
-<li>time make -j8 2&gt;&amp;1 | tee build.log</li>
-</ul>
+修改編譯優化等級:
+打開根目錄下Makefile 修改核心 Makefile 優化選項將KBUILD_CFLAGS += -O2, 修改為：KBUILD_CFLAGS += -O</code></pre>
 
-
+<pre class="prettyprint"><code class=" hljs livecodeserver"> make menuconfig
+ <span class="hljs-built_in">time</span> make -j8 <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> | tee build.<span class="hljs-built_in">log</span></code></pre>
 
 <h3 id="產生根文件系統">產生根文件系統</h3>
 
@@ -73,26 +72,22 @@
 <pre class="prettyprint"><code class=" hljs ini"><span class="hljs-setting">CONFIG_STATIC=<span class="hljs-value">y</span></span>
 <span class="hljs-setting">CONFIG_INSTALL_NO_USR=<span class="hljs-value">y</span></span></code></pre>
 
-<ul>
-<li><p>time make -j8 2&gt;&amp;1 | tee build.log</p></li>
-<li><p>make install</p></li>
-</ul>
 
 
+<pre class="prettyprint"><code class=" hljs livecodeserver"><span class="hljs-built_in">time</span> make -j8 <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> | tee build.<span class="hljs-built_in">log</span>
+make install</code></pre>
 
 <h3 id="創建initrd根文件系統">創建initrd根文件系統</h3>
 
 <ul>
-<li><p>mkdir temp &amp;&amp; cd temp</p></li>
-<li><p>創建系統目錄 // 注意尾行的空白, 去除空白</p></li>
+<li>創建系統目錄 // 注意尾行的空白, 去除空白</li>
 </ul>
 
-
-
-<pre class="prettyprint"><code class=" hljs lasso">mkdir <span class="hljs-attribute">-p</span> dev etc/init<span class="hljs-built_in">.</span>d mnt proc root sys tmp lib 
-mkdir <span class="hljs-attribute">-p</span> modules/<span class="hljs-number">3.15</span><span class="hljs-number">.5</span>  <span class="hljs-comment">// 3.15.5 版本依實際情況而改 , rmmod 才可以正常使用</span>
-chmod a<span class="hljs-subst">+</span>rwxt tmp
-cp <span class="hljs-attribute">-rf</span> <span class="hljs-built_in">..</span>/busybox/_install<span class="hljs-comment">/* ./</span></code></pre>
+<pre class="prettyprint"><code class=" hljs perl"><span class="hljs-keyword">mkdir</span> temp &amp;&amp; cd temp
+<span class="hljs-keyword">mkdir</span> -p dev etc/init.d mnt proc root sys tmp lib 
+<span class="hljs-keyword">mkdir</span> -p modules/<span class="hljs-number">3.15</span>.<span class="hljs-number">5</span>  // <span class="hljs-number">3.15</span>.<span class="hljs-number">5</span> 版本依實際情況而改 , rmmod 才可以正常使用
+<span class="hljs-keyword">chmod</span> a+rwxt tmp
+cp -rf ../busybox/_install/* ./</code></pre>
 
 <pre class="prettyprint"><code class=" hljs cpp"><span class="hljs-preprocessor">#include &lt;stdio.h&gt;</span>
 
@@ -101,8 +96,6 @@ cp <span class="hljs-attribute">-rf</span> <span class="hljs-built_in">..</span>
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world\n"</span>);
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }</code></pre>
-
-
 
 <pre class="prettyprint"><code class=" hljs avrasm"><span class="hljs-keyword">ldd</span> ./test
 
@@ -263,16 +256,16 @@ iptables <span class="hljs-attribute">-I</span> FORWARD <span class="hljs-number
 
 
 
-<pre class="prettyprint"><code class=" hljs perl"> qemu-<span class="hljs-keyword">system</span>-x86_64 -kernel bzImage -serial stdio -append <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap<span class="hljs-number">0</span>,script=<span class="hljs-keyword">no</span> -enable-kvm -<span class="hljs-keyword">m</span> <span class="hljs-number">2048</span> -smp <span class="hljs-number">2</span>  -gdb tcp::<span class="hljs-number">1234</span> -S</code></pre>
+<pre class="prettyprint"><code class=" hljs lasso">需要拿掉 <span class="hljs-attribute">-enable</span><span class="hljs-attribute">-kvm</span> <span class="hljs-attribute">-m</span> <span class="hljs-number">2048</span> <span class="hljs-attribute">-smp</span> <span class="hljs-number">2</span> 才能 break start_kernel
 
+qemu<span class="hljs-attribute">-system</span><span class="hljs-attribute">-x86_64</span>  <span class="hljs-attribute">-s</span> <span class="hljs-attribute">-S</span> <span class="hljs-attribute">-kernel</span> bzImage  <span class="hljs-attribute">-initrd</span> rootfs<span class="hljs-built_in">.</span>img <span class="hljs-attribute">-serial</span> stdio <span class="hljs-attribute">-append</span> <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> <span class="hljs-attribute">-k</span> en<span class="hljs-attribute">-us</span> <span class="hljs-attribute">-net</span> nic,model<span class="hljs-subst">=</span>virtio <span class="hljs-attribute">-net</span> tap,ifname<span class="hljs-subst">=</span>tap0,script<span class="hljs-subst">=</span>no </code></pre>
 
+<pre class="prettyprint"><code class=" hljs lasso">使用 qemu<span class="hljs-attribute">-linaro</span> 啟動要加上 sudo 目前原因不清楚 
+SIOCSIFADDR: 拒絕不符權限的操作 
+SIOCSIFFLAGS: 拒絕不符權限的操作 
+SIOCSIFFLAGS: 拒絕不符權限的操作
 
-<pre class="prettyprint"><code class=" hljs avrasm">使用 qemu-linaro 啟動要加上 sudo 目前原因不清楚 
-<span class="hljs-label">SIOCSIFADDR:</span> 拒絕不符權限的操作 
-<span class="hljs-label">SIOCSIFFLAGS:</span> 拒絕不符權限的操作 
-<span class="hljs-label">SIOCSIFFLAGS:</span> 拒絕不符權限的操作
-
-必須 sudo qemu-system-x86_64 -kernel bzImage -serial stdio -append <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> -initrd rootfs<span class="hljs-preprocessor">.img</span>  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no -enable-kvm -m <span class="hljs-number">2048</span> -smp <span class="hljs-number">2</span>  -gdb tcp::<span class="hljs-number">1234</span> -S </code></pre>
+必須 sudo qemu<span class="hljs-attribute">-system</span><span class="hljs-attribute">-x86_64</span>  <span class="hljs-attribute">-s</span> <span class="hljs-attribute">-S</span> <span class="hljs-attribute">-kernel</span> bzImage  <span class="hljs-attribute">-initrd</span> rootfs<span class="hljs-built_in">.</span>img <span class="hljs-attribute">-serial</span> stdio <span class="hljs-attribute">-append</span> <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> <span class="hljs-attribute">-k</span> en<span class="hljs-attribute">-us</span> <span class="hljs-attribute">-net</span> nic,model<span class="hljs-subst">=</span>virtio <span class="hljs-attribute">-net</span> tap,ifname<span class="hljs-subst">=</span>tap0,script<span class="hljs-subst">=</span>no </code></pre>
 
 
 
@@ -585,8 +578,6 @@ mknod /dev/globalmem c <span class="hljs-number">245</span> <span class="hljs-nu
 <ul>
 <li>gdb 加入 ./globalmem.ko ; 0xffffffffa0000000 是 .text address</li>
 </ul>
-
-
 
 <pre class="prettyprint"><code class=" hljs haml">add-symbol-file ./globalmem.ko 0xffffffffa0000000 \
    -<span class="ruby">s .bss <span class="hljs-number">0xffffffffa0000900</span> \

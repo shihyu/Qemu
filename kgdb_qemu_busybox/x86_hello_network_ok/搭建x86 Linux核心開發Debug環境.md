@@ -33,25 +33,30 @@ CONFIG_MODULE_UNLOAD=y
 CONFIG_MODULE_FORCE_UNLOAD=y
 # CONFIG_MODVERSIONS is not set
 # CONFIG_MODULE_SRCVERSION_ALL is not set
-```
-- make menuconfig
-- time make -j8 2>&1 | tee build.log
 
+修改編譯優化等級:
+打開根目錄下Makefile 修改核心 Makefile 優化選項將KBUILD_CFLAGS += -O2, 修改為：KBUILD_CFLAGS += -O
+```
+```
+ make menuconfig
+ time make -j8 2>&1 | tee build.log
+```
 ### 產生根文件系統
 - 打開 Busybox 選項
 ```
 CONFIG_STATIC=y
 CONFIG_INSTALL_NO_USR=y
 ```
-- time make -j8 2>&1 | tee build.log
-
-- make install
+```
+time make -j8 2>&1 | tee build.log
+make install
+```
 
 ### 創建initrd根文件系統
-- mkdir temp && cd temp
 
 - 創建系統目錄 // 注意尾行的空白, 去除空白
 ```
+mkdir temp && cd temp
 mkdir -p dev etc/init.d mnt proc root sys tmp lib 
 mkdir -p modules/3.15.5  // 3.15.5 版本依實際情況而改 , rmmod 才可以正常使用
 chmod a+rwxt tmp
@@ -187,7 +192,9 @@ tap0      Link encap:Ethernet  HWaddr 0a:18:ee:c4:f0:d0
  qemu-system-x86_64 -kernel bzImage -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no -enable-kvm -m 2048 -smp 2
 ```
 ```
- qemu-system-x86_64 -kernel bzImage -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no -enable-kvm -m 2048 -smp 2  -gdb tcp::1234 -S
+需要拿掉 -enable-kvm -m 2048 -smp 2 才能 break start_kernel
+
+qemu-system-x86_64  -s -S -kernel bzImage  -initrd rootfs.img -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no 
 ```
 
 ```
@@ -196,7 +203,7 @@ SIOCSIFADDR: 拒絕不符權限的操作
 SIOCSIFFLAGS: 拒絕不符權限的操作 
 SIOCSIFFLAGS: 拒絕不符權限的操作
 
-必須 sudo qemu-system-x86_64 -kernel bzImage -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -initrd rootfs.img  -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no -enable-kvm -m 2048 -smp 2  -gdb tcp::1234 -S 
+必須 sudo qemu-system-x86_64  -s -S -kernel bzImage  -initrd rootfs.img -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no 
 ```
 ### 啟動 GDB
 ```
