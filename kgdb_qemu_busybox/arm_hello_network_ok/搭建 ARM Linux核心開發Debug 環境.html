@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Title2</title>
+<title>Title5</title>
 <link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
 <script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
@@ -25,7 +25,7 @@ arm</span><span class="pun">-</span><span class="pln">unknown</span><span class=
 
 <ul>
 <li>成功可看到下面訊息</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">$arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln">gcc </span><span class="pun">-</span><span class="pln">v
 
@@ -57,7 +57,7 @@ make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span clas
 
 <ul>
 <li>建立ARM version的root filesystem image</li>
-</ul><div class="se-section-delimiter"></div>
+</ul>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><span class="pln">
 
@@ -77,7 +77,7 @@ make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span clas
    </span><span class="lit">108</span><span class="pun">:</span><span class="pln"> </span><span class="lit">000083e9</span><span class="pln">    </span><span class="lit">64</span><span class="pln"> FUNC    GLOBAL DEFAULT   </span><span class="lit">13</span><span class="pln"> __libc_csu_init
   </span><span class="lit">000000</span><span class="pun">:</span><span class="pln"> </span><span class="pun">版本:</span><span class="pln"> </span><span class="lit">1</span><span class="pln">  </span><span class="pun">檔案：</span><span class="pln">libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pln">  </span><span class="pun">計數：</span><span class="lit">1</span><span class="pln">
 
-test </span><span class="pun">這個二進位文件需要三個共享庫:</span><span class="pln"> </span><span class="pun">“</span><span class="pln">ld</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">3</span><span class="pun">″,“</span><span class="pln">libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pun">″</span></code></pre><div class="se-section-delimiter"></div>
+test </span><span class="pun">這個二進位文件需要三個共享庫:</span><span class="pln"> </span><span class="pun">“</span><span class="pln">ld</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">3</span><span class="pun">″,“</span><span class="pln">libc</span><span class="pun">.</span><span class="pln">so</span><span class="pun">.</span><span class="lit">6</span><span class="pun">″</span></code></pre>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">cd _install</span><span class="pun">/</span><span class="pln">
 mkdir </span><span class="pun">-</span><span class="pln">p proc sys dev etc etc</span><span class="pun">/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d lib
@@ -142,7 +142,7 @@ mount </span><span class="pun">-</span><span class="pln">o remount</span><span c
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln"> vexpress_defconfig
 
-make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln"> menuconfig</span></code></pre><div class="se-section-delimiter"></div>
+make </span><span class="pun">-</span><span class="pln">j8 ARCH</span><span class="pun">=</span><span class="pln">arm CROSS_COMPILE</span><span class="pun">=</span><span class="pln">arm</span><span class="pun">-</span><span class="pln">unknown</span><span class="pun">-</span><span class="pln">linux</span><span class="pun">-</span><span class="pln">gnueabi</span><span class="pun">-</span><span class="pln"> menuconfig</span></code></pre>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">CONFIG_EXPERIMENTAL</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># 使得編譯的內核包含一些調試信息，使得調試更容易。</span><span class="pln">
@@ -171,8 +171,8 @@ CONFIG_MODULE_FORCE_UNLOAD</span><span class="pun">=</span><span class="pln">y
 </span><span class="com"># CONFIG_MODULE_SRCVERSION_ALL is not set</span></code></pre>
 
 <ul>
-<li>make  ARCH=arm CROSS_COMPILE=arm-eabi- -j8</li>
-</ul>
+<li>make  ARCH=arm CROSS_COMPILE=arm-unknown-linux-gnueabi- -j8</li>
+</ul><div class="se-section-delimiter"></div>
 
 <h3 id="安裝-tftp">安裝 tftp</h3>
 
@@ -236,7 +236,7 @@ iptables </span><span class="pun">-</span><span class="pln">I FORWARD </span><sp
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span></code></pre>
 
-<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre><div class="se-section-delimiter"></div>
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">qemu</span><span class="pun">-</span><span class="pln">system</span><span class="pun">-</span><span class="pln">arm </span><span class="pun">-</span><span class="pln">M vexpress</span><span class="pun">-</span><span class="pln">a9 </span><span class="pun">-</span><span class="pln">kernel zImage </span><span class="pun">-</span><span class="pln">initrd rootfs</span><span class="pun">.</span><span class="pln">img </span><span class="pun">-</span><span class="pln">serial stdio </span><span class="pun">-</span><span class="pln">append </span><span class="str">"root=/dev/ram rdinit=/sbin/init console=ttyAMA0"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">k en</span><span class="pun">-</span><span class="pln">us </span><span class="pun">-</span><span class="pln">net nic </span><span class="pun">-</span><span class="pln">net tap</span><span class="pun">,</span><span class="pln">ifname</span><span class="pun">=</span><span class="pln">tap0</span><span class="pun">,</span><span class="pln">script</span><span class="pun">=</span><span class="kwd">no</span><span class="pln"> </span><span class="pun">-</span><span class="pln">gdb tcp</span><span class="pun">::</span><span class="lit">1234</span><span class="pln"> </span><span class="pun">-</span><span class="pln">S</span></code></pre>
 
 <h3 id="啟動-gdb">啟動 GDB</h3>
 
@@ -499,7 +499,7 @@ kernel_modules</span><span class="pun">:</span><span class="pln">
 clean</span><span class="pun">:</span><span class="pln">
     make </span><span class="pun">-</span><span class="pln">C $</span><span class="pun">(</span><span class="pln">KDIR</span><span class="pun">)</span><span class="pln"> M</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">CURDIR</span><span class="pun">)</span><span class="pln"> clean </span></code></pre>
 
-<p>break 必須加上* 目前原因不清楚 , x86 沒這問題</p><div class="se-section-delimiter"></div>
+<p>break 必須加上* 目前原因不清楚 , x86 沒這問題</p>
 
 <pre class="prettyprint prettyprinted" style=""><code><span class="pln">insmod globalmem</span><span class="pun">.</span><span class="pln">ko
 mknod </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">globalmem c </span><span class="lit">245</span><span class="pln"> </span><span class="lit">0</span><span class="pln">

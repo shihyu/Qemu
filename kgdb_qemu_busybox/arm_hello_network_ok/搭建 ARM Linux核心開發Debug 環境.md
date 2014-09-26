@@ -163,7 +163,7 @@ CONFIG_MODULE_FORCE_UNLOAD=y
 # CONFIG_MODULE_SRCVERSION_ALL is not set
 ```
 
-- make  ARCH=arm CROSS_COMPILE=arm-eabi- -j8
+- make  ARCH=arm CROSS_COMPILE=arm-unknown-linux-gnueabi- -j8
 
 ### 安裝 tftp
 - sudo apt-get install tftp-hpa tftpd-hpa
