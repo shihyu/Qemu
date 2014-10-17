@@ -75,10 +75,10 @@ int main(int argc, char *argv[])
 ```
 ldd ./test
 
-	linux-vdso.so.1 =>  (0x00007fff4bd8f000)
-	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fbd55e5f000)
-	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fbd55a9f000)
-	/lib64/ld-linux-x86-64.so.2 (0x00007fbd5617b000)
+    linux-vdso.so.1 =>  (0x00007fff4bd8f000)
+    libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fbd55e5f000)
+    libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fbd55a9f000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007fbd5617b000)
 ```
 
 ```
@@ -203,7 +203,9 @@ SIOCSIFADDR: 拒絕不符權限的操作
 SIOCSIFFLAGS: 拒絕不符權限的操作 
 SIOCSIFFLAGS: 拒絕不符權限的操作
 
-必須 sudo qemu-system-x86_64  -s -S -kernel bzImage  -initrd rootfs.img -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no 
+
+加上 sudo 不能　break start_kernel　, 目前原因不確定
+qemu-system-x86_64  -s -S -kernel bzImage  -initrd rootfs.img -serial stdio -append "root=/dev/ram rdinit=/sbin/init console=ttyS0" -k en-us -net nic,model=virtio -net tap,ifname=tap0,script=no 
 ```
 ### 啟動 GDB
 ```
@@ -522,3 +524,4 @@ b globalmem_read
 c
 echo "Hello world" > /dev/globalmem    
 ```
+
