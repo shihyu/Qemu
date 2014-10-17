@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Title6</title>
+<title>Hello!</title>
 <link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
@@ -232,11 +232,10 @@ TFTP_OPTIONS=<span class="hljs-string">"-l -c -s"</span></code></pre>
 
 <h3 id="啟動-tap">啟動 tap</h3>
 
-<ul>
-<li>sudo ./nettap.sh  // 必須加上 sudo </li>
-</ul>
 
 
+<pre class="prettyprint"><code class=" hljs lasso">sudo <span class="hljs-built_in">.</span>/nettap<span class="hljs-built_in">.</span>sh  <span class="hljs-comment">// 必須加上 sudo </span>
+sudo apt<span class="hljs-attribute">-get</span> install uml<span class="hljs-attribute">-utilities</span>  <span class="hljs-comment">// tunctl</span></code></pre>
 
 <pre class="prettyprint"><code class=" hljs lasso">tunctl <span class="hljs-attribute">-u</span> shihyu <span class="hljs-attribute">-t</span> tap0 
 ifconfig tap0 <span class="hljs-number">192.168</span><span class="hljs-number">.100</span><span class="hljs-number">.1</span> up 
@@ -273,8 +272,6 @@ iptables <span class="hljs-attribute">-I</span> FORWARD <span class="hljs-number
 
 qemu<span class="hljs-attribute">-system</span><span class="hljs-attribute">-x86_64</span>  <span class="hljs-attribute">-s</span> <span class="hljs-attribute">-S</span> <span class="hljs-attribute">-kernel</span> bzImage  <span class="hljs-attribute">-initrd</span> rootfs<span class="hljs-built_in">.</span>img <span class="hljs-attribute">-serial</span> stdio <span class="hljs-attribute">-append</span> <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> <span class="hljs-attribute">-k</span> en<span class="hljs-attribute">-us</span> <span class="hljs-attribute">-net</span> nic,model<span class="hljs-subst">=</span>virtio <span class="hljs-attribute">-net</span> tap,ifname<span class="hljs-subst">=</span>tap0,script<span class="hljs-subst">=</span>no </code></pre>
 
-
-
 <pre class="prettyprint"><code class=" hljs lasso">使用 qemu<span class="hljs-attribute">-linaro</span> 啟動要加上 sudo 目前原因不清楚 
 SIOCSIFADDR: 拒絕不符權限的操作 
 SIOCSIFFLAGS: 拒絕不符權限的操作 
@@ -283,6 +280,8 @@ SIOCSIFFLAGS: 拒絕不符權限的操作
 
 加上 sudo 不能　break start_kernel　, 目前原因不確定
 qemu<span class="hljs-attribute">-system</span><span class="hljs-attribute">-x86_64</span>  <span class="hljs-attribute">-s</span> <span class="hljs-attribute">-S</span> <span class="hljs-attribute">-kernel</span> bzImage  <span class="hljs-attribute">-initrd</span> rootfs<span class="hljs-built_in">.</span>img <span class="hljs-attribute">-serial</span> stdio <span class="hljs-attribute">-append</span> <span class="hljs-string">"root=/dev/ram rdinit=/sbin/init console=ttyS0"</span> <span class="hljs-attribute">-k</span> en<span class="hljs-attribute">-us</span> <span class="hljs-attribute">-net</span> nic,model<span class="hljs-subst">=</span>virtio <span class="hljs-attribute">-net</span> tap,ifname<span class="hljs-subst">=</span>tap0,script<span class="hljs-subst">=</span>no </code></pre>
+
+
 
 <h3 id="啟動-gdb">啟動 GDB</h3>
 

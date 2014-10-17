@@ -166,7 +166,11 @@ get or put
 ```
 
 ### 啟動 tap
-- sudo ./nettap.sh  // 必須加上 sudo 
+```
+sudo ./nettap.sh  // 必須加上 sudo 
+sudo apt-get install uml-utilities  // tunctl
+```
+
 ```
 tunctl -u shihyu -t tap0 
 ifconfig tap0 192.168.100.1 up 
@@ -524,4 +528,5 @@ b globalmem_read
 c
 echo "Hello world" > /dev/globalmem    
 ```
+
 
