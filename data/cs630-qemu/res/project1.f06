@@ -1,0 +1,59 @@
+                                 CS 630
+
+PROJECT #1                           Due Date: 7:30pm Tuesday 10/31/2006
+
+     This project explores essential steps in crafting minimal operating 
+system code that can load and execute the object-code within an ELF file 
+that was compiled for Linux, running in protected-mode on a Pentium CPU.
+
+                          PROBLEM DESCRIPTION
+
+     Design a miniature operating system (named 'os630.s') which can run
+the 'manydots.s' demo-program (found on our course website) at privilege
+level 3 in protected mode.  You will need to implement your own handlers 
+for the timer-tick and keyboard interrupts, and for Linux's system-calls
+(invoked via the 'int 0x80' software interrupt instruction).  You should
+reprogram the 8259A Interrupt Controllers to issue the device-interrupts
+in a manner that avoids conflicts with Intel reserved interrupt-numbers.     
+Your operating system should continuously show the time-of-day onscreen,
+using a status-line separate from the normal console-output screen area.
+
+     Download the demo-program named 'manydots.s' from our class website
+and assemble it using the GNU/Linux assembler 'as' to produce a linkable 
+ELF-file (named 'manydots.o'), like this:
+
+		     $ as manydots.s -o manydots.o
+
+Then use the 'dd' utility to install the 'manydots.o' ELF-file onto your
+fixed disk partition, starting from Logical Block Address 13, like this:  
+
+		$ dd if=manydots.o of=/dev/sda4 seek=13
+
+This insures that the ELF-file's contents will get loaded into memory as
+you 'boot' from this diskette, assuming our 'quikload.b' boot-loader was
+installed in the partition's 'boot-sector' as usual, like this:
+
+	            $ dd if=quikload.b of=/dev/sda4 
+
+The last step, in preparing a disk to 'test' your project-submission, is
+to install your operating system binary (i.e., 'os630.b') onto the disk- 
+partition, immediately following its boot-sector, like this:
+
+	          $ dd if=os630.b of=/dev/sda4 seek=1
+
+It is vital that the filesize of your 'os630.b' binary should not exceed
+six kilobytes (i.e., twelve disk sectors), in order to avoid overwriting 
+your ELF-file's image which begins at sector number #13, as pictured below:
+
+                    SECTOR-MAP FOR THE DISK-PARTITION  
+
+          sector #0      sectors #1-#12       sectors #13-#15
+       +-------------+-------------------+----------------------+
+       | boot-loader | <--- os630.b ---> | <--- manydots.o ---> |
+       +-------------+-------------------+----------------------+
+      
+     Copy the assembly language source-texts into your '/submit' folder,
+along with the object-files ('os630.o' and 'manydots.o') and your binary 
+executable 'os630.b' (produced with the 'as' assembler and 'ld' linker).
+________________________________________________________________________
+Allan B. Cruse        University of San Francisco              Fall 2006

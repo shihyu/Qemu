@@ -1,0 +1,56 @@
+                                 CS 630
+
+PROJECT #2                           Due Date: 7:30pm Tuesday 11/28/2006
+
+
+     This project acquaints students with Pentium features which support
+preemptive multitasking of a pair of application programs compiled under
+Linux as executable ELF files, thereby requiring use of "virtual" memory
+as well as periodic interrupts triggered by a peripheral device (such as
+the programmable interval timer or the real-time clock).
+
+
+                          PROBLEM DESCRIPTION
+
+     Redesign your miniature operating system (named 'os630.s') in order
+that it can employ "time-sharing" of the cpu to run two different tasks,
+at privilege-level 3, both based upon the 'alphabet.s' demo-program that
+is on our course website.  Task #1 should continuously display uppercase
+letters in the upper half of the screen, while task #2 will continuously
+display lowercase letters in the lower half of the screen.  To terminate
+your demo, you should require your user to type <CONTROL>-C.   
+
+     Because the ELF executable files produced by the 'as' assembler and
+'ld' loader will be approximately 6KB in size, you will need to devise a
+method for loading the two executables from areas of the boot-media that
+currently are not accessed by our 'quikload.s' boot-loader (i.e., you'll
+need a "second-stage" loader as part of your 'os630.s' implementation). 
+
+     Use 'alpha_uc.s' and 'alpha_lc.s' as filenames for the source-texts 
+of your two application tasks, and include their files with your project
+submissions.  Use the following commands to prepare your boot-media when
+testing your project:
+
+
+		$ as alpha_uc.s -o alpha_uc.o
+		$ ld alpha_uc.o -o alpha_uc
+		$ dd if=alpha_uc of=/dev/dev4 seek=18
+
+		$ as alpha_lc.s -o alpha_lc.o
+		$ ld alpha_lc.o -o alpha_lc
+		$ dd if=alpha_lc of=/dev/dev4 seek=36
+
+		$ as os630.s -o os630.o
+		$ ld os630.o -T ldscript -o os630.b
+		$ dd if=os630.b of=/dev/sda4 seek=1
+
+		$ as quikload.s -o quikload.o
+		$ ld quikload.o -T ldscript -o quikload.b
+		$ dd if=quikload.b of=/dev/sda4 
+
+
+     As usual, you should place your assembly language source-files into
+your '/submit' folder, along with the binaries generated from them.  And
+you should turn in printouts of your source-texts to your Instructor.
+________________________________________________________________________
+Allan B. Cruse        University of San Francisco              Fall 2006

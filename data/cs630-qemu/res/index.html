@@ -1,0 +1,520 @@
+<html>
+
+<head> <title>CS 630</title> </head>
+
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+<font face="helvetica" size=+3>
+CS 630: Advanced Microcomputer Programming (Fall 2006)
+<br>
+
+<p>
+<font size=+1>
+Lecture: Tuesday-Thursday 7:30pm-9:15pm (235 Harney Science Center)
+<br>
+
+<p>
+<font size=+1>
+<br>Instructor: 
+<a href="http://nexus.cs.usfca.edu/~cruse">Allan Cruse</a>
+<br>Email: 
+<a href="mailto:cruse@usfca.edu">cruse@usfca.edu</a>
+<br>Phone: (415) 422-6562
+<br>Office: 212 Harney Science Center
+<br>Office Hours: (see my <a href="http://nexus.cs.usfca.edu/~cruse">homepage</a>)
+<br>
+</font>
+<p>
+
+<!--
+<font size=+1>Teaching Assistant:</font>
+<font size=+1>TBA</font>
+-->
+
+<!--
+<br><font size=+3>This page is currently under construction</font><br>
+-->
+
+<br>
+
+
+<font size=+1>Synopsis:</font><br><br>
+
+This course explores fundamental capabilities of Intel's Pentium <br> 
+microprocessor, regarded as a "bare machine" for which the basic <br>
+software components of an operating system are to be constructed <br>
+in a context of standard PC-BIOS firmware and peripheral devices <br>
+(a.k.a the 'Pre-boot eXecution Environment'). <br>
+<br>
+
+
+Topics appropriate to this goal include: <br>
+ - crafting a bootstrap loader <br>
+ - identifying the processor model and stepping <br>
+ - segmented real-mode memory-addressing <br>
+ - peripheral device detection and initialization <br>
+ - the CMOS memory and real-time clock <br>
+ - keyboard, monitor, and interval-timers <br>
+ - the programmable interrupt controllers <br>
+ - building protected-mode segment-descriptors <br>
+ - entering and leaving 16-bit or 32-bit protected-mode <br>
+ - creating exception-handlers and interrupt-descriptors <br>
+ - building page-tables for virtual-memory support <br>
+ - privilege-level transitions and multitasking mechanisms <br> 
+ - emulation of the legacy 8086 execution environment <br>
+ - support for debugging and performance monitoring <br> 
+ - initialization and communication among multiple CPUs <br>
+ - the memory controller hub and system management mode <br>
+<br>
+Throughout the course small software-component prototypes will be <br>
+written using the GNU/Linux program development tools (including <br>
+assemblers and C/C++ compilers).  The course is open to graduate <br>
+students in computer science (and to qualified undergraduates or <br>
+non-degree students when the Instructor has granted permission).  <br>
+Students are assumed to be familiar with Linux or UNIX, and with <br>
+programming in C/C++ and to be acquainted with the Intel Pentium <br>
+processor's registers, instruction-set, and assembly language.  <br>
+<br>
+
+<font size=+1>Learning Outcomes:</font>
+<UL TYPE=CIRCLE>
+<LI> You will broaden your knowledge of standard 32-bit Intel Architectures. 
+<LI> You will increase your proficiency with using C and assembler language.
+<LI> You will become aware of the Intel processors' seldom-used capabilities.
+<LI> You will know how to access service-functions provided in BIOS firmware.
+<LI> You will gain practical experience in programming peripheral I/O devices.
+<LI> You will acquire the background for understanding next-generation CPUs.
+<LI> You will lay a foundation for pursuing some additional career options.  
+</UL>
+
+<br>
+Class meetings will be held in the 
+<a href="http://www.usfca.edu/~wolberd/department/KudlickClass.htm">
+ Michael D. Kudlick computer classroom </a> <br> 
+(Room 235, Harney Science Center) which affords convenient opportunities <br> 
+for combining formal instruction with "hands-on" programming exercises. <br>  
+This facility, a gift of USF alumnus 
+<a href="http://www.bea.com/framework.jsp?CNT=exec_chuang.htm&FP=/content/about/corporate"> Alfred S. Chuang ('82)</a>, opened in Fall 2002.
+
+
+<h1>
+<hr WIDTH="100%">
+<font size=+2>Textbook: </font>
+
+
+</h1>
+<UL TYPE=BOX>
+	Tom Shanley, <a href=
+"http://www.aw-bc.com/catalog/academic/product/0,4096,020155447X,00.html">
+Protected Mode Software Architecture</a>, Addison-Wesley (1996), 
+ISBN 0-201-55447-X <br>
+</UL>
+
+
+<h1>
+<hr WIDTH="100%"><font size=+2>Resources</font>
+</h1>
+
+<UL TYPE=SQUARE>
+<LI> Official IA-32 Programmer Reference Manuals online at 
+<a href="http://developer.intel.com/products/processor/manuals/index.htm">
+http://developer.intel.com/products/processor/manuals/index.htm</a>
+
+<LI> The official 
+<a href="http://www.gnu.org/software/binutils/manual/gas-2.9.1/as.html">
+GNU Assembler Manual (GAS)</a>
+
+<LI> Online tutorial on writing <a href=
+"http://www.redhat.com/docs/manuals/enterprise/RHEL-3-Manual/gnu-linker/index.html">
+Linker Scripts</a>
+for the GNU linker 'ld' (FSF and RedHat, Inc.) 
+
+<LI> Professor Ralf Brown's Interrupt List online at
+<a href="http://www.ctyme.com/rbrown.htm">
+http://www.ctyme.com/rbrown.htm</a>
+
+<LI> BiosCentral's online map of ROM-BIOS DATA-AREA at
+<a href="http://bioscentral.com/misc/cmosmap.htm">
+http://bioscentral.com/misc/bda.htm</a>
+
+<LI> Online documentation: <a href=
+"http://www.phoenix.com/en/Customer+Services/White+Papers-Specs/pc+industry+specifications.htm">
+PC Industry Specifications</a> hosted by Phoenix Technologies, Inc.
+
+<LI> Online reference: 
+<a href="http://www.win.tue.nl/~aeb/partitions/partition_types-1.html">
+List of Hard Disk Partition Identifiers</a> by Andries Brouwer
+
+<LI> Official Datasheet for the <a href="8259.pdf">
+Intel 8259A Programmable Interrupt Controller</a>
+(.pdf file-format)
+
+<LI> Documentation for the Linux Executable and Linkable Format (ELF) files:
+	<a href="elf.pdf">elf.pdf</a>
+
+
+<LI> Programmers Reference Manual for the 
+<a href="http://www.intel.com/design/chipsets/manuals/301444.htm">
+ICH6 I/O Controller Hub</a> (.pdf format), Intel Corporation
+
+<LI>Website for current ATA Disk-Drive Interface
+<a href="http://www.t13.org/#Documents%202004">
+Draft ANSI Standards Documentation</a> by INCITS Technical Committee T13
+
+
+<LI> De facto standard: <a href="idems100.pdf">
+Programming Interface for Bus Master IDE Controller</a>
+(1994), by Brad Hosler (.pdf file-format)
+
+<LI> Online article: 
+<a href="http://www.win.tue.nl/~aeb/linux/kbd/A20.html">
+A20 - a pain from the past</a> by Andries Brouwer
+
+<LI> Official Data Sheet for the <a href="ds12887.pdf">
+Dallas Semiconductor DS12887 Real-Time Clock and CMOS Memory</a>
+
+<LI> BiosCentral's CMOS Memory Map online at
+<a href="http://bioscentral.com/misc/cmosmap.htm">
+http://bioscentral.com/misc/cmosmap.htm</a>
+
+<LI> Online article: A review of
+<a href="http://www.x86.org/articles/pmbasics/tspec_a1_doc.htm">
+Protected Mode Basics</a> by Robert Collins, 
+Dr. Dobb's Microprocessor Resources
+
+
+<LI> Online industry document: 
+<a href="http://www.intel.com/design/pentium/datashts/24201606.pdf">
+Intel Multiprocessor Specification (version 1.4)</a>
+(.pdf format)
+
+<LI> Online datasheet: 
+<a href="http://www.national.com/ds/PC/PC16550D.pdf">
+PC16550 Universal Asynchronous Receiver/Transmitter</a>
+National Semiconductor, Inc.
+
+<LI> Online article:
+<a href="http://www.cs.utah.edu/classes/cs7940-010/papers/virt.pdf">
+Intel Virtualization Technology</a> (.pdf format), IEEE Computer Society (2005)
+
+
+
+<LI> 
+Online interview with author 
+<a href="http://www.securityfocus.com/columnists/402">Loic Duflot</a> 
+about <a href="duflot.pdf">his recent research</a> (April 2006) into some <br>
+security vulnerabilities inherent in the x86 System Management Mode
+
+
+
+
+
+<!--
+<LI> Homepage for H. Peter Anvin's SYSLINUX Project online at
+<a href="http://syslinux.zytor.com/">
+http://syslinux.zytor.com/</a>
+
+<LI> Online article: 
+<a href="http://www.linuxgazette.com/issue64/kohli.html">
+The GNU GRUB Boot Loader</a> 
+by Jaswinder Singh Kohli (Linux Gazette #64, 2001)
+
+<LI> Official Data Sheet for the <a href="8259.pdf">
+Intel 8259A Programmable Interrupt Controller</a>
+(.pdf file-format)
+
+<LI> Documentation for the Linux Executable and Linkable Format (ELF) files:
+	<a href="elf.pdf">elf.pdf</a>
+
+<LI> Online article: 
+<a href="http://www.win.tue.nl/~aeb/linux/kbd/A20.html">
+A20 - a pain from the past</a> by Andries Brouwer
+
+<LI> Official Data Sheet for the <a href="ds12887.pdf">
+Dallas Semiconductor DS12887 Real-Time Clock and CMOS Memory</a>
+
+
+<LI> BiosCentral's CMOS Memory Map online at
+<a href="http://bioscentral.com/misc/cmosmap.htm">
+http://bioscentral.com/misc/cmosmap.htm</a>
+
+<LI> Official Data Sheet for the <a href="em84502.pdf">
+EM84502 PS/2 Mouse Controller</a> by Elan Microelectronics Corp.
+
+<LI> Online article: 
+<a href="http://panda.cs.ndsu.nodak.edu/~achapwes/PICmicro/mouse/mouse.html">
+The PS/2 Mouse Interface</a> by Adam Chapweske
+
+<LI> Official Data Sheet for the <a href="82C54.pdf">
+Intel 82C54 Programmable Interval Timer</a>
+(.pdf file-format)
+
+
+<LI> Online industry document: 
+<a href="http://www.intel.com/design/pro/datashts/242016.htm">
+Intel Multiprocessor Specification (version 1.4)</a>
+(.pdf format)
+
+
+
+-->
+<br>
+</UL>
+
+
+
+<h1>
+<hr WIDTH="100%"><font size=+2>Readings</font>
+</h1>
+
+
+<UL TYPE=SQUARE>
+<LI> Week 1: Part One (Chapters 1-3) in textbook by Shanley 
+<LI> Week 2: Part Two (Chapters 4-5) in textbook by Shanley
+<LI> Week 3: Part Three (Chapters 6-7) in textbook by Shanley
+<LI> Week 4: Part Three (Chapters 8-9) in textbook by Shanley
+<LI> Week 5: Part Three (Chapters 10-11) in textbook by Shanley
+<LI> Week 6: Part Three (Chapter 12) in textbook by Shanley.
+<LI> Week 7: Data Sheet for 8259A Programmable Interrupt Controller.
+<LI> Week 8: Official Documentation for ELF files (Chapter One).
+<LI> Week 9: Official Documentation for ELF files (Chapters 2-3).
+<LI> Week 10: Part Three (Chapters 13-14) in textbook by Shanley.-
+<LI> Week 11: Part Three (Chapter 15) in textbook by Shanley.
+<LI> Week 12: Intel Multiprocessor Specification version 1.4
+<LI> Weeks 13-15: No new assignment (work on Project 2 and course review).
+
+
+</UL>
+
+
+<h1><hr WIDTH="100%"><font size=+2>Systems Software</font></h1>
+
+<UL TYPE=SQUARE>
+<LI> Utility program: <a href="ljpages.cpp">ljpages.cpp</a>
+(a tool that submits your program source to a laser printer)
+<LI> Utility program: <a href="dump.cpp">dump.cpp</a>
+(a tool that displays the contents of any file in hex and ascii)
+<LI> Utility program: <a href="fileview.cpp">fileview.cpp</a>
+(a navigation tool for viewing the contents of binary files)
+<LI> Utility program: <a href="iopl3.cpp">iopl3.cpp</a>
+(a tool by Alex Fedosov that lets user programs do direct I/O)
+<LI> Device-driver: <a href="8086.c">8086.c</a>
+needed for addressing I/O ports and accessing 8086 memory
+<LI> Utility program: <a href="mmake.cpp">mmake.cpp</a>
+(a tool for compiling Linux 2.6 kernel modules)
+<-- revised 7/27/2006
+
+<LI> Support files: <a href="int86.h">int86.h</a> and 
+	<a href="int86.cpp">int86.cpp</a>
+	(we link these with programs that call BIOS routines) 
+<LI> Linker script: <a href="ldscript">ldscript</a> 
+	allows the GNU linker 'ld' to produce a 'binary-format' executable 
+
+<LI> Device-driver: <a href="dram.c">dram.c</a>
+needed to allow reading from the workstation's physical memory
+
+</UL>
+
+
+<h1>
+<hr WIDTH="100%"><font size=+2>Handouts</font>
+</h1>
+
+<LI> 0203-630-01: <a href="syllabus.pdf">Course syllabus</a>(.pdf-format) 
+<LI> <a href="lesson01.ppt">lesson1.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="bootmsw.s">bootmsw.s</a>
+a 'boot-sector' program that display's the Pentium's Machine Status Word
+
+
+<LI> <a href="lesson02.ppt">lesson2.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="memsize.s">memsize.s</a>
+a boot-sector program to show the extent of real-mode memory (in KB)
+<LI> Demo program: <a href="viewrbda.s">viewrbda.s</a>
+boot-sector program giving a dynamic look at the ROM-BIOS DATA-AREA 
+<LI> Demo program: <a href="viewivt.s">viewivt.s</a>
+a boot-sector program that shows the Interrupt Vector Table's 256 entries
+<font color="green"><I> <-- revised 8/30/2006 </I></font>
+
+
+<LI> <a href="lesson03.ppt">lesson3.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="tickdemo.s">tickdemo.s</a>
+illustrating the basic elements of a (real-mode) Interrupt Service Routine  
+
+
+<LI> <a href="lesson04.ppt">lesson4.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="finalpte.s">finalpte.s</a>
+reads the Master Boot Record and shows its final Partition-Table Entry 
+<LI> Demo program: <a href="greeting.s">greeting.s</a>
+for use when testing our programs that transfer code from disk to memory
+
+<LI> <a href="lesson05.ppt">lesson5.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="sysregs.s">sysregs.s</a>
+a boot-sector program that shows the values in several 'system' registers
+
+<LI> <a href="lesson06.ppt">lesson6.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="pmhello.s">pmhello.s</a>
+shows segment-register usage when entering and leaving protected-mode
+<LI> Classroom tool: <a href="quikload.s">quikload.s</a>
+a 'boot-loader' that launches binary-executables from our disk-partition
+
+<LI> <a href="lesson07.ppt">lesson7.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="tryring1.s">tryring1.s</a>
+to show how a processor 'privilege-level transition' may be accomplished 
+<font color="green"><I> <-- modified on 09/15/2008 </I></font>
+
+<LI> <a href="lesson08.ppt">lesson8.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="twotasks.s">twotasks.s</a>
+demonstrates the Pentium's ability to do 'context-switching' between tasks 
+
+<LI> <a href="lesson09.ppt">lesson9.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="pmtimer.s">pmtimer.s</a>
+showing how you can handle the 'timer-tick' interrupts in protected-mode
+
+<LI> <a href="lesson10.ppt">lesson10.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="whycrash.s">whycrash.s</a>
+uses a protected-mode fault-handler to show some system-crash diagnostics 
+
+<LI> <a href="lesson11.ppt">lesson11.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="notready.s">notready.s</a>
+uses the 'Segment-Not-Present' exception to simulate 'loading-on-demand' 
+
+<LI> <a href="lesson12.ppt">lesson12.ppt</a> (PowerPoint Slides)   
+<-- two extra slides added on 10/10/2006
+<LI> Demo program: <a href="minikybd.s">minikybd.s</a>
+illustrates basic steps in handling interrupts from the Keyboard Controller 
+
+<LI> <a href="lesson13.ppt">lesson13.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="reporter.s">reporter.s</a>
+to illustrate the 'reprogramming' of the two 8259A Interrupt Controllers
+<font color="green"><I> <-- bug fix 10/14/2008 </I></font>
+
+<LI> <a href="lesson14.ppt">lesson14.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="arrows.s">arrows.s</a>
+illustrating "polled-mode" keyboard programming and CRT cursor movements 
+
+<LI> <a href="lesson15.ppt">lesson15.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="manydots.s">manydots.s</a>
+(a Linux application that we want to execute without using Linux)
+<LI> Demo printout: <a href="manydots.opd">manydots.opd</a>
+(dump of the 'manydots.o' object-file, showing its ELF sections) 
+<LI> CS630 utility: <a href="loadmap.cpp">loadmap.cpp</a>
+(a tool for studying the sections in a relocatable ELF object-file) 
+
+<LI> Demo program: <a href="try32bit.s">try32bit.s</a>
+(it executes the 32-bit code in a linkable ELF-file named 'hello.o')
+<font color="green"><I>   <-- bug-fixes on 10/18/2006 </I></font> 
+<LI> Demo program: <a href="hello.s">hello.s</a>
+(source-text for the Linux program used with our 'try32bit.s' demo) 
+
+<LI> <a href="lesson16.ppt">lesson16.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="timeoday.s">timeoday.s</a>
+implements the steps that convert 'tick_count' into time-of-day
+
+<LI> <a href="lesson17.ppt">lesson17.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="trydebug.s">trydebug.s</a>
+(illustrates single-stepping through code in an ELF application)
+
+<LI> <a href="lesson18.ppt">lesson18.ppt</a> (PowerPoint Slides)   
+<LI> Demo program: <a href="ideload1.s">ideload1.s</a>
+a replacement for our 'quikload.s' boot-loader that uses Programmed I/O
+<LI> Demo program: <a href="ideload2.s">ideload2.s</a>
+a replacement for our 'quikload.s' boot-loader that uses Bus Master DMA
+<LI> Include file: <a href="platform.inc">platform.inc</a>
+for the platform-specific parameters needed by 'ideload1.s' and 'ideload2.s' 
+
+<LI> <a href="lesson19.ppt">lesson19.ppt</a> (PowerPoint Slides)  
+<LI> Demo program: <a href="mixcalls.s">mixcalls.s</a>
+illustrates long calls and returns between 16-bit and 32-bit code-segments
+
+<LI> Test program: <a href="queryA20.s">queryA20.s</a>
+this program checks to see if the A20 address-line is enabled at boot-time
+
+<LI> Demo program: <a href="alphabet.s">alphabet.s</a>
+(The source-text for a Linux application to be adapted for use in Project 2) 
+
+<LI> CS630 utility: <a href="elfinfo.cpp">elfinfo.cpp</a>
+(a tool for studying the sections in a relocatable or an executable ELF file) 
+
+<LI> Exercise solution: <a href="elfexec.s">elfexec.s</a>
+we rewrote 'try32bit.s' so it runs our ELF executable file named 'hello'
+
+<LI> <a href="lesson20.ppt">lesson20.ppt</a> (PowerPoint Slides)  
+<LI> Demo program: <a href="trypages.s">trypages.s</a>
+it builds and activates a page-directory with just one page-table entry
+
+<LI> Demo program: <a href="showCR4.s">showCR4.s</a>
+it shows one possible way to answer Question V on Midterm Exam II 
+
+<LI> <a href="lesson21.ppt">lesson21.ppt</a> (PowerPoint Slides)  
+<LI> Demo program: <a href="tryvm86.s">tryvm86.s</a>
+it executes a "real-mode" procedure in virtual-8086 emulation mode
+<LI> Demo program: <a href="emulate.s">emulate.s</a>
+it executes ROM-BIOS routines in virtual-8086 mode, but with IOPL<3
+
+<LI> <a href="lesson22.ppt">lesson22.ppt</a> (PowerPoint Slides)  
+<LI> Demo program: <a href="rtcdemo.s">rtcdemo.s</a>
+to illustrate programming of the Real-Time Clock's 'update' interrupt
+
+<LI> <a href="lesson23.ppt">lesson23.ppt</a> (PowerPoint Slides)  
+<LI> Demo program: <a href="cpuid.cpp">cpuid.cpp</a>
+illustrates use of the 'cpuid' instruction (to detect cpu's capabilities)
+<LI> Demo program: <a href="apictick.s">apictick.s</a>
+to demonstrate programming of the cpu's Local-APIC timer interrupt 
+<LI> Demo program: <a href="smpinfo.cpp">smpinfo.cpp</a>
+shows the MP Floating Pointer Structure and Base Configuration entries
+<font color="green"><I>  <-- modified on 12/26/2006 </I></font>
+
+<LI> <a href="lesson24.ppt">lesson24.ppt</a> (PowerPoint Slides)  
+<LI> Demo program: <a href="cpuslice.s">cpuslice.s</a>
+uses APIC's Timer to implement processor timesharing among several tasks
+<LI> Demo program: <a href="smphello.s">smphello.s</a>
+illustrating the MP protocol for awakening any auxilliary processors
+
+
+<LI> <a href="lesson25.ppt">lesson25.ppt</a> (PowerPoint Slides)  
+<LI> Utility program: <a href="pciprobe.cpp">pciprobe.cpp</a>
+showing how software can identify a system's PCI device-functions
+
+<LI> <a href="lesson26.ppt">lesson26.ppt</a> (PowerPoint Slides)  
+<LI> Demo program: <a href="activity.s">activity.s</a>
+it produces a dynamic display of all interrupt-activity at boot-time 
+<LI> Demo program: <a href="activity.cpp">activity.cpp</a>
+shows a similar display of interrupt-activity under the Linux OS 
+<LI> Kernel module: <a href="activity.c">activity.c</a>
+this driver is needed for running the Linux 'activity.cpp' application
+
+<LI> <a href="lesson27.ppt">lesson27.ppt</a> (PowerPoint Slides)  
+<LI> Demo program: <a href="try64bit.s">try64bit.s</a>
+offers an illustration of the role played by some Model-Specific Registers
+
+
+<br><br>
+<LI> Utility program: <a href="newasapp.cpp">newasapp.cpp</a>
+it quickly creates the 'boilerplate' text for a new protected-mode demo 
+
+<br><br>
+<LI> Demo program: <a href="smpwatch.cpp">smpwatch.cpp</a>
+shows a real-time display of dual-CPU interrupt-activity under Linux  
+<LI> Kernel module: <a href="smpwatch.c">smpwatch.c</a>
+this driver is required when running our Linux 'smpwatch.cpp' application
+
+
+<h1>
+<hr WIDTH="100%"><font size=+2>Announcements</font>
+</h1>
+
+<UL TYPE=SQUARE>
+<LI> Midterm Exam 1: Tuesday, October 3
+<LI> <a href="project1.f06">Project 1:</a> Due by Tuesday, October 31, 7:30pm
+<LI> Midterm Exam 2: Tuesday, November 7
+<LI> <a href="project2.f06">Project 2:</a> Due by Tuesday, November 28, 7:30pm
+<LI> FINAL EXAMINATION: Tuesday, December 12, 7:30pm <br>
+</UL>
+
+
+
+<hr WIDTH="100%">
+Last updated on 10/14/2008
+<br>
+</font>
+</body>
+</html>

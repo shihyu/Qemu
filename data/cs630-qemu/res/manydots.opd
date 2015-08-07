@@ -1,0 +1,15 @@
+
+        MAP OF RELOCATABLE ELF FILE CONTENTS: manydots.o (1084 bytes) 
+
+        00000000-00000034  00000034 <<    ELF FILE-HEADER   >>     
+LOAD--> 00000034-000000D7  000000A3  SECTION #1: .text             
+        000000D7-000000D8  00000001     << filler >>               
+LOAD--> 000000D8-00000114  0000003C  SECTION #3: .data             
+LOAD--> 00000114-00000114  00000000  SECTION #4: .bss              
+        00000114-00000144  00000030  SECTION #5: .shstrtab         
+        00000144-00000284  00000140 << SECTION-HEADER TABLE >>     
+        00000284-00000384  00000100  SECTION #6: .symtab           
+        00000384-000003E2  0000005E  SECTION #7: .strtab           
+        000003E2-000003E4  00000002     << filler >>               
+        000003E4-0000043C  00000058  SECTION #2: .rel.text         
+
